@@ -1,0 +1,122 @@
+server:
+  host: "${SERVER_HOST:-127.0.0.1}"
+  port: "${SERVER_PORT:-7860}"
+  project_name: "WanxAgent"
+  version: "2.4.0"
+
+mysql:
+  endpoint: "${MYSQL_ENDPOINT:-sqlite:///./wanxagent.db}"
+  async_endpoint: "${MYSQL_ASYNC_ENDPOINT:-sqlite+aiosqlite:///./wanxagent.db}"
+
+redis:
+  endpoint: "${REDIS_ENDPOINT:-redis://localhost:6379}"
+
+multi_models:
+  conversation_model:
+    api_key: "${CONVERSATION_MODEL_API_KEY:-8b5a78b0170e41d3a8dbad70f0905aa1.LY3n6aJofqDgWOC}"
+    base_url: "${CONVERSATION_MODEL_BASE_URL:-https://open.bigmodel.cn/api/paas/v4/}"
+    model_name: "${CONVERSATION_MODEL_NAME:-glm-4.5-air}"
+  tool_call_model:
+    api_key: "${TOOL_CALL_MODEL_API_KEY:-8b5a78b0170e41d3a8dbad70f0905aa1.LY3n6aJofqDgWOC}"
+    base_url: "${TOOL_CALL_MODEL_BASE_URL:-https://open.bigmodel.cn/api/paas/v4/}"
+    model_name: "${TOOL_CALL_MODEL_NAME:-glm-4.5-air}"
+  reasoning_model:
+    api_key: "${REASONING_MODEL_API_KEY:-8b5a78b0170e41d3a8dbad70f0905aa1.LY3n6aJofqDgWOC}"
+    base_url: "${REASONING_MODEL_BASE_URL:-https://open.bigmodel.cn/api/paas/v4/}"
+    model_name: "${REASONING_MODEL_NAME:-glm-4.5-air}"
+  text2image:
+    api_key: "${TEXT2IMAGE_API_KEY:-your_api_key_here}"
+    base_url: "${TEXT2IMAGE_BASE_URL:-https://dashscope.aliyuncs.com/api/v1/services/aigc/text2image/image-synthesis}"
+    model_name: "${TEXT2IMAGE_MODEL_NAME:-wanx2.0-t2i-turbo}"
+  qwen_vl:
+    api_key: "${QWEN_VL_API_KEY:-your_api_key_here}"
+    base_url: "${QWEN_VL_BASE_URL:-https://dashscope.aliyuncs.com/compatible-mode/v1}"
+    model_name: "${QWEN_VL_MODEL_NAME:-qwen-vl-plus}"
+
+  embedding:
+    api_key: "${EMBEDDING_API_KEY:-your_api_key_here}"
+    base_url: "${EMBEDDING_BASE_URL:-https://dashscope.aliyuncs.com/compatible-mode/v1}"
+    model_name: "${EMBEDDING_MODEL_NAME:-text-embedding-v3}"
+
+  rerank:
+    api_key: "${RERANK_API_KEY:-your_api_key_here}"
+    base_url: "${RERANK_BASE_URL:-https://dashscope.aliyuncs.com/compatible-mode/v1}"
+    model_name: "${RERANK_MODEL_NAME:-qwen-vl-rerank}"
+
+
+tools:
+  weather:
+    api_key: "${WEATHER_API_KEY:-your_api_key_here}"
+    endpoint: "https://restapi.amap.com/v3/weather/weatherInfo?parameters"
+  tavily:
+    api_key: "${TAVILY_API_KEY:-your_api_key_here}"
+  google:
+    api_key: "${GOOGLE_API_KEY:-your_api_key_here}"
+  delivery:
+    api_key: "${DELIVERY_API_KEY:-your_api_key_here}"
+    endpoint: "https://qyexpress.market.alicloudapi.com/composite/queryexpress"
+  bocha:
+    api_key: "${BOCHA_API_KEY:-your_api_key_here}"
+    endpoint: "https://api.bochaai.com/v1/web-search"
+
+
+rag:
+  enable_summary: ${RAG_ENABLE_SUMMARY:-False}
+  enable_elasticsearch: ${RAG_ENABLE_ELASTICSEARCH:-False}
+
+  retrival:
+    top_k: ${RAG_TOP_K:-5}
+    min_score: ${RAG_MIN_SCORE:-0.2}
+
+  split:
+    chunk_size: ${RAG_CHUNK_SIZE:-500}
+    overlap_size: ${RAG_OVERLAP_SIZE:-100}
+
+  elasticsearch:
+    hosts: "${ELASTICSEARCH_HOSTS:-http://127.0.0.1:9200}"
+
+  vector_db:
+    host: "${VECTOR_DB_HOST:-127.0.0.1}"
+    port: "${VECTOR_DB_PORT:-19530}"
+    mode: "${VECTOR_DB_MODE:-chroma}"
+
+storage:
+  mode: "${STORAGE_MODE:-local}"
+
+  oss:
+    access_key_id: "${OSS_ACCESS_KEY_ID:-your_access_key_here}"
+    access_key_secret: "${OSS_ACCESS_KEY_SECRET:-your_secret_key_here}"
+    endpoint: "${OSS_ENDPOINT:-oss-cn-beijing.aliyuncs.com}"
+    bucket_name: "${OSS_BUCKET_NAME:-wanxagent}"
+    base_url: "${OSS_BASE_URL:-https://wanxagent.oss-cn-beijing.aliyuncs.com}"
+
+  minio:
+    access_key_id: "${MINIO_ACCESS_KEY_ID:-minioadmin}"
+    access_key_secret: "${MINIO_ACCESS_KEY_SECRET:-minioadmin}"
+    endpoint: "${MINIO_ENDPOINT:-127.0.0.1:9000}"
+    bucket_name: "${MINIO_BUCKET_NAME:-wanxagent}"
+    base_url: "${MINIO_BASE_URL:-http://127.0.0.1:9000/wanxagent}"
+
+  local:
+    storage_dir: "${LOCAL_STORAGE_DIR:-./storage}"
+
+default_config:
+  mcp_logo_url: "${MCP_LOGO_URL:-https://wanxagent.oss-cn-beijing.aliyuncs.com/icons/mcp/mcp.png}"
+  tool_logo_url: "${TOOL_LOGO_URL:-https://wanxagent.oss-cn-beijing.aliyuncs.com/icons/tools/default.png}"
+  agent_logo_url: "${AGENT_LOGO_URL:-https://wanxagent.oss-cn-beijing.aliyuncs.com/icons/tools/bot.png}"
+  mars_daily_url: "${MARS_DAILY_URL:-https://news.aibase.com/zh/news}"
+  memory_collection_name: "${MEMORY_COLLECTION_NAME:-memory}"
+
+wechat_config:
+  token: "${WECHAT_TOKEN:-your_wechat_token_here}"
+  app_id: "${WECHAT_APP_ID:-your_wechat_app_id_here}"
+  secret: "${WECHAT_SECRET:-your_wechat_secret_here}"
+
+langfuse:
+  trace_name: "${LANGFUSE_TRACE_NAME:-wanxagent}"
+  host: "${LANGFUSE_HOST:-https://cloud.langfuse.com}"
+  public_key: "${LANGFUSE_PUBLIC_KEY:-your_public_key_here}"
+  secret_key: "${LANGFUSE_SECRET_KEY:-your_secret_key_here}"
+  user_id: "${LANGFUSE_USER_ID:-your_user_id_here}"
+
+whitelist_paths: ["/api/v1/login"]
