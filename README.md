@@ -234,21 +234,21 @@ VITE_API_BASE_URL=http://localhost:7860
 
 ### 职责分配
 
-**梁思宇（Agent 核心开发 / 组长）**
+**梁斯禹（Agent 核心开发 / 组长）**
 - Agent 架构设计与实现（GeneralAgent、ReActAgent、SkillAgent、MCPAgent）
 - MCP 服务集成与工具调用（天气、ArXiv、飞书日历）
 - Skills 领域知识封装
 - 后端 API 开发与调试（JWT认证、流式响应）
 - 模型管理与配置
 
-**倪丹（前端 UI 开发）**
+**倪聃（前端 UI 开发）**
 - Vue 3 页面组件开发（工作台、对话、Agent管理、知识库、模型管理）
 - 交互逻辑与动画效果
 - 响应式布局设计
 - 流式输出动效实现
 - 前端路由配置
 
-**夏丽莎（RAG / 数据开发）**
+**夏莉莎（RAG / 数据开发）**
 - 文档解析与索引构建（PDF/Word/PPT/Markdown）
 - 向量检索与重排序优化（ES + ChromaDB）
 - Memory 智能记忆系统（语义/情景/程序记忆）
