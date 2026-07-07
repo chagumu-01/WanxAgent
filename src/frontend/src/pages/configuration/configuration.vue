@@ -48,6 +48,7 @@ const cancel = ()=>{
 <style lang="scss" scoped>
 .editor {
   height: calc(100vh - 62px);
+  background: var(--newsprint-bg);
   .editor-container {
     margin: 20px;
     width: 100%;
@@ -60,6 +61,29 @@ const cancel = ()=>{
     justify-content: center;
     :deep(.el-button) {
       padding: 20px 40px;
+      border-radius: 4px;
+      font-family: 'Lora', serif;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    :deep(.el-button--primary) {
+      background: var(--newsprint-fg);
+      color: var(--newsprint-bg);
+      border: 2px solid var(--newsprint-fg);
+      &:hover {
+        transform: translate(-2px, -2px);
+        box-shadow: 4px 4px 0px 0px var(--newsprint-border);
+      }
+    }
+    :deep(.el-button--default) {
+      background: var(--newsprint-bg);
+      color: var(--newsprint-fg);
+      border: 2px solid var(--newsprint-border);
+      &:hover {
+        transform: translate(-2px, -2px);
+        box-shadow: 4px 4px 0px 0px var(--newsprint-border);
+      }
     }
   }
 }

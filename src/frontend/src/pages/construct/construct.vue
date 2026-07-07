@@ -78,7 +78,7 @@ onMounted(async () => {
 .agent-card {
   padding: 32px;
   min-height: calc(100vh - 150px);
-  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  background: var(--newsprint-bg);
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 16px;
@@ -89,39 +89,14 @@ onMounted(async () => {
     display: flex;
     flex-direction: column;
     height: 160px;
-    background: linear-gradient(135deg, #c41e3a 0%, #d94560 100%);
-    border-radius: 20px;
-    border: 2px solid transparent;
-    box-shadow: 0 8px 32px rgba(196, 30, 58, 0.2);
+    background: var(--newsprint-fg);
+    border-radius: 4px;
+    border: 2px solid var(--newsprint-fg);
+    box-shadow: 4px 4px 0px 0px var(--newsprint-border);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     cursor: pointer;
     position: relative;
     overflow: hidden;
-    
-    &::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
-      backdrop-filter: blur(20px);
-    }
-    
-    &::after {
-      content: '';
-      position: absolute;
-      top: -2px;
-      left: -2px;
-      right: -2px;
-      bottom: -2px;
-      background: linear-gradient(135deg, #f2a5b5 0%, #c41e3a 50%, #d94560 100%);
-      border-radius: 22px;
-      z-index: -1;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
 
           .content {
         padding: 16px;
@@ -141,7 +116,7 @@ onMounted(async () => {
             width: 40px;
             height: 40px;
             margin-right: 12px;
-            filter: brightness(0) invert(1) drop-shadow(0 2px 8px rgba(255, 255, 255, 0.3));
+            filter: brightness(0) invert(1);
             transition: all 0.3s ease;
           }
           
@@ -149,8 +124,9 @@ onMounted(async () => {
             font-size: 18px;
             font-weight: 600;
             color: white;
-            font-family: 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', Arial, sans-serif;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            font-family: 'Playfair Display', serif;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
           }
         }
 
@@ -159,23 +135,18 @@ onMounted(async () => {
           font-weight: 400;
           line-height: 1.5;
           color: rgba(255, 255, 255, 0.9);
-          text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-          font-family: 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', Arial, sans-serif;
+          font-family: 'Lora', serif;
         }
       }
     
     &:hover {
-      transform: translateY(-8px) scale(1.02);
-      box-shadow: 0 20px 60px rgba(255, 159, 67, 0.4);
-      
-      &::after {
-        opacity: 1;
-      }
+      transform: translate(-2px, -2px);
+      box-shadow: 8px 8px 0px 0px var(--newsprint-border);
       
       .content {
         .top img {
           transform: scale(1.1) rotate(5deg);
-          filter: brightness(0) invert(1) drop-shadow(0 4px 12px rgba(255, 255, 255, 0.5));
+          filter: brightness(0) invert(1);
         }
       }
     }

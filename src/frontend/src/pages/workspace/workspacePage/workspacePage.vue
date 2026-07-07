@@ -587,7 +587,7 @@ const handleStartTask = () => {
   height: 100%;
   display: flex;
   justify-content: center;
-  background: linear-gradient(180deg, #fafbfc 0%, #ffffff 100%);
+  background: var(--newsprint-bg);
   padding: 0;
   overflow: hidden;
 }
@@ -599,7 +599,7 @@ const handleStartTask = () => {
   display: flex;
   flex-direction: column;
   gap: 24px;
-  min-height: 0; // allow inner sections to manage their own overflow
+  min-height: 0;
 }
 
 // 历史记录区域（全屏模式）
@@ -607,9 +607,8 @@ const handleStartTask = () => {
   flex: 1;
   display: flex;
   flex-direction: column;
-  background: white;
-  border-radius: 16px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  background: var(--newsprint-bg);
+  border: 2px solid var(--newsprint-border);
   overflow: hidden;
   animation: fadeInUp 0.5s ease both;
 
@@ -618,9 +617,9 @@ const handleStartTask = () => {
     justify-content: space-between;
     align-items: center;
     padding: 24px 32px;
-    background: linear-gradient(135deg, #c41e3a 0%, #d94560 100%);
-    color: white;
-    border-bottom: 3px solid rgba(255, 255, 255, 0.2);
+    background: var(--newsprint-fg);
+    color: var(--newsprint-bg);
+    border-bottom: 3px solid var(--newsprint-accent);
 
     .header-left {
       display: flex;
@@ -635,18 +634,19 @@ const handleStartTask = () => {
         margin: 0;
         font-size: 22px;
         font-weight: 700;
-        color: white;
+        color: var(--newsprint-bg);
+        font-family: 'Playfair Display', serif;
       }
     }
 
     .header-right {
       .history-count {
         font-size: 14px;
-        color: rgba(255, 255, 255, 0.9);
-        background: rgba(255, 255, 255, 0.2);
+        color: var(--newsprint-bg);
+        background: var(--newsprint-accent);
         padding: 6px 16px;
-        border-radius: 20px;
         font-weight: 500;
+        border: 1px solid var(--newsprint-bg);
       }
     }
   }
@@ -655,22 +655,21 @@ const handleStartTask = () => {
     flex: 1;
     overflow-y: auto;
     padding: 20px;
-    background: #fafbfc;
-    // 隐藏滚动条（仍可滚动）
-    scrollbar-width: none; // Firefox
-    -ms-overflow-style: none; // IE/Edge
-    &::-webkit-scrollbar { display: none; } // WebKit
+    background: var(--newsprint-bg);
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    &::-webkit-scrollbar { display: none; }
 
     .conversation-item {
-      background: white;
-      border-radius: 12px;
+      background: var(--newsprint-neutral-100);
+      border: 2px solid var(--newsprint-border);
       margin-bottom: 16px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
       transition: all 0.3s ease;
       overflow: hidden;
 
       &:hover {
-        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+        transform: translate(-4px, -4px);
+        box-shadow: 8px 8px 0px 0px var(--newsprint-fg);
       }
 
       &:last-child {
@@ -682,13 +681,13 @@ const handleStartTask = () => {
         justify-content: space-between;
         align-items: center;
         padding: 16px 20px;
-        background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%);
+        background: var(--newsprint-bg);
         cursor: pointer;
         transition: all 0.2s ease;
-        border-bottom: 1px solid #f3f4f6;
+        border-bottom: 2px solid var(--newsprint-border);
 
         &:hover {
-          background: linear-gradient(135deg, #f3f4f6 0%, #f9fafb 100%);
+          background: var(--newsprint-neutral-100);
         }
 
         .header-info {
@@ -701,16 +700,16 @@ const handleStartTask = () => {
           .conversation-number {
             font-size: 14px;
             font-weight: 700;
-            color: #667eea;
-            background: #eff6ff;
+            color: var(--newsprint-accent);
+            background: var(--newsprint-bg);
             padding: 4px 12px;
-            border-radius: 12px;
+            border: 2px solid var(--newsprint-accent);
             flex-shrink: 0;
           }
 
           .conversation-preview {
             font-size: 14px;
-            color: #374151;
+            color: var(--newsprint-fg);
             font-weight: 500;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -720,7 +719,7 @@ const handleStartTask = () => {
 
         .expand-icon {
           font-size: 14px;
-          color: #9ca3af;
+          color: var(--newsprint-neutral-500);
           transition: transform 0.2s ease;
           margin-left: 12px;
         }
@@ -736,7 +735,7 @@ const handleStartTask = () => {
 
       .conversation-content {
         padding: 20px;
-        background: white;
+        background: var(--newsprint-neutral-100);
 
         .message-block {
           margin-bottom: 24px;
@@ -751,7 +750,7 @@ const handleStartTask = () => {
             gap: 8px;
             margin-bottom: 12px;
             padding-bottom: 8px;
-            border-bottom: 2px solid #f3f4f6;
+            border-bottom: 2px solid var(--newsprint-border);
 
             .message-icon {
               font-size: 20px;
@@ -760,17 +759,16 @@ const handleStartTask = () => {
             .message-title {
               font-size: 14px;
               font-weight: 600;
-              color: #6b7280;
+              color: var(--newsprint-neutral-500);
               text-transform: uppercase;
               letter-spacing: 0.5px;
             }
           }
 
           .message-body {
-            background: #fafbfc;
-            border-radius: 12px;
+            background: var(--newsprint-bg);
             padding: 16px;
-            border: 1px solid #e5e7eb;
+            border: 2px solid var(--newsprint-border);
 
             :deep(.md-editor-preview) {
               background: transparent;
@@ -779,13 +777,15 @@ const handleStartTask = () => {
               p {
                 margin: 8px 0;
                 line-height: 1.8;
-                color: #374151;
+                color: var(--newsprint-fg);
+                font-family: 'Lora', serif;
               }
 
               h1, h2, h3, h4, h5, h6 {
                 margin: 16px 0 8px 0;
                 font-weight: 600;
-                color: #1f2937;
+                color: var(--newsprint-fg);
+                font-family: 'Playfair Display', serif;
               }
 
               ul, ol {
@@ -795,40 +795,42 @@ const handleStartTask = () => {
                 li {
                   margin: 6px 0;
                   line-height: 1.6;
-                  color: #374151;
+                  color: var(--newsprint-fg);
                 }
               }
 
               code {
-                background: #f3f4f6;
+                background: var(--newsprint-neutral-100);
                 padding: 2px 6px;
-                border-radius: 4px;
-                font-family: 'Consolas', 'Monaco', monospace;
+                font-family: 'JetBrains Mono', monospace;
                 font-size: 0.9em;
-                color: #e11d48;
+                color: var(--newsprint-accent);
+                border: 1px solid var(--newsprint-border);
               }
 
               pre {
-                background: #1f2937;
-                color: #f9fafb;
+                background: var(--newsprint-fg);
+                color: var(--newsprint-bg);
                 padding: 16px;
-                border-radius: 8px;
                 overflow-x: auto;
                 margin: 12px 0;
+                border: 2px solid var(--newsprint-border);
 
                 code {
                   background: none;
                   color: inherit;
                   padding: 0;
+                  border: none;
                 }
               }
 
               blockquote {
-                border-left: 4px solid #667eea;
+                border-left: 4px solid var(--newsprint-accent);
                 padding-left: 16px;
                 margin: 12px 0;
-                color: #6b7280;
+                color: var(--newsprint-neutral-500);
                 font-style: italic;
+                font-family: 'Lora', serif;
               }
 
               table {
@@ -837,13 +839,13 @@ const handleStartTask = () => {
                 margin: 12px 0;
 
                 th, td {
-                  border: 1px solid #e5e7eb;
+                  border: 1px solid var(--newsprint-border);
                   padding: 8px 12px;
                   text-align: left;
                 }
 
                 th {
-                  background: #f9fafb;
+                  background: var(--newsprint-neutral-100);
                   font-weight: 600;
                 }
               }
@@ -853,36 +855,36 @@ const handleStartTask = () => {
           &.user-block {
             .message-header {
               .message-icon {
-                background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
-                border-radius: 50%;
+                background: var(--newsprint-neutral-100);
                 width: 32px;
                 height: 32px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
+                border: 2px solid var(--newsprint-border);
               }
             }
 
             .message-body {
-              border-left: 3px solid #667eea;
+              border-left: 4px solid var(--newsprint-fg);
             }
           }
 
           &.ai-block {
             .message-header {
               .message-icon {
-                background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
-                border-radius: 50%;
+                background: var(--newsprint-neutral-100);
                 width: 32px;
                 height: 32px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
+                border: 2px solid var(--newsprint-border);
               }
             }
 
             .message-body {
-              border-left: 3px solid #10b981;
+              border-left: 4px solid var(--newsprint-accent);
             }
           }
         }
@@ -917,7 +919,8 @@ const handleStartTask = () => {
       .editor-title {
         font-size: 16px;
         font-weight: 600;
-        color: #1f2937;
+        color: var(--newsprint-fg);
+        font-family: 'Playfair Display', serif;
       }
     }
 
@@ -931,21 +934,19 @@ const handleStartTask = () => {
         align-items: center;
         gap: 8px;
         padding: 6px 12px;
-        background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
-        border-radius: 20px;
-        border: 1px solid #667eea;
+        background: var(--newsprint-bg);
+        border: 2px solid var(--newsprint-border);
 
         .loading-dot {
           width: 8px;
           height: 8px;
-          background: #667eea;
-          border-radius: 50%;
+          background: var(--newsprint-accent);
           animation: pulse 1.5s ease-in-out infinite;
         }
 
         .loading-text {
           font-size: 13px;
-          color: #667eea;
+          color: var(--newsprint-fg);
           font-weight: 500;
         }
       }
@@ -955,9 +956,8 @@ const handleStartTask = () => {
         align-items: center;
         gap: 6px;
         padding: 6px 12px;
-        background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
-        border-radius: 20px;
-        border: 1px solid #10b981;
+        background: var(--newsprint-bg);
+        border: 2px solid var(--newsprint-fg);
 
         .edit-icon {
           font-size: 14px;
@@ -965,7 +965,7 @@ const handleStartTask = () => {
 
         .edit-text {
           font-size: 13px;
-          color: #059669;
+          color: var(--newsprint-fg);
           font-weight: 500;
         }
       }
@@ -974,16 +974,14 @@ const handleStartTask = () => {
 
   .editor-wrapper {
     flex: 1;
-    background: white;
-    border: 2px solid #e5e7eb;
-    border-radius: 16px;
+    background: var(--newsprint-bg);
+    border: 2px solid var(--newsprint-border);
     overflow: hidden;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
     transition: all 0.3s ease;
 
     &:focus-within {
-      border-color: #667eea;
-      box-shadow: 0 6px 24px rgba(102, 126, 234, 0.15);
+      border-color: var(--newsprint-accent);
+      box-shadow: 4px 4px 0px 0px var(--newsprint-accent);
     }
 
     .editor-content {
@@ -993,20 +991,21 @@ const handleStartTask = () => {
       .editor-pane {
         width: 50%;
         height: 100%;
-        border-right: 1px solid #e5e7eb;
+        border-right: 2px solid var(--newsprint-border);
         overflow: hidden;
         display: flex;
         flex-direction: column;
-        background: white;
+        background: var(--newsprint-bg);
 
         .pane-header {
           padding: 12px 16px;
-          background: #f9fafb;
-          border-bottom: 1px solid #e5e7eb;
+          background: var(--newsprint-neutral-100);
+          border-bottom: 2px solid var(--newsprint-border);
           font-size: 13px;
           font-weight: 600;
-          color: #6b7280;
+          color: var(--newsprint-neutral-500);
           letter-spacing: 0.5px;
+          text-transform: uppercase;
         }
 
         .markdown-editor {
@@ -1016,18 +1015,18 @@ const handleStartTask = () => {
           outline: none;
           resize: none;
           padding: 16px;
-          font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+          font-family: 'JetBrains Mono', monospace;
           font-size: 14px;
           line-height: 1.6;
-          color: #1f2937;
-          background: white;
+          color: var(--newsprint-fg);
+          background: var(--newsprint-bg);
 
           &::placeholder {
-            color: #9ca3af;
+            color: var(--newsprint-neutral-400);
           }
 
           &:read-only {
-            background: #fafbfc;
+            background: var(--newsprint-neutral-100);
             cursor: default;
           }
         }
@@ -1038,45 +1037,46 @@ const handleStartTask = () => {
         height: 100%;
         display: flex;
         flex-direction: column;
-        background: #fafbfc;
+        background: var(--newsprint-neutral-100);
 
         .pane-header {
           padding: 12px 16px;
-          background: #f9fafb;
-          border-bottom: 1px solid #e5e7eb;
+          background: var(--newsprint-neutral-100);
+          border-bottom: 2px solid var(--newsprint-border);
           font-size: 13px;
           font-weight: 600;
-          color: #6b7280;
+          color: var(--newsprint-neutral-500);
           letter-spacing: 0.5px;
+          text-transform: uppercase;
         }
 
         .markdown-preview {
           flex: 1;
           overflow-y: auto;
           padding: 16px 24px;
-          // 隐藏滚动条（仍可滚动）
-          scrollbar-width: none; // Firefox
-          -ms-overflow-style: none; // IE/Edge
-          &::-webkit-scrollbar { display: none; } // WebKit
+          scrollbar-width: none;
+          -ms-overflow-style: none;
+          &::-webkit-scrollbar { display: none; }
           
           :deep(h1), :deep(h2), :deep(h3), :deep(h4), :deep(h5), :deep(h6) {
             margin-top: 6px;
             margin-bottom: 0px;
             font-weight: 600;
             line-height: 1.2;
-            color: #1f2937;
+            color: var(--newsprint-fg);
+            font-family: 'Playfair Display', serif;
           }
 
           :deep(h1) { 
             font-size: 1.8em; 
-            border-bottom: 1px solid #e5e7eb; 
+            border-bottom: 2px solid var(--newsprint-border); 
             padding-bottom: 1px;
             margin-top: 8px;
             margin-bottom: 1px;
           }
           :deep(h2) { 
             font-size: 1.5em; 
-            border-bottom: 1px solid #f3f4f6; 
+            border-bottom: 1px solid var(--newsprint-border); 
             padding-bottom: 1px;
             margin-top: 6px;
             margin-bottom: 0px;
@@ -1098,7 +1098,7 @@ const handleStartTask = () => {
           }
           :deep(h6) { 
             font-size: 0.9em; 
-            color: #6b7280;
+            color: var(--newsprint-neutral-500);
             margin-top: 3px;
             margin-bottom: 0px;
           }
@@ -1107,7 +1107,8 @@ const handleStartTask = () => {
             margin-top: 0;
             margin-bottom: 2px;
             line-height: 1.5;
-            color: #374151;
+            color: var(--newsprint-fg);
+            font-family: 'Lora', serif;
           }
 
           :deep(ul), :deep(ol) {
@@ -1118,7 +1119,7 @@ const handleStartTask = () => {
             li {
               margin-bottom: 0px;
               line-height: 1.4;
-              color: #374151;
+              color: var(--newsprint-fg);
             }
           }
 
@@ -1130,7 +1131,6 @@ const handleStartTask = () => {
             list-style-type: decimal;
           }
 
-          // 嵌套列表样式
           :deep(ul.list-level-1) {
             list-style-type: disc;
             margin-left: 0;
@@ -1153,38 +1153,40 @@ const handleStartTask = () => {
           }
 
           :deep(code) {
-            background: #f3f4f6;
+            background: var(--newsprint-bg);
             padding: 2px 6px;
-            border-radius: 4px;
-            font-family: 'Consolas', 'Monaco', monospace;
+            font-family: 'JetBrains Mono', monospace;
             font-size: 0.9em;
-            color: #e11d48;
+            color: var(--newsprint-accent);
+            border: 1px solid var(--newsprint-border);
           }
 
           :deep(pre) {
-            background: #1f2937;
-            color: #f9fafb;
+            background: var(--newsprint-fg);
+            color: var(--newsprint-bg);
             padding: 10px;
-            border-radius: 6px;
             overflow-x: auto;
             margin-top: 3px;
             margin-bottom: 4px;
+            border: 2px solid var(--newsprint-border);
 
             code {
               background: none;
               color: inherit;
               padding: 0;
               line-height: 1.4;
+              border: none;
             }
           }
 
           :deep(blockquote) {
-            border-left: 4px solid #667eea;
+            border-left: 4px solid var(--newsprint-accent);
             padding-left: 12px;
             margin: 2px 0;
-            color: #6b7280;
+            color: var(--newsprint-neutral-500);
             font-style: italic;
             line-height: 1.4;
+            font-family: 'Lora', serif;
           }
 
           :deep(table) {
@@ -1194,20 +1196,20 @@ const handleStartTask = () => {
             margin-bottom: 4px;
 
             th, td {
-              border: 1px solid #e5e7eb;
+              border: 1px solid var(--newsprint-border);
               padding: 5px 8px;
               text-align: left;
               line-height: 1.4;
             }
 
             th {
-              background: #f9fafb;
+              background: var(--newsprint-neutral-100);
               font-weight: 600;
             }
           }
 
           :deep(a) {
-            color: #667eea;
+            color: var(--newsprint-accent);
             text-decoration: none;
 
             &:hover {
@@ -1217,12 +1219,12 @@ const handleStartTask = () => {
 
           :deep(hr) {
             border: none;
-            border-top: 1px solid #e5e7eb;
+            border-top: 2px solid var(--newsprint-border);
             margin: 6px 0;
           }
 
           :deep(.placeholder) {
-            color: #9ca3af;
+            color: var(--newsprint-neutral-400);
             font-style: italic;
           }
 
@@ -1250,13 +1252,13 @@ const handleStartTask = () => {
       align-items: center;
       gap: 10px;
       padding: 14px 28px;
-      border: none;
-      border-radius: 12px;
+      border: 2px solid var(--newsprint-border);
       font-size: 15px;
       font-weight: 600;
       cursor: pointer;
       transition: all 0.3s ease;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
 
       .btn-icon {
         font-size: 18px;
@@ -1273,34 +1275,32 @@ const handleStartTask = () => {
       }
 
       &:not(:disabled):hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+        transform: translate(-2px, -2px);
+        box-shadow: 4px 4px 0px 0px var(--newsprint-fg);
       }
 
       &:not(:disabled):active {
-        transform: translateY(0);
+        transform: translate(-1px, -1px);
+        box-shadow: 2px 2px 0px 0px var(--newsprint-fg);
       }
     }
 
     .regenerate-btn {
-      background: white;
-      color: #6b7280;
-      border: 2px solid #e5e7eb;
+      background: var(--newsprint-bg);
+      color: var(--newsprint-fg);
 
       &:not(:disabled):hover {
-        background: linear-gradient(135deg, #f8f9fa 0%, #f0f2f5 100%);
-        border-color: #667eea;
-        color: #667eea;
+        background: var(--newsprint-neutral-100);
       }
     }
 
     .start-btn {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: white;
+      background: var(--newsprint-fg);
+      color: var(--newsprint-bg);
 
       &:not(:disabled):hover {
-        background: linear-gradient(135deg, #5568d3 0%, #6a3d91 100%);
-        box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        background: var(--newsprint-bg);
+        color: var(--newsprint-fg);
       }
     }
   }
@@ -1349,7 +1349,7 @@ const handleStartTask = () => {
 
     .editor-pane {
       border-right: none !important;
-      border-bottom: 1px solid #e5e7eb;
+      border-bottom: 2px solid var(--newsprint-border);
     }
   }
 
@@ -1372,19 +1372,18 @@ const handleStartTask = () => {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(17, 17, 17, 0.5);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 1000;
-  backdrop-filter: blur(4px);
   animation: fadeIn 0.3s ease;
 }
 
 .feedback-modal {
-  background: white;
-  border-radius: 16px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  background: var(--newsprint-bg);
+  border: 2px solid var(--newsprint-border);
+  box-shadow: 8px 8px 0px 0px var(--newsprint-border);
   width: 420px;
   max-width: 90vw;
   animation: slideUp 0.3s ease;
@@ -1396,32 +1395,32 @@ const handleStartTask = () => {
   align-items: center;
   justify-content: space-between;
   padding: 20px 24px;
-  border-bottom: 1px solid #f0f0f0;
-  background: linear-gradient(135deg, #fafbfc 0%, #ffffff 100%);
+  border-bottom: 2px solid var(--newsprint-border);
+  background: var(--newsprint-fg);
 
   .modal-title {
     margin: 0;
     font-size: 18px;
     font-weight: 600;
-    color: #1f2937;
+    color: var(--newsprint-bg);
+    font-family: 'Playfair Display', serif;
   }
 
   .close-btn {
     width: 32px;
     height: 32px;
-    border: none;
-    background: #f3f4f6;
-    border-radius: 50%;
+    border: 2px solid var(--newsprint-bg);
+    background: transparent;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     transition: all 0.2s ease;
-    color: #6b7280;
+    color: var(--newsprint-bg);
 
     &:hover {
-      background: #e5e7eb;
-      color: #374151;
+      background: var(--newsprint-bg);
+      color: var(--newsprint-fg);
     }
 
     span {
@@ -1437,8 +1436,9 @@ const handleStartTask = () => {
   .feedback-tip {
     margin: 0 0 16px 0;
     font-size: 14px;
-    color: #6b7280;
+    color: var(--newsprint-neutral-500);
     line-height: 1.6;
+    font-family: 'Lora', serif;
   }
 
   .input-wrapper {
@@ -1448,26 +1448,23 @@ const handleStartTask = () => {
       width: 100%;
       min-height: 100px;
       padding: 16px;
-      border: 2px solid #e5e7eb;
-      border-radius: 12px;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+      border: 2px solid var(--newsprint-border);
+      font-family: 'Lora', serif;
       font-size: 14px;
       line-height: 1.6;
-      color: #1f2937;
-      background: #fafbfc;
+      color: var(--newsprint-fg);
+      background: var(--newsprint-bg);
       resize: none;
       outline: none;
       transition: all 0.3s ease;
       box-sizing: border-box;
 
       &:focus {
-        border-color: #667eea;
-        background: white;
-        box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+        border-color: var(--newsprint-accent);
       }
 
       &::placeholder {
-        color: #9ca3af;
+        color: var(--newsprint-neutral-400);
         font-style: italic;
       }
     }
@@ -1477,10 +1474,8 @@ const handleStartTask = () => {
       bottom: 8px;
       right: 12px;
       font-size: 12px;
-      color: #9ca3af;
-      background: rgba(255, 255, 255, 0.9);
+      color: var(--newsprint-neutral-400);
       padding: 2px 6px;
-      border-radius: 4px;
       pointer-events: none;
     }
   }
@@ -1491,45 +1486,41 @@ const handleStartTask = () => {
   gap: 12px;
   justify-content: flex-end;
   padding: 20px 24px;
-  border-top: 1px solid #f0f0f0;
-  background: #fafbfc;
+  border-top: 2px solid var(--newsprint-border);
+  background: var(--newsprint-neutral-100);
 
   button {
     padding: 10px 20px;
-    border: none;
-    border-radius: 10px;
+    border: 2px solid var(--newsprint-border);
     font-size: 14px;
     font-weight: 500;
     cursor: pointer;
     transition: all 0.3s ease;
     min-width: 80px;
+    text-transform: uppercase;
 
     &:active {
-      transform: translateY(1px);
+      transform: translate(-1px, -1px);
     }
   }
 
   .cancel-btn {
-    background: white;
-    color: #6b7280;
-    border: 1px solid #e5e7eb;
+    background: var(--newsprint-bg);
+    color: var(--newsprint-fg);
 
     &:hover {
-      background: #f9fafb;
-      border-color: #d1d5db;
-      color: #374151;
+      background: var(--newsprint-neutral-100);
     }
   }
 
   .confirm-btn {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+    background: var(--newsprint-fg);
+    color: var(--newsprint-bg);
 
     &:hover {
-      background: linear-gradient(135deg, #5568d3 0%, #6a3d91 100%);
-      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
-      transform: translateY(-1px);
+      background: var(--newsprint-accent);
+      color: var(--newsprint-bg);
+      border-color: var(--newsprint-accent);
     }
 
     &:disabled {
@@ -1553,11 +1544,11 @@ const handleStartTask = () => {
 @keyframes slideUp {
   from {
     opacity: 0;
-    transform: translateY(20px) scale(0.95);
+    transform: translateY(20px);
   }
   to {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    transform: translateY(0);
   }
 }
 </style>

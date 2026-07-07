@@ -886,8 +886,8 @@ const saveUserConfig = async () => {
               <div class="wizard-header">
                 <div class="wizard-icon">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 2L2 7V17L12 22L22 17V7L12 2Z" stroke="#c41e3a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M12 12L2 7L12 2L22 7L12 12Z" stroke="#c41e3a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M12 2L2 7V17L12 22L22 17V7L12 2Z" stroke="var(--newsprint-fg)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M12 12L2 7L12 2L22 7L12 12Z" stroke="var(--newsprint-fg)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                   </svg>
                 </div>
                 <div class="wizard-text">
@@ -977,9 +977,9 @@ const saveUserConfig = async () => {
                         ></textarea>
                         <div class="json-indicator">
                           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M16 3l4 4-4 4" stroke="#909399" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M8 21l-4-4 4-4" stroke="#909399" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M15 14l-6-6" stroke="#909399" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M16 3l4 4-4 4" stroke="var(--newsprint-neutral-400)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M8 21l-4-4 4-4" stroke="var(--newsprint-neutral-400)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M15 14l-6-6" stroke="var(--newsprint-neutral-400)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                           </svg>
                           JSON
                         </div>
@@ -987,9 +987,9 @@ const saveUserConfig = async () => {
                       <span v-if="formErrors.imported_config" class="error-text">{{ formErrors.imported_config }}</span>
                       <span v-if="editingServer" class="help-text">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <circle cx="12" cy="12" r="10" stroke="#909399" stroke-width="2"/>
-                          <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" stroke="#909399" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                          <line x1="12" y1="17" x2="12.01" y2="17" stroke="#909399" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                          <circle cx="12" cy="12" r="10" stroke="var(--newsprint-neutral-400)" stroke-width="2"/>
+                          <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" stroke="var(--newsprint-neutral-400)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                          <line x1="12" y1="17" x2="12.01" y2="17" stroke="var(--newsprint-neutral-400)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                         编辑模式下，如果不修改配置可以保持原样，只修改需要更新的字段
                       </span>
@@ -1035,7 +1035,7 @@ const saveUserConfig = async () => {
             <div v-if="selectedServerTools.length === 0" class="no-tools">
               <div class="empty-icon">
                 <svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.77 3.77z" stroke="#c0c4cc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.77 3.77z" stroke="var(--newsprint-neutral-400)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </div>
               <div class="empty-text">
@@ -1049,7 +1049,7 @@ const saveUserConfig = async () => {
                 <div class="stat-card">
                   <div class="stat-icon">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.77 3.77z" stroke="#c41e3a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.77 3.77z" stroke="var(--newsprint-fg)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                   </div>
                   <div class="stat-info">
@@ -1072,7 +1072,7 @@ const saveUserConfig = async () => {
                     <div class="tool-info">
                       <div class="tool-icon">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.77 3.77z" stroke="#c41e3a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                          <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.77 3.77z" stroke="var(--newsprint-fg)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                       </div>
                       <div class="tool-text">
@@ -1093,8 +1093,8 @@ const saveUserConfig = async () => {
                       <div class="tool-schema" v-if="tool.input_schema">
                         <div class="schema-header">
                           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <polyline points="16 18 22 12 16 6" stroke="#c41e3a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            <polyline points="8 6 2 12 8 18" stroke="#c41e3a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <polyline points="16 18 22 12 16 6" stroke="var(--newsprint-fg)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <polyline points="8 6 2 12 8 18" stroke="var(--newsprint-fg)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                           </svg>
                           <span>参数结构</span>
                         </div>
@@ -1114,8 +1114,8 @@ const saveUserConfig = async () => {
                           <div v-if="tool.input_schema.required?.length" class="required-section">
                             <div class="section-title">
                               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="#f56c6c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M9 12l2 2 4-4" stroke="#f56c6c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="var(--newsprint-accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M9 12l2 2 4-4" stroke="var(--newsprint-accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                               </svg>
                               <span>必填参数</span>
                             </div>
@@ -1133,9 +1133,9 @@ const saveUserConfig = async () => {
                           <div v-if="tool.input_schema.properties" class="properties-section">
                             <div class="section-title">
                               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2" stroke="#67c23a" stroke-width="2"/>
-                                <circle cx="8.5" cy="8.5" r="1.5" stroke="#67c23a" stroke-width="2"/>
-                                <path d="M21 15l-5-5L5 21l5-5z" stroke="#67c23a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2" stroke="var(--newsprint-accent)" stroke-width="2"/>
+                                <circle cx="8.5" cy="8.5" r="1.5" stroke="var(--newsprint-accent)" stroke-width="2"/>
+                                <path d="M21 15l-5-5L5 21l5-5z" stroke="var(--newsprint-accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                               </svg>
                               <span>参数详情</span>
                             </div>
@@ -1197,8 +1197,8 @@ const saveUserConfig = async () => {
               <div class="info-card">
                 <div class="info-icon">
                   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="12" cy="12" r="10" stroke="#c41e3a" stroke-width="2"/>
-                    <path d="M9 12l2 2 4-4" stroke="#c41e3a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <circle cx="12" cy="12" r="10" stroke="var(--newsprint-fg)" stroke-width="2"/>
+                    <path d="M9 12l2 2 4-4" stroke="var(--newsprint-fg)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                   </svg>
                 </div>
                 <div class="info-text">
@@ -1246,9 +1246,9 @@ const saveUserConfig = async () => {
             <div class="config-help">
               <h4 class="help-title">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <circle cx="12" cy="12" r="10" stroke="#c41e3a" stroke-width="2"/>
-                  <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" stroke="#c41e3a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  <line x1="12" y1="17" x2="12.01" y2="17" stroke="#c41e3a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <circle cx="12" cy="12" r="10" stroke="var(--newsprint-fg)" stroke-width="2"/>
+                  <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" stroke="var(--newsprint-fg)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <line x1="12" y1="17" x2="12.01" y2="17" stroke="var(--newsprint-fg)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
                 配置说明
               </h4>
@@ -1304,9 +1304,9 @@ const saveUserConfig = async () => {
           <div class="modal-header delete-header">
             <div class="warning-icon">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" stroke="#f56c6c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="rgba(245, 108, 108, 0.1)"/>
-                <line x1="12" y1="9" x2="12" y2="13" stroke="#f56c6c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <line x1="12" y1="17" x2="12.01" y2="17" stroke="#f56c6c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" stroke="var(--newsprint-accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="var(--newsprint-neutral-100)"/>
+                <line x1="12" y1="9" x2="12" y2="13" stroke="var(--newsprint-accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <line x1="12" y1="17" x2="12.01" y2="17" stroke="var(--newsprint-accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
             </div>
             <h3>确认删除</h3>
@@ -1389,7 +1389,8 @@ const saveUserConfig = async () => {
   bottom: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: var(--newsprint-fg);
+  opacity: 0.6;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1400,15 +1401,16 @@ const saveUserConfig = async () => {
 }
 
 .modal-dialog {
-  background: white;
-  border-radius: 16px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  background: var(--newsprint-bg);
+  border-radius: 4px;
+  box-shadow: 4px 4px 0px 0px var(--newsprint-border);
   width: 90%;
   max-width: 600px;
   max-height: 90vh;
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  font-family: 'Lora', serif;
   
   &.tools-dialog {
     max-width: 800px;
@@ -1424,14 +1426,17 @@ const saveUserConfig = async () => {
   align-items: center;
   justify-content: space-between;
   padding: 20px 24px;
-  border-bottom: 1px solid #ebeef5;
-  background: #fff;
+  border-bottom: 1px solid var(--newsprint-border);
+  background: var(--newsprint-bg);
   
   h3 {
     margin: 0;
     font-size: 18px;
     font-weight: 600;
-    color: #303133;
+    color: var(--newsprint-fg);
+    font-family: 'Playfair Display', serif;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
   }
   
   .close-btn {
@@ -1439,7 +1444,7 @@ const saveUserConfig = async () => {
     height: 28px;
     border: none;
     background: none;
-    color: #909399;
+    color: var(--newsprint-neutral-400);
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -1448,8 +1453,8 @@ const saveUserConfig = async () => {
     transition: all 0.2s ease;
     
     &:hover {
-      background: #f5f7fa;
-      color: #606266;
+      background: var(--newsprint-neutral-100);
+      color: var(--newsprint-neutral-500);
     }
   }
 }
@@ -1458,7 +1463,7 @@ const saveUserConfig = async () => {
   padding: 24px;
   overflow: hidden;
   flex: 1;
-  background: #fafafa;
+  background: var(--newsprint-bg);
   
   &.tools-content {
     overflow-y: auto;
@@ -1468,18 +1473,18 @@ const saveUserConfig = async () => {
 
 .modal-footer {
   padding: 16px 24px;
-  border-top: 1px solid #ebeef5;
+  border-top: 1px solid var(--newsprint-border);
   display: flex;
   justify-content: flex-end;
   gap: 12px;
-  background: #fff;
+  background: var(--newsprint-bg);
 }
 
 // 删除对话框样式
 .delete-dialog {
   .delete-header {
-    background: linear-gradient(135deg, #fff5f5 0%, #fff0f0 100%);
-    border-bottom-color: #fde2e2;
+    background: var(--newsprint-neutral-100);
+    border-bottom-color: var(--newsprint-border);
     position: relative;
     padding-left: 60px;
     
@@ -1491,7 +1496,10 @@ const saveUserConfig = async () => {
     }
     
     h3 {
-      color: #f56c6c;
+      color: var(--newsprint-accent);
+      font-family: 'Playfair Display', serif;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
   }
   
@@ -1502,23 +1510,23 @@ const saveUserConfig = async () => {
   .delete-warning {
     .warning-text {
       font-size: 16px;
-      color: #303133;
+      color: var(--newsprint-fg);
       margin: 0 0 20px 0;
       line-height: 1.6;
       
       .server-name-highlight {
-        color: #f56c6c;
+        color: var(--newsprint-accent);
         font-weight: 600;
         padding: 2px 6px;
-        background: rgba(245, 108, 108, 0.1);
+        background: var(--newsprint-neutral-100);
         border-radius: 4px;
       }
     }
     
     .warning-details {
-      background: #fef0f0;
-      border: 1px solid #fde2e2;
-      border-radius: 8px;
+      background: var(--newsprint-neutral-100);
+      border: 1px solid var(--newsprint-border);
+      border-radius: 4px;
       padding: 16px;
       
       .detail-item {
@@ -1538,7 +1546,7 @@ const saveUserConfig = async () => {
         
         span {
           font-size: 14px;
-          color: #606266;
+          color: var(--newsprint-neutral-500);
           line-height: 1.5;
         }
       }
@@ -1546,14 +1554,14 @@ const saveUserConfig = async () => {
   }
   
   .delete-footer {
-    background: #fafafa;
+    background: var(--newsprint-bg);
     
     .btn-danger {
-      background: #f56c6c;
-      color: white;
+      background: var(--newsprint-accent);
+      color: var(--newsprint-bg);
       border: none;
       padding: 10px 20px;
-      border-radius: 6px;
+      border-radius: 4px;
       font-size: 14px;
       font-weight: 500;
       cursor: pointer;
@@ -1563,9 +1571,9 @@ const saveUserConfig = async () => {
       gap: 6px;
       
       &:hover:not(:disabled) {
-        background: #f78989;
-        transform: translateY(-1px);
-        box-shadow: 0 4px 12px rgba(245, 108, 108, 0.3);
+        background: var(--newsprint-accent);
+        transform: translate(-2px, -2px);
+        box-shadow: 4px 4px 0px 0px var(--newsprint-fg);
       }
       
       &:active:not(:disabled) {
@@ -1580,8 +1588,8 @@ const saveUserConfig = async () => {
       .loading-spinner {
         width: 14px;
         height: 14px;
-        border: 2px solid rgba(255, 255, 255, 0.3);
-        border-top-color: white;
+        border: 2px solid var(--newsprint-bg);
+        border-top-color: var(--newsprint-bg);
         border-radius: 50%;
         animation: spin 0.6s linear infinite;
       }
@@ -1603,21 +1611,21 @@ const saveUserConfig = async () => {
     align-items: center;
     gap: 16px;
     padding: 20px;
-    background: linear-gradient(135deg, #f8fbff 0%, #f0f7ff 100%);
-    border: 1px solid #e1ecf4;
-    border-radius: 12px;
+    background: var(--newsprint-neutral-100);
+    border: 1px solid var(--newsprint-border);
+    border-radius: 4px;
     margin-bottom: 24px;
     
     .wizard-icon {
       flex-shrink: 0;
       width: 48px;
       height: 48px;
-      background: white;
-      border-radius: 12px;
+      background: var(--newsprint-bg);
+      border-radius: 4px;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 2px 8px rgba(196, 30, 58, 0.1);
+      box-shadow: 4px 4px 0px 0px var(--newsprint-border);
     }
     
     .wizard-text {
@@ -1625,13 +1633,16 @@ const saveUserConfig = async () => {
         margin: 0 0 6px 0;
         font-size: 18px;
         font-weight: 600;
-        color: #303133;
+        color: var(--newsprint-fg);
+        font-family: 'Playfair Display', serif;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
       }
       
       p {
         margin: 0;
         font-size: 14px;
-        color: #606266;
+        color: var(--newsprint-neutral-500);
         line-height: 1.5;
       }
     }
@@ -1640,12 +1651,12 @@ const saveUserConfig = async () => {
 
 .mcp-form {
   .form-section {
-    background: white;
-    border: 1px solid #ebeef5;
-    border-radius: 12px;
+    background: var(--newsprint-bg);
+    border: 1px solid var(--newsprint-border);
+    border-radius: 4px;
     padding: 20px;
     margin-bottom: 20px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    box-shadow: 4px 4px 0px 0px var(--newsprint-border);
     
     .section-title {
       display: flex;
@@ -1653,13 +1664,13 @@ const saveUserConfig = async () => {
       gap: 8px;
       margin-bottom: 20px;
       padding-bottom: 12px;
-      border-bottom: 1px solid #f0f2f5;
+      border-bottom: 1px solid var(--newsprint-neutral-100);
       font-weight: 600;
-      color: #303133;
+      color: var(--newsprint-fg);
       font-size: 16px;
       
       .required-mark {
-        color: #f56c6c;
+        color: var(--newsprint-accent);
         margin-left: 4px;
       }
     }
@@ -1698,12 +1709,12 @@ const saveUserConfig = async () => {
       align-items: center;
       gap: 8px;
       font-weight: 600;
-      color: #303133;
+      color: var(--newsprint-fg);
       margin-bottom: 12px;
       font-size: 14px;
       
       .required-mark {
-        color: #f56c6c;
+        color: var(--newsprint-accent);
         margin-left: 2px;
       }
       
@@ -1715,43 +1726,43 @@ const saveUserConfig = async () => {
     input, select, textarea {
       width: 100%;
       padding: 12px 16px;
-      border: 1px solid #dcdfe6;
-      border-radius: 6px;
+      border: 1px solid var(--newsprint-border);
+      border-radius: 4px;
       font-size: 14px;
       transition: all 0.2s ease;
-      background: white;
+      background: var(--newsprint-bg);
       box-sizing: border-box;
       font-family: inherit;
       
       &:focus {
         outline: none;
-        border-color: #c41e3a;
-        box-shadow: 0 0 0 2px rgba(196, 30, 58, 0.1);
+        border-color: var(--newsprint-fg);
+        box-shadow: 4px 4px 0px 0px var(--newsprint-border);
       }
       
       &:hover {
-        border-color: #c0c4cc;
+        border-color: var(--newsprint-neutral-400);
       }
       
       &.error {
-        border-color: #f56c6c;
-        background-color: #fef0f0;
+        border-color: var(--newsprint-accent);
+        background-color: var(--newsprint-neutral-100);
       }
       
       &::placeholder {
-        color: #c0c4cc;
+        color: var(--newsprint-neutral-400);
         font-size: 13px;
       }
       
       &:disabled,
       &[readonly] {
-        background-color: #f5f7fa;
-        border-color: #e4e7ed;
-        color: #c0c4cc;
+        background-color: var(--newsprint-neutral-100);
+        border-color: var(--newsprint-border);
+        color: var(--newsprint-neutral-400);
         cursor: not-allowed;
         
         &::placeholder {
-          color: #c0c4cc;
+          color: var(--newsprint-neutral-400);
         }
       }
     }
@@ -1776,7 +1787,7 @@ const saveUserConfig = async () => {
     
     .error-text {
       display: block;
-      color: #f56c6c;
+      color: var(--newsprint-accent);
       font-size: 12px;
       margin-top: 6px;
       font-weight: 500;
@@ -1787,13 +1798,13 @@ const saveUserConfig = async () => {
       align-items: flex-start;
       gap: 6px;
       font-size: 12px;
-      color: #909399;
+      color: var(--newsprint-neutral-400);
       margin-top: 8px;
       line-height: 1.5;
       padding: 8px 12px;
-      background: #f5f7fa;
+      background: var(--newsprint-neutral-100);
       border-radius: 4px;
-      border-left: 3px solid #c41e3a;
+      border-left: 3px solid var(--newsprint-fg);
       
       svg {
         flex-shrink: 0;
@@ -1806,13 +1817,13 @@ const saveUserConfig = async () => {
       align-items: flex-start;
       gap: 8px;
       font-size: 12px;
-      color: #909399;
+      color: var(--newsprint-neutral-400);
       margin-top: 8px;
       line-height: 1.5;
       padding: 8px 12px;
-      background: #f8f9fa;
-      border-radius: 6px;
-      border-left: 3px solid #67c23a;
+      background: var(--newsprint-neutral-100);
+      border-radius: 4px;
+      border-left: 3px solid var(--newsprint-accent);
       
       svg {
         flex-shrink: 0;
@@ -1830,13 +1841,13 @@ const saveUserConfig = async () => {
         display: flex;
         align-items: center;
         gap: 4px;
-        background: rgba(255, 255, 255, 0.9);
+        background: var(--newsprint-bg);
         padding: 4px 8px;
         border-radius: 4px;
         font-size: 11px;
-        color: #909399;
+        color: var(--newsprint-neutral-400);
         font-weight: 500;
-        border: 1px solid #e4e7ed;
+        border: 1px solid var(--newsprint-border);
         backdrop-filter: blur(4px);
       }
     }
@@ -1848,23 +1859,23 @@ const saveUserConfig = async () => {
       :deep(.el-upload) {
         width: 100px;
         height: 100px;
-        border: 2px solid #c41e3a;
-        border-radius: 8px;
+        border: 2px solid var(--newsprint-fg);
+        border-radius: 4px;
         cursor: pointer;
         position: relative;
         overflow: hidden;
         transition: all 0.3s ease;
-        background: #fceef2;
+        background: var(--newsprint-neutral-100);
         display: block;
         box-sizing: border-box;
         
         &:hover {
-          background: #c41e3a;
-          border-color: #c41e3a;
+          background: var(--newsprint-fg);
+          border-color: var(--newsprint-fg);
           
           .logo-upload-placeholder {
             svg path {
-              stroke: white !important;
+              stroke: var(--newsprint-bg) !important;
             }
           }
         }
@@ -1876,7 +1887,7 @@ const saveUserConfig = async () => {
         display: flex;
         align-items: center;
         justify-content: center;
-        color: #c41e3a;
+        color: var(--newsprint-fg);
         transition: all 0.3s ease;
         background: transparent;
         
@@ -1886,7 +1897,7 @@ const saveUserConfig = async () => {
           display: block;
           
           path {
-            stroke: #c41e3a !important;
+            stroke: var(--newsprint-fg) !important;
             stroke-width: 2.5;
           }
         }
@@ -1894,7 +1905,7 @@ const saveUserConfig = async () => {
         &.uploading {
           .uploading-text {
             font-size: 12px;
-            color: #c41e3a;
+            color: var(--newsprint-fg);
             font-weight: 500;
           }
         }
@@ -1902,10 +1913,10 @@ const saveUserConfig = async () => {
       
       :deep(.el-upload:hover) {
         .logo-upload-placeholder {
-          color: white;
+          color: var(--newsprint-bg);
           
           svg path {
-            stroke: white !important;
+            stroke: var(--newsprint-bg) !important;
           }
         }
       }
@@ -1914,7 +1925,7 @@ const saveUserConfig = async () => {
         width: 100%;
         height: 100%;
         position: relative;
-        border-radius: 8px;
+        border-radius: 4px;
         overflow: hidden;
         display: flex;
         align-items: center;
@@ -1933,7 +1944,7 @@ const saveUserConfig = async () => {
           left: 0;
           right: 0;
           bottom: 0;
-          background: rgba(0, 0, 0, 0.5);
+          background: var(--newsprint-fg);
           display: flex;
           align-items: center;
           justify-content: center;
@@ -1970,30 +1981,30 @@ const saveUserConfig = async () => {
   }
   
   &.btn-cancel {
-    background: #fff;
-    border-color: #dcdfe6;
-    color: #606266;
+    background: var(--newsprint-bg);
+    border-color: var(--newsprint-border);
+    color: var(--newsprint-neutral-500);
     
     &:hover:not(:disabled) {
-      color: #c41e3a;
-      border-color: #f2a5b5;
-      background-color: #fceef2;
+      color: var(--newsprint-fg);
+      border-color: var(--newsprint-border);
+      background-color: var(--newsprint-neutral-100);
     }
   }
   
   &.btn-primary {
-    background: #c41e3a;
-    border-color: #c41e3a;
-    color: #fff;
+    background: var(--newsprint-fg);
+    border-color: var(--newsprint-fg);
+    color: var(--newsprint-bg);
     
     &:hover:not(:disabled) {
-      background: #d94560;
-      border-color: #d94560;
+      background: var(--newsprint-fg);
+      border-color: var(--newsprint-fg);
     }
     
     &:active:not(:disabled) {
-      background: #9e1830;
-      border-color: #9e1830;
+      background: var(--newsprint-fg);
+      border-color: var(--newsprint-fg);
     }
   }
 }
@@ -2002,9 +2013,9 @@ const saveUserConfig = async () => {
   display: inline-block;
   width: 16px;
   height: 16px;
-  border: 2px solid rgba(255, 255, 255, 0.3);
+  border: 2px solid var(--newsprint-bg);
   border-radius: 50%;
-  border-top-color: white;
+  border-top-color: var(--newsprint-bg);
   animation: spin 1s ease-in-out infinite;
   margin-right: 8px;
 }
@@ -2017,7 +2028,7 @@ const saveUserConfig = async () => {
 
 // 工具详情样式
 .tools-content {
-  background: #f8f9fa;
+  background: var(--newsprint-neutral-100);
   
   .no-tools {
     text-align: center;
@@ -2033,11 +2044,14 @@ const saveUserConfig = async () => {
         margin: 0 0 8px 0;
         font-size: 18px;
         font-weight: 600;
-        color: #909399;
+        color: var(--newsprint-neutral-400);
+        font-family: 'Playfair Display', serif;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
       }
       
       p {
-        color: #c0c4cc;
+        color: var(--newsprint-neutral-400);
         font-size: 14px;
         margin: 0;
         line-height: 1.5;
@@ -2050,20 +2064,20 @@ const saveUserConfig = async () => {
       margin-bottom: 24px;
       
       .stat-card {
-        background: white;
-        border: 1px solid #ebeef5;
-        border-radius: 12px;
+        background: var(--newsprint-bg);
+        border: 1px solid var(--newsprint-border);
+        border-radius: 4px;
         padding: 20px;
         display: flex;
         align-items: center;
         gap: 16px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        box-shadow: 4px 4px 0px 0px var(--newsprint-border);
         
         .stat-icon {
           width: 48px;
           height: 48px;
-          background: #f0f7ff;
-          border-radius: 12px;
+          background: var(--newsprint-neutral-100);
+          border-radius: 4px;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -2077,13 +2091,13 @@ const saveUserConfig = async () => {
           .stat-number {
             font-size: 24px;
             font-weight: 700;
-            color: #409eff;
+            color: var(--newsprint-accent);
             line-height: 1;
           }
           
           .stat-label {
             font-size: 14px;
-            color: #606266;
+            color: var(--newsprint-neutral-500);
             font-weight: 500;
           }
         }
@@ -2092,22 +2106,22 @@ const saveUserConfig = async () => {
     
     .tools-list {
       .tool-item {
-        background: white;
-        border: 1px solid #ebeef5;
-        border-radius: 12px;
+        background: var(--newsprint-bg);
+        border: 1px solid var(--newsprint-border);
+        border-radius: 4px;
         margin-bottom: 12px;
         overflow: hidden;
         transition: all 0.2s ease;
         cursor: pointer;
         
         &:hover {
-          border-color: #409eff;
-          box-shadow: 0 2px 12px rgba(64, 158, 255, 0.1);
+          border-color: var(--newsprint-accent);
+          box-shadow: 4px 4px 0px 0px var(--newsprint-border);
         }
         
         &.expanded {
-          border-color: #409eff;
-          box-shadow: 0 4px 16px rgba(64, 158, 255, 0.15);
+          border-color: var(--newsprint-accent);
+          box-shadow: 4px 4px 0px 0px var(--newsprint-border);
           
           .tool-expand-icon svg {
             transform: rotate(180deg);
@@ -2129,8 +2143,8 @@ const saveUserConfig = async () => {
             .tool-icon {
               width: 40px;
               height: 40px;
-              background: #f0f7ff;
-              border-radius: 10px;
+              background: var(--newsprint-neutral-100);
+              border-radius: 4px;
               display: flex;
               align-items: center;
               justify-content: center;
@@ -2144,12 +2158,12 @@ const saveUserConfig = async () => {
                 margin: 0 0 6px 0;
                 font-size: 16px;
                 font-weight: 600;
-                color: #303133;
+                color: var(--newsprint-fg);
               }
               
               .tool-description {
                 margin: 0;
-                color: #606266;
+                color: var(--newsprint-neutral-500);
                 font-size: 14px;
                 line-height: 1.5;
               }
@@ -2158,7 +2172,7 @@ const saveUserConfig = async () => {
           
           .tool-expand-icon {
             flex-shrink: 0;
-            color: #909399;
+            color: var(--newsprint-neutral-400);
             transition: all 0.3s ease;
             
             svg {
@@ -2168,13 +2182,13 @@ const saveUserConfig = async () => {
         }
         
         .tool-details {
-          border-top: 1px solid #ebeef5;
+          border-top: 1px solid var(--newsprint-border);
           padding: 0 24px 20px 24px;
           
           .tool-schema {
-            background: #f8f9fa;
-            border: 1px solid #ebeef5;
-            border-radius: 8px;
+            background: var(--newsprint-neutral-100);
+            border: 1px solid var(--newsprint-border);
+            border-radius: 4px;
             padding: 20px;
             margin-top: 20px;
             
@@ -2184,9 +2198,9 @@ const saveUserConfig = async () => {
               gap: 8px;
               margin-bottom: 16px;
               padding-bottom: 12px;
-              border-bottom: 1px solid #e4e7ed;
+              border-bottom: 1px solid var(--newsprint-border);
               font-weight: 600;
-              color: #303133;
+              color: var(--newsprint-fg);
               font-size: 14px;
             }
             
@@ -2202,15 +2216,15 @@ const saveUserConfig = async () => {
                   
                   .meta-label {
                     font-weight: 500;
-                    color: #606266;
+                    color: var(--newsprint-neutral-500);
                     min-width: 60px;
                   }
                   
                   .meta-value {
-                    color: #303133;
+                    color: var(--newsprint-fg);
                     
                     &.type {
-                      background: #f0f2f5;
+                      background: var(--newsprint-neutral-100);
                       padding: 2px 8px;
                       border-radius: 4px;
                       font-size: 12px;
@@ -2229,7 +2243,7 @@ const saveUserConfig = async () => {
                   gap: 6px;
                   margin-bottom: 12px;
                   font-weight: 600;
-                  color: #f56c6c;
+                  color: var(--newsprint-accent);
                   font-size: 14px;
                 }
                 
@@ -2239,9 +2253,9 @@ const saveUserConfig = async () => {
                   gap: 8px;
                   
                   .required-param {
-                    background: #fef0f0;
-                    color: #f56c6c;
-                    border: 1px solid #fbc4c4;
+                    background: var(--newsprint-neutral-100);
+                    color: var(--newsprint-accent);
+                    border: 1px solid var(--newsprint-border);
                     padding: 4px 8px;
                     border-radius: 4px;
                     font-size: 12px;
@@ -2257,7 +2271,7 @@ const saveUserConfig = async () => {
                   gap: 6px;
                   margin-bottom: 12px;
                   font-weight: 600;
-                  color: #67c23a;
+                  color: var(--newsprint-accent);
                   font-size: 14px;
                 }
                 
@@ -2266,9 +2280,9 @@ const saveUserConfig = async () => {
                   gap: 12px;
                   
                   .property-card {
-                    background: white;
-                    border: 1px solid #ebeef5;
-                    border-radius: 6px;
+                    background: var(--newsprint-bg);
+                    border: 1px solid var(--newsprint-border);
+                    border-radius: 4px;
                     padding: 16px;
                     
                     .property-header {
@@ -2279,13 +2293,13 @@ const saveUserConfig = async () => {
                       
                       .property-name {
                         font-weight: 600;
-                        color: #303133;
+                        color: var(--newsprint-fg);
                         font-size: 14px;
                       }
                       
                       .property-type {
-                        background: #ecf5ff;
-                        color: #409eff;
+                        background: var(--newsprint-neutral-100);
+                        color: var(--newsprint-accent);
                         padding: 2px 8px;
                         border-radius: 4px;
                         font-size: 12px;
@@ -2295,7 +2309,7 @@ const saveUserConfig = async () => {
                     
                     .property-body {
                       .property-desc {
-                        color: #606266;
+                        color: var(--newsprint-neutral-500);
                         font-size: 13px;
                         line-height: 1.5;
                         margin: 0 0 8px 0;
@@ -2308,12 +2322,12 @@ const saveUserConfig = async () => {
                         
                         .default-label {
                           font-size: 12px;
-                          color: #909399;
+                          color: var(--newsprint-neutral-400);
                         }
                         
                         .default-value {
-                          background: #f4f4f5;
-                          color: #303133;
+                          background: var(--newsprint-neutral-100);
+                          color: var(--newsprint-fg);
                           padding: 2px 6px;
                           border-radius: 3px;
                           font-size: 12px;
@@ -2349,18 +2363,19 @@ const saveUserConfig = async () => {
 .mcp-server-page {
   padding: 32px;
   min-height: 100vh;
-  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  background: var(--newsprint-neutral-100);
+  font-family: 'Lora', serif;
   
   .page-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 24px;
-    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+    background: var(--newsprint-bg);
     padding: 20px 28px;
-    border-radius: 16px;
-    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
-    border: 1px solid rgba(226, 232, 240, 0.6);
+    border-radius: 4px;
+    box-shadow: 4px 4px 0px 0px var(--newsprint-border);
+    border: 1px solid var(--newsprint-border);
     
     .header-title {
       display: flex;
@@ -2376,10 +2391,10 @@ const saveUserConfig = async () => {
         margin: 0;
         font-size: 24px;
         font-weight: 600;
-        background: linear-gradient(90deg, #1B7CE4, #409eff);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
+        color: var(--newsprint-fg);
+        font-family: 'Playfair Display', serif;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
       }
     }
     
@@ -2387,13 +2402,13 @@ const saveUserConfig = async () => {
       .el-button {
         font-weight: 600;
         letter-spacing: 0.025em;
-        border-radius: 12px;
+        border-radius: 4px;
         padding: 12px 24px;
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         
         &:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 8px 25px rgba(64, 158, 255, 0.3);
+          transform: translate(-2px, -2px);
+          box-shadow: 4px 4px 0px 0px var(--newsprint-fg);
         }
       }
     }
@@ -2401,29 +2416,29 @@ const saveUserConfig = async () => {
   
   .server-list {
     min-height: 400px;
-    background: linear-gradient(135deg, #ffffff 0%, #fafbfc 100%);
-    border-radius: 16px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: var(--newsprint-bg);
+    border-radius: 4px;
+    box-shadow: 4px 4px 0px 0px var(--newsprint-border);
+    border: 1px solid var(--newsprint-border);
     overflow: auto;
     
     :deep(.el-table) {
-      border-radius: 16px;
+      border-radius: 4px;
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif;
       
       .el-table__header {
         th {
-          background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-          color: #374151;
+          background: var(--newsprint-neutral-100);
+          color: var(--newsprint-neutral-500);
           font-weight: 700;
           font-size: 13px;
           padding: 18px 12px;
-          border-bottom: 2px solid #e2e8f0;
+          border-bottom: 2px solid var(--newsprint-border);
           letter-spacing: 0.025em;
           text-transform: uppercase;
           
           .cell {
-            color: #4b5563;
+            color: var(--newsprint-neutral-500);
             font-weight: 700;
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
           }
@@ -2435,17 +2450,17 @@ const saveUserConfig = async () => {
           transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
           
           &:hover {
-            background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            background: var(--newsprint-neutral-100);
+            transform: translate(-2px, -2px);
+            box-shadow: 4px 4px 0px 0px var(--newsprint-border);
           }
           
           td {
             padding: 20px 12px;
-            border-bottom: 1px solid #f1f5f9;
+            border-bottom: 1px solid var(--newsprint-neutral-100);
             font-size: 14px;
             font-weight: 500;
-            color: #374151;
+            color: var(--newsprint-neutral-500);
             
             .cell {
               font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -2459,9 +2474,9 @@ const saveUserConfig = async () => {
     .server-avatar {
       width: 40px;
       height: 40px;
-      border-radius: 8px;
+      border-radius: 4px;
       overflow: hidden;
-      border: 1px solid #e1e8ed;
+      border: 1px solid var(--newsprint-border);
       margin: 0 auto;
       
       img {
@@ -2480,7 +2495,7 @@ const saveUserConfig = async () => {
       
       .name {
         font-weight: 600;
-        color: #1f2937;
+        color: var(--newsprint-fg);
         font-size: 15px;
         display: block;
         overflow: hidden;
@@ -2494,7 +2509,7 @@ const saveUserConfig = async () => {
         opacity: 0.8;
         
         .name {
-          color: #6b7280;
+          color: var(--newsprint-neutral-500);
           font-weight: 500;
         }
       }
@@ -2515,7 +2530,7 @@ const saveUserConfig = async () => {
       .el-tag {
         font-weight: 600;
         letter-spacing: 0.025em;
-        border-radius: 8px;
+        border-radius: 4px;
         font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       }
       
@@ -2526,11 +2541,11 @@ const saveUserConfig = async () => {
         font-weight: 700;
         
         &:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 8px 20px rgba(245, 158, 11, 0.4);
-          background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
-          border-color: #d97706;
-          color: white;
+          transform: translate(-2px, -2px);
+          box-shadow: 4px 4px 0px 0px var(--newsprint-fg);
+          background: var(--newsprint-accent);
+          border-color: var(--newsprint-accent);
+          color: var(--newsprint-bg);
         }
         
         &:active {
@@ -2554,7 +2569,7 @@ const saveUserConfig = async () => {
         padding: 6px 12px;
         font-weight: 600;
         letter-spacing: 0.025em;
-        border-radius: 8px;
+        border-radius: 4px;
       }
     }
     
@@ -2564,19 +2579,19 @@ const saveUserConfig = async () => {
         padding: 8px 14px;
         font-weight: 600;
         letter-spacing: 0.025em;
-        border-radius: 8px;
+        border-radius: 4px;
         transition: all 0.3s ease;
         
         &:hover {
-          transform: translateY(-1px);
-          box-shadow: 0 4px 12px rgba(64, 158, 255, 0.25);
+          transform: translate(-2px, -2px);
+          box-shadow: 4px 4px 0px 0px var(--newsprint-fg);
         }
       }
     }
     
     .create-time {
       font-size: 13px;
-      color: #6b7280;
+      color: var(--newsprint-neutral-500);
       font-weight: 500;
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     }
@@ -2591,17 +2606,18 @@ const saveUserConfig = async () => {
         padding: 8px 16px;
         font-size: 13px;
         font-weight: 600;
-        border-radius: 8px;
+        border-radius: 4px;
         transition: all 0.3s ease;
         
         &:hover {
-          transform: translateY(-1px);
+          transform: translate(-2px, -2px);
+          box-shadow: 4px 4px 0px 0px var(--newsprint-border);
         }
       }
     }
     
     :deep(.el-table__fixed-right) {
-      box-shadow: -2px 0 8px rgba(0, 0, 0, 0.06);
+      box-shadow: 4px 4px 0px 0px var(--newsprint-border);
     }
     
     :deep(.el-table__body) {
@@ -2612,43 +2628,44 @@ const saveUserConfig = async () => {
           font-weight: 600;
           letter-spacing: 0.025em;
           min-width: 70px;
-          border-radius: 10px;
+          border-radius: 4px;
           transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
           font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
           
           &:hover {
-            transform: translateY(-2px);
+            transform: translate(-2px, -2px);
+            box-shadow: 4px 4px 0px 0px var(--newsprint-border);
           }
           
           &.el-button--primary {
-            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            background: var(--newsprint-accent);
             border: none;
             
             &:hover {
-              background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
-              box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
+              background: var(--newsprint-accent);
+              box-shadow: 4px 4px 0px 0px var(--newsprint-fg);
             }
           }
           
           &.el-button--danger {
-            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            background: var(--newsprint-accent);
             border: none;
             
             &:hover {
-              background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
-              box-shadow: 0 8px 25px rgba(239, 68, 68, 0.4);
+              background: var(--newsprint-accent);
+              box-shadow: 4px 4px 0px 0px var(--newsprint-fg);
             }
           }
           
           &.el-button--info {
-            background: #e5e7eb;
-            color: #9ca3af;
+            background: var(--newsprint-border);
+            color: var(--newsprint-neutral-400);
             border: none;
             cursor: not-allowed;
             
             &:hover {
               transform: none;
-              background: #e5e7eb;
+              background: var(--newsprint-border);
             }
           }
         }
@@ -2662,7 +2679,7 @@ const saveUserConfig = async () => {
       p {
         margin-top: 24px;
         font-size: 16px;
-        color: #6b7280;
+        color: var(--newsprint-neutral-500);
         font-weight: 500;
         font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
         letter-spacing: -0.01em;
@@ -2673,7 +2690,7 @@ const saveUserConfig = async () => {
     :deep(.el-button) {
       font-size: 12px;
       padding: 8px 15px;
-      border-radius: 6px;
+      border-radius: 4px;
       height: auto;
       line-height: 1.2;
       
@@ -2681,13 +2698,13 @@ const saveUserConfig = async () => {
         min-width: 60px;
         
         &.el-button--primary {
-          background-color: #409eff;
-          border-color: #409eff;
+          background-color: var(--newsprint-accent);
+          border-color: var(--newsprint-accent);
         }
         
         &.el-button--danger {
-          background-color: #f56c6c;
-          border-color: #f56c6c;
+          background-color: var(--newsprint-accent);
+          border-color: var(--newsprint-accent);
         }
       }
     }
@@ -2714,9 +2731,9 @@ const saveUserConfig = async () => {
       margin-bottom: 24px;
       
       .info-card {
-        background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
-        border: 1px solid #bae6fd;
-        border-radius: 12px;
+        background: var(--newsprint-neutral-100);
+        border: 1px solid var(--newsprint-border);
+        border-radius: 4px;
         padding: 16px;
         display: flex;
         align-items: flex-start;
@@ -2726,7 +2743,7 @@ const saveUserConfig = async () => {
           flex-shrink: 0;
           width: 40px;
           height: 40px;
-          background: rgba(64, 158, 255, 0.1);
+          background: var(--newsprint-neutral-100);
           border-radius: 50%;
           display: flex;
           align-items: center;
@@ -2740,13 +2757,16 @@ const saveUserConfig = async () => {
             margin: 0 0 6px 0;
             font-size: 16px;
             font-weight: 600;
-            color: #1e293b;
+            color: var(--newsprint-fg);
+            font-family: 'Playfair Display', serif;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
           }
           
           p {
             margin: 0;
             font-size: 14px;
-            color: #64748b;
+            color: var(--newsprint-neutral-500);
             line-height: 1.6;
           }
         }
@@ -2759,7 +2779,7 @@ const saveUserConfig = async () => {
     
     .json-indicator {
       span {
-        color: #e67e22;
+        color: var(--newsprint-accent);
         font-weight: 500;
       }
     }
@@ -2777,11 +2797,11 @@ const saveUserConfig = async () => {
     
     .config-server-name {
       font-weight: 700;
-      color: #1e293b;
+      color: var(--newsprint-fg);
     }
     
     .config-title {
-      color: #64748b;
+      color: var(--newsprint-neutral-500);
       font-weight: 500;
     }
     
@@ -2790,7 +2810,7 @@ const saveUserConfig = async () => {
       display: inline-block;
       width: 4px;
       height: 18px;
-      background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
+      background: var(--newsprint-accent);
       border-radius: 2px;
       margin-right: 8px;
     }
@@ -2800,9 +2820,9 @@ const saveUserConfig = async () => {
     margin-bottom: 20px;
     
     .info-card {
-      background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
-      border: 1px solid #bae6fd;
-      border-radius: 12px;
+      background: var(--newsprint-neutral-100);
+      border: 1px solid var(--newsprint-border);
+      border-radius: 4px;
       padding: 16px;
       display: flex;
       align-items: flex-start;
@@ -2812,7 +2832,7 @@ const saveUserConfig = async () => {
         flex-shrink: 0;
         width: 40px;
         height: 40px;
-        background: rgba(59, 130, 246, 0.1);
+        background: var(--newsprint-neutral-100);
         border-radius: 50%;
         display: flex;
         align-items: center;
@@ -2826,13 +2846,16 @@ const saveUserConfig = async () => {
           margin: 0 0 6px 0;
           font-size: 16px;
           font-weight: 600;
-          color: #1e293b;
+          color: var(--newsprint-fg);
+          font-family: 'Playfair Display', serif;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
         }
         
         p {
           margin: 0;
           font-size: 14px;
-          color: #64748b;
+          color: var(--newsprint-neutral-500);
           line-height: 1.6;
         }
       }
@@ -2844,11 +2867,11 @@ const saveUserConfig = async () => {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #f8fafc;
-    border: 1px solid #e2e8f0;
+    background: var(--newsprint-neutral-100);
+    border: 1px solid var(--newsprint-border);
     border-bottom: none;
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
     padding: 8px 12px;
     
     .toolbar-btn {
@@ -2856,18 +2879,18 @@ const saveUserConfig = async () => {
       align-items: center;
       gap: 6px;
       border: none;
-      background: #f1f5f9;
-      color: #475569;
+      background: var(--newsprint-neutral-100);
+      color: var(--newsprint-neutral-500);
       padding: 6px 12px;
-      border-radius: 6px;
+      border-radius: 4px;
       font-size: 13px;
       font-weight: 500;
       cursor: pointer;
       transition: all 0.2s ease;
       
       &:hover {
-        background: #e2e8f0;
-        color: #334155;
+        background: var(--newsprint-border);
+        color: var(--newsprint-neutral-500);
       }
       
       svg {
@@ -2882,16 +2905,16 @@ const saveUserConfig = async () => {
       gap: 6px;
       font-size: 13px;
       padding: 6px 12px;
-      border-radius: 6px;
+      border-radius: 4px;
       
       &.is-valid {
-        background: rgba(34, 197, 94, 0.1);
-        color: #16a34a;
+        background: var(--newsprint-neutral-100);
+        color: var(--newsprint-accent);
       }
       
       &.is-invalid {
-        background: rgba(239, 68, 68, 0.1);
-        color: #dc2626;
+        background: var(--newsprint-neutral-100);
+        color: var(--newsprint-accent);
       }
     }
   }
@@ -2899,9 +2922,9 @@ const saveUserConfig = async () => {
   // 编辑器容器
   .editor-container {
     height: 300px;
-    border: 1px solid #e2e8f0;
-    border-bottom-left-radius: 8px;
-    border-bottom-right-radius: 8px;
+    border: 1px solid var(--newsprint-border);
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
     overflow: hidden;
     
     .json-editor {
@@ -2913,9 +2936,9 @@ const saveUserConfig = async () => {
   // 帮助说明
   .config-help {
     margin-top: 24px;
-    background: #f8fafc;
-    border: 1px solid #e2e8f0;
-    border-radius: 8px;
+    background: var(--newsprint-neutral-100);
+    border: 1px solid var(--newsprint-border);
+    border-radius: 4px;
     overflow: hidden;
     
     .help-title {
@@ -2924,11 +2947,11 @@ const saveUserConfig = async () => {
       gap: 8px;
       margin: 0;
       padding: 12px 16px;
-      background: #f1f5f9;
-      color: #1e293b;
+      background: var(--newsprint-neutral-100);
+      color: var(--newsprint-fg);
       font-size: 14px;
       font-weight: 600;
-      border-bottom: 1px solid #e2e8f0;
+      border-bottom: 1px solid var(--newsprint-border);
     }
     
     .help-content {
@@ -2944,14 +2967,17 @@ const saveUserConfig = async () => {
         h5 {
           margin: 0 0 8px 0;
           font-size: 14px;
-          color: #334155;
+          color: var(--newsprint-neutral-500);
           font-weight: 600;
+          font-family: 'Playfair Display', serif;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
         }
         
         p {
           margin: 0 0 8px 0;
           font-size: 13px;
-          color: #475569;
+          color: var(--newsprint-neutral-500);
           line-height: 1.5;
         }
         
@@ -2961,14 +2987,14 @@ const saveUserConfig = async () => {
           
           li {
             font-size: 13px;
-            color: #475569;
+            color: var(--newsprint-neutral-500);
             margin-bottom: 4px;
             
             code {
-              background: #e2e8f0;
+              background: var(--newsprint-border);
               padding: 2px 4px;
               border-radius: 4px;
-              color: #334155;
+              color: var(--newsprint-neutral-500);
               font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
               font-size: 12px;
             }
@@ -2988,14 +3014,14 @@ const saveUserConfig = async () => {
             gap: 8px;
             
             .key {
-              background: #e2e8f0;
+              background: var(--newsprint-border);
               padding: 2px 6px;
               border-radius: 4px;
-              color: #475569;
+              color: var(--newsprint-neutral-500);
               font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
               font-size: 12px;
-              border: 1px solid #cbd5e1;
-              box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+              border: 1px solid var(--newsprint-border);
+              box-shadow: 4px 4px 0px 0px var(--newsprint-border);
             }
           }
         }
@@ -3048,7 +3074,7 @@ const saveUserConfig = async () => {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: rgba(64, 158, 255, 0.1);
+    background: var(--newsprint-neutral-100);
     border-radius: 50%;
     margin-bottom: 20px;
     
@@ -3059,14 +3085,17 @@ const saveUserConfig = async () => {
   
   h3 {
     font-size: 20px;
-    color: #303133;
+    color: var(--newsprint-fg);
     margin: 0 0 16px;
+    font-family: 'Playfair Display', serif;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
   }
   
   p {
     margin: 0 0 20px;
     font-size: 16px;
-    color: #909399;
+    color: var(--newsprint-neutral-400);
     max-width: 300px;
   }
   

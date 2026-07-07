@@ -357,7 +357,7 @@ onMounted(() => {
 .model-editor-page {
   padding: 24px;
   height: 100%;
-  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  background-color: var(--newsprint-bg);
   min-height: 100vh;
   
   .page-header {
@@ -365,59 +365,57 @@ onMounted(() => {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 32px;
-    background: white;
+    background: var(--newsprint-bg);
     padding: 24px 32px;
-    border-radius: 16px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-    border: 1px solid rgba(226, 232, 240, 0.6);
+    box-shadow: 4px 4px 0px 0px var(--newsprint-border);
+    border: 1px solid var(--newsprint-border);
     
-          .header-left {
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      
+      .breadcrumb {
         display: flex;
         align-items: center;
-        gap: 20px;
+        gap: 12px;
+        font-size: 15px;
+        color: var(--newsprint-neutral-500);
         
-        .breadcrumb {
-          display: flex;
-          align-items: center;
-          gap: 12px;
-          font-size: 15px;
-          color: #94a3b8;
+        .breadcrumb-item {
+          transition: all 0.2s ease;
+          padding: 8px 12px;
+          border: 1px solid transparent;
+          cursor: default;
+          font-family: 'Lora', serif;
           
-          .breadcrumb-item {
-            transition: all 0.3s ease;
-            padding: 8px 12px;
-            border-radius: 8px;
-            cursor: default;
+          &.clickable {
+            cursor: pointer;
+            color: var(--newsprint-neutral-500);
+            font-weight: 500;
+            border-color: var(--newsprint-border);
+            background: var(--newsprint-neutral-100);
             
-            &.clickable {
-              cursor: pointer;
-              color: #64748b;
-              font-weight: 500;
-              
-              &:hover {
-                color: #c41e3a;
-                background: rgba(196, 30, 58, 0.1);
-                transform: translateY(-1px);
-              }
-              
-              &:active {
-                transform: translateY(0);
-              }
-            }
-            
-            &.active {
-              color: #c41e3a;
-              font-weight: 600;
-              background: rgba(196, 30, 58, 0.05);
+            &:hover {
+              color: var(--newsprint-fg);
+              background: var(--newsprint-border);
             }
           }
           
-          .breadcrumb-separator {
-            color: #cbd5e1;
-            font-weight: 500;
+          &.active {
+            color: var(--newsprint-accent);
+            font-weight: 600;
+            border-color: var(--newsprint-accent);
+            background: var(--newsprint-bg);
           }
         }
+        
+        .breadcrumb-separator {
+          color: var(--newsprint-neutral-400);
+          font-weight: 500;
+        }
       }
+    }
     
     .header-title {
       display: flex;
@@ -427,16 +425,14 @@ onMounted(() => {
       .title-icon {
         width: 48px;
         height: 48px;
-        background: linear-gradient(135deg, #c41e3a 0%, #9e1830 100%);
-        border-radius: 12px;
+        background: var(--newsprint-fg);
         display: flex;
         align-items: center;
         justify-content: center;
-        box-shadow: 0 8px 20px rgba(196, 30, 58, 0.3);
         
         .el-icon {
           font-size: 24px;
-          color: white;
+          color: var(--newsprint-bg);
         }
       }
       
@@ -444,21 +440,20 @@ onMounted(() => {
         margin: 0;
         font-size: 28px;
         font-weight: 700;
-        background: linear-gradient(135deg, #1e293b 0%, #475569 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
+        color: var(--newsprint-fg);
+        font-family: 'Playfair Display', serif;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
       }
     }
   }
   
   .edit-form-section {
     .form-container {
-      background: white;
-      border-radius: 20px;
+      background: var(--newsprint-bg);
       padding: 32px;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
-      border: 1px solid rgba(226, 232, 240, 0.6);
+      box-shadow: 4px 4px 0px 0px var(--newsprint-border);
+      border: 1px solid var(--newsprint-border);
       
       .form-header {
         display: flex;
@@ -466,44 +461,42 @@ onMounted(() => {
         gap: 20px;
         margin-bottom: 32px;
         padding-bottom: 24px;
-        border-bottom: 2px solid #f1f5f9;
+        border-bottom: 2px solid var(--newsprint-border);
         
         .form-icon {
           width: 56px;
           height: 56px;
-          background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-          border-radius: 16px;
+          background: var(--newsprint-fg);
           display: flex;
           align-items: center;
           justify-content: center;
-          box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
           
           .el-icon {
             font-size: 28px;
-            color: white;
+            color: var(--newsprint-bg);
           }
         }
         
-                  .form-title {
-            h3 {
-              margin: 0 0 12px 0;
-              font-size: 28px;
-              font-weight: 800;
-              background: linear-gradient(135deg, #1e293b 0%, #475569 100%);
-              -webkit-background-clip: text;
-              -webkit-text-fill-color: transparent;
-              background-clip: text;
-              letter-spacing: -0.5px;
-            }
-            
-            p {
-              margin: 0;
-              font-size: 16px;
-              color: #64748b;
-              line-height: 1.6;
-              font-weight: 500;
-            }
+        .form-title {
+          h3 {
+            margin: 0 0 12px 0;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--newsprint-fg);
+            font-family: 'Playfair Display', serif;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
           }
+          
+          p {
+            margin: 0;
+            font-size: 16px;
+            color: var(--newsprint-neutral-500);
+            line-height: 1.6;
+            font-weight: 500;
+            font-family: 'Lora', serif;
+          }
+        }
       }
       
       .edit-form {
@@ -512,12 +505,14 @@ onMounted(() => {
           
           .section-title {
             font-size: 18px;
-            font-weight: 600;
-            color: #334155;
+            font-weight: 700;
+            color: var(--newsprint-fg);
             margin: 0 0 20px 0;
             padding-bottom: 12px;
-            border-bottom: 1px solid #e2e8f0;
+            border-bottom: 1px solid var(--newsprint-border);
             position: relative;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
             
             &::before {
               content: '';
@@ -526,8 +521,7 @@ onMounted(() => {
               left: 0;
               width: 40px;
               height: 2px;
-              background: linear-gradient(135deg, #c41e3a 0%, #9e1830 100%);
-              border-radius: 1px;
+              background: var(--newsprint-accent);
             }
           }
           
@@ -549,59 +543,38 @@ onMounted(() => {
           .form-input,
           .form-select {
             .el-input__wrapper {
-              background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-              border: 2px solid #e2e8f0;
-              border-radius: 16px;
+              background: var(--newsprint-bg);
+              border: 1px solid var(--newsprint-border);
               padding: 16px 20px;
-              transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-              box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+              transition: all 0.2s ease;
               position: relative;
               overflow: hidden;
               
-              &::before {
-                content: '';
-                position: absolute;
-                top: 0;
-                left: 0;
-                right: 0;
-                height: 2px;
-                background: linear-gradient(135deg, #c41e3a 0%, #9e1830 100%);
-                transform: scaleX(0);
-                transition: transform 0.3s ease;
-              }
-              
               &:hover {
-                border-color: #f2a5b5;
-                background: linear-gradient(135deg, #f1f5f9 0%, #fceef2 100%);
-                box-shadow: 0 4px 12px rgba(196, 30, 58, 0.08);
-                transform: translateY(-1px);
+                border-color: var(--newsprint-fg);
               }
               
               &.is-focus {
-                border-color: #c41e3a;
-                background: white;
-                box-shadow: 0 0 0 4px rgba(196, 30, 58, 0.1), 0 8px 24px rgba(0, 0, 0, 0.12);
-                transform: translateY(-2px);
-                
-                &::before {
-                  transform: scaleX(1);
-                }
+                border-color: var(--newsprint-fg);
+                box-shadow: 2px 2px 0px 0px var(--newsprint-fg);
+                transform: translate(-1px, -1px);
               }
             }
             
             .el-input__inner {
               font-size: 15px;
-              color: #1e293b;
+              color: var(--newsprint-fg);
               font-weight: 500;
+              font-family: 'Lora', serif;
               
               &::placeholder {
-                color: #94a3b8;
+                color: var(--newsprint-neutral-400);
                 font-weight: 400;
               }
             }
             
             .el-input__count {
-              color: #64748b;
+              color: var(--newsprint-neutral-500);
               font-weight: 500;
               font-size: 13px;
             }
@@ -609,13 +582,13 @@ onMounted(() => {
           
           .el-form-item__label {
             font-weight: 700;
-            color: #334155;
+            color: var(--newsprint-fg);
             font-size: 15px;
             position: relative;
             
             &::before {
               content: '*';
-              color: #ef4444;
+              color: var(--newsprint-accent);
               margin-right: 4px;
               font-weight: 800;
             }
@@ -629,63 +602,47 @@ onMounted(() => {
           gap: 20px;
           margin-top: 40px;
           padding-top: 32px;
-          border-top: 2px solid #f1f5f9;
+          border-top: 2px solid var(--newsprint-border);
           
           .action-btn {
             padding: 16px 32px;
-            border-radius: 16px;
             font-weight: 700;
             font-size: 15px;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 2px solid transparent;
+            transition: all 0.2s ease;
+            border: 1px solid var(--newsprint-border);
             min-width: 140px;
-            position: relative;
-            overflow: hidden;
-            
-            &::before {
-              content: '';
-              position: absolute;
-              top: 0;
-              left: -100%;
-              width: 100%;
-              height: 100%;
-              background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-              transition: left 0.5s ease;
-            }
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
             
             &:hover {
-              transform: translateY(-3px);
-              box-shadow: 0 12px 28px rgba(0, 0, 0, 0.2);
-              
-              &::before {
-                left: 100%;
-              }
+              transform: translate(-2px, -2px);
             }
             
             &:active {
-              transform: translateY(-1px);
+              transform: translate(0, 0);
             }
             
             &.cancel-btn {
-              background: white;
-              border-color: #e2e8f0;
-              color: #64748b;
+              background: var(--newsprint-bg);
+              border-color: var(--newsprint-border);
+              color: var(--newsprint-neutral-500);
               
               &:hover {
-                border-color: #cbd5e1;
-                background: #f8fafc;
-                color: #475569;
+                border-color: var(--newsprint-fg);
+                color: var(--newsprint-fg);
+                box-shadow: 2px 2px 0px 0px var(--newsprint-fg);
               }
             }
             
             &.primary-btn {
-              background: linear-gradient(135deg, #c41e3a 0%, #9e1830 100%);
-              border-color: transparent;
-              color: white;
+              background: var(--newsprint-fg);
+              border-color: var(--newsprint-fg);
+              color: var(--newsprint-bg);
               
               &:hover {
-                background: linear-gradient(135deg, #d94560 0%, #c41e3a 100%);
-                box-shadow: 0 12px 28px rgba(196, 30, 58, 0.4);
+                background: var(--newsprint-bg);
+                color: var(--newsprint-fg);
+                box-shadow: 4px 4px 0px 0px var(--newsprint-fg);
               }
             }
           }
@@ -701,28 +658,42 @@ onMounted(() => {
     justify-content: center;
     height: 100%;
     text-align: center;
-    background: white;
-    border-radius: 20px;
+    background: var(--newsprint-bg);
     padding: 80px 40px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+    box-shadow: 4px 4px 0px 0px var(--newsprint-border);
+    border: 1px solid var(--newsprint-border);
     
     .empty-icon {
       font-size: 80px;
-      color: #cbd5e1;
+      color: var(--newsprint-neutral-400);
       margin-bottom: 24px;
     }
     
     h3 {
       margin: 0 0 12px 0;
       font-size: 24px;
-      font-weight: 600;
-      color: #475569;
+      font-weight: 700;
+      color: var(--newsprint-fg);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
     
     p {
       margin: 0 0 32px 0;
-      color: #64748b;
+      color: var(--newsprint-neutral-500);
       font-size: 16px;
+      font-family: 'Lora', serif;
+    }
+    
+    .el-button--primary {
+      background: var(--newsprint-fg) !important;
+      color: var(--newsprint-bg) !important;
+      border: 2px solid var(--newsprint-fg) !important;
+      
+      &:hover {
+        background: var(--newsprint-bg) !important;
+        color: var(--newsprint-fg) !important;
+      }
     }
   }
 }

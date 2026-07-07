@@ -17,11 +17,16 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  background: var(--newsprint-bg);
+  font-family: 'Lora', serif;
   .text{
     display: flex;
     font-size: 25px;
     justify-content: center;
-    color:rgb(157, 157, 157);
+    color: var(--newsprint-neutral-500);
+    font-family: 'Playfair Display', serif;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
   }
 }
 </style>

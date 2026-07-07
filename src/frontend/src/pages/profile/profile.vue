@@ -459,8 +459,8 @@ const handleCustomUpload = async (event: Event) => {
 <style lang="scss" scoped>
 .profile-page {
   padding: 24px;
-  background-color: #fff9f2;
-  min-height: calc(100vh - 104px); // Adjusted for main layout padding
+  background-color: var(--newsprint-bg);
+  min-height: calc(100vh - 104px);
 
   .profile-header {
     margin-bottom: 32px;
@@ -471,14 +471,18 @@ const handleCustomUpload = async (event: Event) => {
     h2 {
       margin: 0 0 8px 0;
       font-size: 28px;
-      font-weight: 600;
-      color: #5c3d2e;
+      font-weight: 700;
+      color: var(--newsprint-fg);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-family: 'Playfair Display', serif;
     }
 
     p {
       margin: 0;
-      color: #8d6e63;
+      color: var(--newsprint-neutral-500);
       font-size: 16px;
+      font-family: 'Lora', serif;
     }
   }
 
@@ -486,18 +490,18 @@ const handleCustomUpload = async (event: Event) => {
     max-width: 800px;
 
     .profile-card {
-      background: white;
-      border-radius: 16px;
+      background: var(--newsprint-bg);
+      border-radius: 4px;
       padding: 32px;
-      box-shadow: 0 4px 20px rgba(255, 159, 67, 0.1);
-      border: 1px solid #ffe0b2;
+      box-shadow: 4px 4px 0px 0px var(--newsprint-border);
+      border: 1px solid var(--newsprint-border);
 
       .avatar-section {
         display: flex;
         align-items: center;
         margin-bottom: 32px;
         padding-bottom: 24px;
-        border-bottom: 1px solid #ffe0b2;
+        border-bottom: 1px solid var(--newsprint-border);
 
         .avatar-container {
           margin-right: 24px;
@@ -511,10 +515,10 @@ const handleCustomUpload = async (event: Event) => {
             .user-avatar {
               width: 100%;
               height: 100%;
-              border-radius: 50%;
+              border-radius: 4px;
               object-fit: cover;
-              border: 4px solid #c41e3a;
-              box-shadow: 0 4px 12px rgba(196, 30, 58, 0.2);
+              border: 3px solid var(--newsprint-fg);
+              box-shadow: 4px 4px 0px 0px var(--newsprint-border);
             }
 
             .avatar-overlay {
@@ -523,8 +527,8 @@ const handleCustomUpload = async (event: Event) => {
               left: 0;
               right: 0;
               bottom: 0;
-              background: rgba(92, 61, 46, 0.4);
-              border-radius: 50%;
+              background: rgba(0, 0, 0, 0.4);
+              border-radius: 4px;
               display: flex;
               align-items: center;
               justify-content: center;
@@ -544,18 +548,23 @@ const handleCustomUpload = async (event: Event) => {
           h3 {
             margin: 0 0 8px 0;
             font-size: 24px;
-            font-weight: 600;
-            color: #5c3d2e;
+            font-weight: 700;
+            color: var(--newsprint-fg);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-family: 'Playfair Display', serif;
           }
 
           .user-id {
             margin: 0;
-            color: #8d6e63;
+            color: var(--newsprint-neutral-500);
             font-size: 14px;
-            background: #fff3e0;
+            background: var(--newsprint-neutral-100);
             padding: 2px 8px;
             border-radius: 4px;
             display: inline-block;
+            border: 1px solid var(--newsprint-border);
+            font-family: 'Lora', serif;
           }
         }
       }
@@ -570,8 +579,11 @@ const handleCustomUpload = async (event: Event) => {
           h4 {
             margin: 0;
             font-size: 18px;
-            font-weight: 600;
-            color: #5c3d2e;
+            font-weight: 700;
+            color: var(--newsprint-fg);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-family: 'Playfair Display', serif;
           }
         }
 
@@ -580,11 +592,12 @@ const handleCustomUpload = async (event: Event) => {
             margin: 0;
             font-size: 16px;
             line-height: 1.6;
-            color: #5c3d2e;
-            background: #fffbf7;
+            color: var(--newsprint-fg);
+            background: var(--newsprint-bg);
             padding: 16px;
-            border-radius: 12px;
-            border: 1px solid #ffe0b2;
+            border-radius: 4px;
+            border: 1px solid var(--newsprint-border);
+            font-family: 'Lora', serif;
           }
         }
 
@@ -603,48 +616,68 @@ const handleCustomUpload = async (event: Event) => {
 
 // 通用按钮和输入框覆盖
 .orange-btn {
-  background-color: #c41e3a !important;
-  border-color: #c41e3a !important;
-  color: #fff !important;
+  background-color: var(--newsprint-fg) !important;
+  border-color: var(--newsprint-fg) !important;
+  color: var(--newsprint-bg) !important;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 
   &:hover {
-    background-color: #d94560 !important;
-    border-color: #d94560 !important;
+    background-color: var(--newsprint-bg) !important;
+    color: var(--newsprint-fg) !important;
+    box-shadow: 4px 4px 0px 0px var(--newsprint-fg);
+    transform: translate(-2px, -2px);
   }
 }
 
 :deep(.el-button--primary) {
-  background-color: #c41e3a;
-  border-color: #c41e3a;
+  background-color: var(--newsprint-fg);
+  border-color: var(--newsprint-fg);
+  color: var(--newsprint-bg);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
   
   &:hover {
-    background-color: #d94560;
-    border-color: #d94560;
+    background-color: var(--newsprint-bg);
+    color: var(--newsprint-fg);
+    box-shadow: 4px 4px 0px 0px var(--newsprint-fg);
+    transform: translate(-2px, -2px);
   }
 }
 
 :deep(.el-textarea__inner) {
-  border-radius: 12px;
+  border-radius: 4px;
+  background: var(--newsprint-bg);
+  border: 1px solid var(--newsprint-border);
+  color: var(--newsprint-fg);
+  font-family: 'Lora', serif;
+  
   &:focus {
-    border-color: #c41e3a;
-    box-shadow: 0 0 0 2px rgba(196, 30, 58, 0.2);
+    border-color: var(--newsprint-fg);
+    box-shadow: 2px 2px 0px 0px var(--newsprint-fg);
   }
 }
 
 // 对话框样式
 :deep(.orange-dialog) {
-  border-radius: 16px;
+  border-radius: 4px;
   overflow: hidden;
+  background: var(--newsprint-bg);
+  border: 1px solid var(--newsprint-border);
+  box-shadow: 8px 8px 0px 0px var(--newsprint-border);
   
   .el-dialog__header {
     margin-right: 0;
     padding: 20px;
-    background-color: #fceef2;
-    border-bottom: 1px solid #f2a5b5;
+    background-color: var(--newsprint-neutral-100);
+    border-bottom: 1px solid var(--newsprint-border);
     
     .el-dialog__title {
-      color: #4a1a25;
-      font-weight: 600;
+      color: var(--newsprint-fg);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-family: 'Playfair Display', serif;
     }
   }
   
@@ -654,8 +687,8 @@ const handleCustomUpload = async (event: Event) => {
   
   .el-dialog__footer {
     padding: 16px 20px;
-    border-top: 1px solid #f2a5b5;
-    background-color: #fceef2;
+    border-top: 1px solid var(--newsprint-border);
+    background-color: var(--newsprint-neutral-100);
   }
 }
 

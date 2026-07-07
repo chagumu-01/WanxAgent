@@ -659,9 +659,9 @@ onMounted(() => {
 }
 
 .leave-modal {
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  background: var(--newsprint-bg);
+  border-radius: 4px;
+  box-shadow: 4px 4px 0px 0px var(--newsprint-border);
   max-width: 420px;
   width: 90%;
   max-height: 80vh;
@@ -682,13 +682,16 @@ onMounted(() => {
 
 .leave-modal-header {
   padding: 20px 24px 16px;
-  border-bottom: 1px solid #e9ecef;
+  border-bottom: 1px solid var(--newsprint-border);
   
   h3 {
     margin: 0;
     font-size: 18px;
     font-weight: 600;
-    color: #333;
+    color: var(--newsprint-fg);
+    font-family: 'Playfair Display', serif;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
   }
 }
 
@@ -698,17 +701,17 @@ onMounted(() => {
   p {
     margin: 0 0 12px 0;
     line-height: 1.6;
-    color: #555;
+    color: var(--newsprint-neutral-500);
     
     &:first-child {
       font-weight: 600;
-      color: #4a90e2;
+      color: var(--newsprint-fg);
     }
     
     &:last-child {
       margin-bottom: 0;
       font-weight: 500;
-      color: #333;
+      color: var(--newsprint-fg);
     }
   }
 }
@@ -718,13 +721,13 @@ onMounted(() => {
   display: flex;
   gap: 12px;
   justify-content: flex-end;
-  border-top: 1px solid #e9ecef;
+  border-top: 1px solid var(--newsprint-border);
 }
 
 .modal-btn {
   padding: 10px 20px;
   border: none;
-  border-radius: 6px;
+  border-radius: 4px;
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
@@ -732,53 +735,51 @@ onMounted(() => {
   min-width: 80px;
   
   &.cancel-btn {
-    background: #f8f9fa;
-    color: #666;
-    border: 1px solid #e9ecef;
+    background: var(--newsprint-neutral-100);
+    color: var(--newsprint-neutral-500);
+    border: 1px solid var(--newsprint-border);
     
     &:hover {
-      background: #e9ecef;
-      color: #333;
+      background: var(--newsprint-border);
+      color: var(--newsprint-fg);
     }
   }
   
   &.confirm-btn {
-    background: #4a90e2;
-    color: white;
+    background: var(--newsprint-fg);
+    color: var(--newsprint-bg);
     
     &:hover {
-      background: #357abd;
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
+      transform: translate(-2px, -2px);
+      box-shadow: 4px 4px 0px 0px var(--newsprint-border);
     }
   }
 }
 
 .mars-output-page {
   height: 100vh;
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  background: var(--newsprint-bg);
   display: flex;
   flex-direction: column;
   padding: 0;
-  overflow: hidden; /* 防止整个页面出现滚动条 */
+  overflow: hidden;
 }
 
 .mars-output-container {
   flex: 1;
   width: 100%;
-  background: white;
-  overflow-y: auto; /* 只在内容超出时显示垂直滚动条 */
-  overflow-x: hidden; /* 隐藏水平滚动条 */
+  background: var(--newsprint-bg);
+  overflow-y: auto;
+  overflow-x: hidden;
   display: flex;
   flex-direction: column;
   
-  /* 隐藏右侧滚动条但保留滚动功能 */
   &::-webkit-scrollbar {
     width: 0;
     display: none;
   }
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 .typing-dots {
@@ -790,7 +791,7 @@ onMounted(() => {
 .typing-dots span {
   width: 8px;
   height: 8px;
-  background-color: #666;
+  background-color: var(--newsprint-neutral-500);
   border-radius: 50%;
   animation: typing-blink 1.4s infinite both;
 }
@@ -816,23 +817,26 @@ onMounted(() => {
 }
 
 .thinking-segment {
-  background-color: #f9f9f9;
-  border: 1px solid #e0e0e0;
-  border-radius: 12px;
+  background-color: var(--newsprint-neutral-100);
+  border: 1px solid var(--newsprint-border);
+  border-radius: 4px;
   margin-bottom: 16px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1), 0 2px 6px rgba(0, 0, 0, 0.04);
+  box-shadow: 4px 4px 0px 0px var(--newsprint-border);
   transition: all 0.3s ease;
 }
 
 .thinking-header {
   padding: 12px 16px;
   font-weight: 600;
-  color: #333;
+  color: var(--newsprint-fg);
   cursor: pointer;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 1px solid var(--newsprint-border);
+  font-family: 'Playfair Display', serif;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .collapse-icon {
@@ -855,21 +859,20 @@ onMounted(() => {
 .thinking-content :deep(.md-editor-preview) h4,
 .thinking-content :deep(.md-editor-preview) h5,
 .thinking-content :deep(.md-editor-preview) h6 {
-  color: #495057 !important;
+  color: var(--newsprint-fg) !important;
 }
 
 .answer-segment {
-  /* No specific styles needed unless for spacing/debugging */
   margin-bottom: 10px;
 }
 
 // 加载对话框样式
 .mars-loading-dialog {
-  background: #f8f9fa;
-  border-radius: 12px;
+  background: var(--newsprint-neutral-100);
+  border-radius: 4px;
   padding: 16px 20px;
-  border: 1px solid #e9ecef;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--newsprint-border);
+  box-shadow: 4px 4px 0px 0px var(--newsprint-border);
   display: flex;
   align-items: center;
   gap: 12px;
@@ -908,32 +911,6 @@ onMounted(() => {
       min-width: 0;
     }
   }
-  
-  /*
-  .mars-generating {
-    margin-top: 16px;
-    padding: 12px 16px;
-    background: #f8f9fa;
-    border-radius: 12px;
-    border: 1px solid #e9ecef;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    
-    .mars-generating-indicator {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      
-      .mars-generating-spinner {
-        width: 20px;
-        height: 20px;
-        border: 2px solid #e9ecef;
-        border-top: 2px solid #666;
-        border-radius: 50%;
-        animation: spin 1s linear infinite;
-      }
-    }
-  }
-  */
 }
 
 // 错误状态样式
@@ -974,19 +951,18 @@ onMounted(() => {
   }
   
   .mars-retry-btn {
-    background: #722ed1;
-    color: white;
+    background: var(--newsprint-fg);
+    color: var(--newsprint-bg);
     border: none;
     padding: 12px 24px;
-    border-radius: 8px;
+    border-radius: 4px;
     font-size: 14px;
     cursor: pointer;
     transition: all 0.2s ease;
     
     &:hover {
-      background: #531dab;
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(114, 46, 209, 0.3);
+      transform: translate(-2px, -2px);
+      box-shadow: 4px 4px 0px 0px var(--newsprint-border);
     }
   }
 }
@@ -1022,73 +998,64 @@ onMounted(() => {
     
     .mars-empty-text {
       font-size: 16px;
-      color: #999;
+      color: var(--newsprint-neutral-500);
       margin-bottom: 32px;
     }
   }
   
   .mars-back-btn {
-    background: #722ed1;
-    color: white;
+    background: var(--newsprint-fg);
+    color: var(--newsprint-bg);
     border: none;
     padding: 12px 24px;
-    border-radius: 8px;
+    border-radius: 4px;
     font-size: 14px;
     cursor: pointer;
     transition: all 0.2s ease;
     
     &:hover {
-      background: #531dab;
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(114, 46, 209, 0.3);
+      transform: translate(-2px, -2px);
+      box-shadow: 4px 4px 0px 0px var(--newsprint-border);
     }
   }
 }
 
-// 移除滚动条样式，使用上面定义的隐藏滚动条
-
 .mars-response-content {
-  // Markdown预览组件的样式调整
   :deep(.md-editor-preview) {
     background: transparent;
     padding: 0;
     width: 100%;
     max-width: 100%;
     
-    // 确保代码块有合适的样式并充分利用宽度
     pre {
-      background: #f6f8fa;
-      border-radius: 6px;
+      background: var(--newsprint-neutral-100);
+      border-radius: 4px;
       padding: 16px;
       margin: 8px 0;
-      border: 1px solid #e1e4e8;
+      border: 1px solid var(--newsprint-border);
       width: 100%;
       box-sizing: border-box;
       overflow-x: auto;
     }
     
-    // 段落间距
     p {
       margin: 8px 0;
       line-height: 1.6;
       width: 100%;
     }
     
-    // 列表样式
     ul, ol {
       margin: 8px 0;
       padding-left: 24px;
       width: 100%;
     }
     
-    // 标题样式
     h1, h2, h3, h4, h5, h6 {
       margin: 16px 0 8px 0;
       font-weight: 600;
       width: 100%;
     }
     
-    // 表格样式 - 充分利用宽度
     table {
       border-collapse: collapse;
       margin: 8px 0;
@@ -1096,39 +1063,36 @@ onMounted(() => {
       max-width: 100%;
       
       th, td {
-        border: 1px solid #e1e4e8;
+        border: 1px solid var(--newsprint-border);
         padding: 8px 12px;
         text-align: left;
         word-wrap: break-word;
       }
       
       th {
-        background: #f6f8fa;
+        background: var(--newsprint-neutral-100);
         font-weight: 600;
       }
     }
     
-    // 引用块样式
     blockquote {
-      border-left: 4px solid #722ed1;
+      border-left: 4px solid var(--newsprint-fg);
       padding-left: 16px;
       margin: 8px 0;
-      color: #666;
+      color: var(--newsprint-neutral-500);
       font-style: italic;
       width: 100%;
       box-sizing: border-box;
     }
     
-    // 行内代码样式
     code {
-      background: #f6f8fa;
+      background: var(--newsprint-neutral-100);
       padding: 2px 4px;
-      border-radius: 3px;
+      border-radius: 4px;
       font-size: 0.9em;
-      color: #d73a49;
+      color: #ff4d4f;
     }
     
-    // 确保所有内容元素都充分利用宽度
     div, section, article {
       width: 100%;
       max-width: 100%;
@@ -1147,8 +1111,6 @@ onMounted(() => {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
-
-// 删除输入相关样式，现在只是输出页面
 
 @media (max-width: 768px) {
   .mars-output-page {
@@ -1200,23 +1162,10 @@ onMounted(() => {
         .mars-loading-spinner {
           width: 16px;
           height: 16px;
-          border-top: 2px solid #666;
+          border-top: 2px solid var(--newsprint-neutral-500);
         }
       }
     }
-    
-    /*
-    .mars-generating {
-      padding: 10px 12px;
-      
-      .mars-generating-indicator {
-        .mars-generating-spinner {
-          width: 16px;
-          height: 16px;
-        }
-      }
-    }
-    */
   }
 }
 </style> 
