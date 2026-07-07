@@ -345,40 +345,44 @@ const clearSearch = () => {
 <style lang="scss" scoped>
 .demo-page {
   height: 100vh;
-  background: linear-gradient(135deg, #f2a5b5 0%, #c41e3a 100%);
+  background: var(--newsprint-bg);
   padding: 20px;
+  font-family: 'Lora', serif;
+  color: var(--newsprint-fg);
 
   .demo-header {
     text-align: center;
-    color: white;
+    color: var(--newsprint-fg);
     margin-bottom: 20px;
 
     h1 {
       font-size: 2rem;
       margin: 0 0 8px 0;
-      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      font-family: 'Playfair Display', serif;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
 
     p {
       font-size: 1rem;
       margin: 0;
-      opacity: 0.9;
+      color: var(--newsprint-neutral-500);
     }
   }
 
   .demo-container {
     display: flex;
     height: calc(100vh - 120px);
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 16px;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    background: var(--newsprint-bg);
+    border-radius: 4px;
+    border: 1px solid var(--newsprint-border);
+    box-shadow: 4px 4px 0px 0px var(--newsprint-border);
     overflow: hidden;
 
     .sidebar {
       width: 300px;
-      background: #f8f9fa;
-      border-right: 1px solid #e9ecef;
+      background: var(--newsprint-neutral-100);
+      border-right: 1px solid var(--newsprint-border);
       display: flex;
       flex-direction: column;
 
@@ -388,7 +392,7 @@ const clearSearch = () => {
         .create-btn {
           width: 100%;
           height: 48px;
-          border-radius: 8px;
+          border-radius: 4px;
 
           .btn-content {
             display: flex;
@@ -401,7 +405,7 @@ const clearSearch = () => {
 
       .search-section {
         padding: 16px;
-        border-bottom: 1px solid #f0f0f0;
+        border-bottom: 1px solid var(--newsprint-border);
       }
 
       .list-header {
@@ -413,12 +417,15 @@ const clearSearch = () => {
         .title {
           font-size: 14px;
           font-weight: 600;
-          color: #1f2937;
+          color: var(--newsprint-fg);
+          font-family: 'Playfair Display', serif;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
         }
 
         .count {
           font-size: 12px;
-          color: #6b7280;
+          color: var(--newsprint-neutral-500);
         }
       }
 
@@ -433,7 +440,7 @@ const clearSearch = () => {
           align-items: center;
           justify-content: center;
           height: 200px;
-          color: #9ca3af;
+          color: var(--newsprint-neutral-500);
 
           .empty-icon {
             font-size: 48px;
@@ -447,28 +454,27 @@ const clearSearch = () => {
 
           .empty-hint {
             font-size: 12px;
-            color: #d1d5db;
+            color: var(--newsprint-neutral-400);
           }
         }
 
         .dialog-card {
-          background: white;
-          border: 1px solid #e5e7eb;
-          border-radius: 12px;
+          background: var(--newsprint-bg);
+          border: 1px solid var(--newsprint-border);
+          border-radius: 4px;
           padding: 16px;
           margin-bottom: 8px;
           cursor: pointer;
-          transition: all 0.3s ease;
+          transition: all 0.2s ease;
 
           &:hover {
-            border-color: #c41e3a;
-            box-shadow: 0 4px 12px rgba(196, 30, 58, 0.15);
-            transform: translateY(-2px);
+            transform: translate(-2px, -2px);
+            box-shadow: 4px 4px 0px 0px var(--newsprint-border);
           }
 
           &.active {
-            border-color: #c41e3a;
-            background-color: #fceef2;
+            border-color: var(--newsprint-fg);
+            background-color: var(--newsprint-neutral-100);
           }
 
           .card-main {
@@ -486,7 +492,7 @@ const clearSearch = () => {
               .avatar {
                 width: 40px;
                 height: 40px;
-                border-radius: 8px;
+                border-radius: 4px;
                 overflow: hidden;
 
                 img {
@@ -502,7 +508,7 @@ const clearSearch = () => {
                 .title {
                   font-size: 14px;
                   font-weight: 600;
-                  color: #1f2937;
+                  color: var(--newsprint-fg);
                   margin-bottom: 4px;
                   overflow: hidden;
                   text-overflow: ellipsis;
@@ -511,7 +517,7 @@ const clearSearch = () => {
 
                 .subtitle {
                   font-size: 12px;
-                  color: #6b7280;
+                  color: var(--newsprint-neutral-500);
                 }
               }
             }
@@ -524,7 +530,7 @@ const clearSearch = () => {
 
               .time {
                 font-size: 11px;
-                color: #9ca3af;
+                color: var(--newsprint-neutral-500);
               }
 
               .actions {
@@ -559,7 +565,7 @@ const clearSearch = () => {
         align-items: center;
         justify-content: center;
         text-align: center;
-        color: #6b7280;
+        color: var(--newsprint-neutral-500);
 
         .welcome-icon {
           margin-bottom: 24px;
@@ -568,7 +574,10 @@ const clearSearch = () => {
         h2 {
           font-size: 1.5rem;
           margin: 0 0 12px 0;
-          color: #1f2937;
+          color: var(--newsprint-fg);
+          font-family: 'Playfair Display', serif;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
         }
 
         p {
@@ -584,12 +593,15 @@ const clearSearch = () => {
 
         .chat-header {
           padding: 20px;
-          border-bottom: 1px solid #e5e7eb;
-          background: #f9fafb;
+          border-bottom: 1px solid var(--newsprint-border);
+          background: var(--newsprint-neutral-100);
 
           h3 {
             margin: 0;
-            color: #1f2937;
+            color: var(--newsprint-fg);
+            font-family: 'Playfair Display', serif;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
           }
         }
 
@@ -599,12 +611,13 @@ const clearSearch = () => {
 
           .message {
             padding: 12px 16px;
-            border-radius: 8px;
+            border-radius: 4px;
             margin-bottom: 12px;
 
             &.system {
-              background: #f3f4f6;
-              color: #6b7280;
+              background: var(--newsprint-neutral-100);
+              color: var(--newsprint-neutral-500);
+              border: 1px solid var(--newsprint-border);
             }
           }
         }
@@ -628,19 +641,22 @@ const clearSearch = () => {
       .title {
         font-size: 16px;
         font-weight: 600;
-        color: #1f2937;
+        color: var(--newsprint-fg);
+        font-family: 'Playfair Display', serif;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
       }
 
       .count {
         font-size: 14px;
-        color: #6b7280;
+        color: var(--newsprint-neutral-500);
       }
     }
 
     .empty-state {
       text-align: center;
       padding: 40px 20px;
-      color: #9ca3af;
+      color: var(--newsprint-neutral-500);
 
       .empty-icon {
         font-size: 48px;
@@ -662,23 +678,23 @@ const clearSearch = () => {
         gap: 12px;
         padding: 16px;
         border: 2px solid transparent;
-        border-radius: 8px;
+        border-radius: 4px;
         cursor: pointer;
         transition: all 0.2s ease;
 
         &:hover {
-          background: #f9fafb;
+          background: var(--newsprint-neutral-100);
         }
 
         &.active {
-          border-color: #c41e3a;
-          background: #fceef2;
+          border-color: var(--newsprint-fg);
+          background: var(--newsprint-neutral-100);
         }
 
         .agent-avatar {
           width: 40px;
           height: 40px;
-          border-radius: 8px;
+          border-radius: 4px;
           overflow: hidden;
 
           img {
@@ -694,13 +710,13 @@ const clearSearch = () => {
           .agent-name {
             font-size: 14px;
             font-weight: 600;
-            color: #1f2937;
+            color: var(--newsprint-fg);
             margin-bottom: 4px;
           }
 
           .agent-description {
             font-size: 12px;
-            color: #6b7280;
+            color: var(--newsprint-neutral-500);
           }
         }
       }

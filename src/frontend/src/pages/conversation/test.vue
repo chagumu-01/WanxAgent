@@ -128,36 +128,46 @@ const testFileUpload = async (event: Event) => {
   padding: 20px;
   max-width: 800px;
   margin: 0 auto;
+  background: var(--newsprint-bg);
+  font-family: 'Lora', serif;
+  color: var(--newsprint-fg);
 }
 
 .test-section {
   margin-bottom: 30px;
   padding: 20px;
-  border: 1px solid #e9ecef;
-  border-radius: 8px;
+  border: 1px solid var(--newsprint-border);
+  border-radius: 4px;
+  background: var(--newsprint-bg);
+  box-shadow: 4px 4px 0px 0px var(--newsprint-border);
 }
 
 .test-section h3 {
   margin-bottom: 15px;
-  color: #333;
+  color: var(--newsprint-fg);
+  font-family: 'Playfair Display', serif;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .chat-log {
   max-height: 300px;
   overflow-y: auto;
-  border: 1px solid #e9ecef;
+  border: 1px solid var(--newsprint-border);
   padding: 10px;
-  background-color: #f8f9fa;
+  background-color: var(--newsprint-neutral-100);
+  border-radius: 4px;
 }
 
 .message {
   margin-bottom: 10px;
   padding: 8px;
-  background-color: white;
+  background-color: var(--newsprint-bg);
   border-radius: 4px;
+  border: 1px solid var(--newsprint-border);
 }
 
 .message strong {
-  color: #007AFF;
+  color: var(--newsprint-fg);
 }
 </style> 

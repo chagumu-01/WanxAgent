@@ -99,19 +99,40 @@ const testAPI = async () => {
   padding: 20px;
   max-width: 1000px;
   margin: 0 auto;
-  
+  font-family: 'Lora', serif;
+
+  h2 {
+    font-family: 'Playfair Display', serif;
+    color: var(--newsprint-fg);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
   .debug-section {
     margin-bottom: 30px;
     padding: 20px;
-    border: 1px solid #e1e8ed;
-    border-radius: 8px;
+    border: 1px solid var(--newsprint-border);
+    border-radius: 4px;
     background: white;
-    
+    box-shadow: 4px 4px 0px 0px var(--newsprint-border);
+
     h3 {
       margin-top: 0;
-      color: #2c3e50;
+      font-family: 'Playfair Display', serif;
+      color: var(--newsprint-fg);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
-    
+
+    p {
+      color: var(--newsprint-neutral-500);
+    }
+
+    .el-button:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 4px 4px 0px 0px var(--newsprint-fg);
+    }
+
     .debug-log {
       background: #1e1e1e;
       color: #00ff00;

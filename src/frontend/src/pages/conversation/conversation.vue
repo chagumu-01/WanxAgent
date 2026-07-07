@@ -1,4 +1,4 @@
-﻿<script setup lang="ts">
+<script setup lang="ts">
 import { ref, onMounted, computed } from "vue"
 import { useRouter } from "vue-router"
 import { ElMessage, ElMessageBox } from "element-plus"
@@ -495,40 +495,43 @@ const closeCreateDialog = () => {
 .conversation-main {
   display: flex;
   height: calc(100vh - 60px);
-  background-color: #ffffff;
+  background-color: var(--newsprint-bg);
 
   .sidebar {
     height: 100%;
     width: 280px;
-    background-color: #ffffff;
-    border-right: 1px solid #f8d0d8;
+    background-color: var(--newsprint-bg);
+    border-right: 1px solid var(--newsprint-border);
     display: flex;
     flex-direction: column;
-    box-shadow: 2px 0 8px rgba(196, 30, 58, 0.05);
 
     .create-section {
       padding: 20px 16px 16px;
-      border-bottom: 1px solid #fceef2;
+      border-bottom: 1px solid var(--newsprint-border);
 
       .create-btn-native {
         width: 100%;
         height: 48px;
-        border-radius: 12px;
         font-weight: 600;
-        transition: all 0.3s ease;
-        background: linear-gradient(135deg, #c41e3a 0%, #9e1830 100%);
-        color: white;
-        border: none;
+        transition: all 0.2s ease;
+        background: var(--newsprint-fg);
+        color: var(--newsprint-bg);
+        border: 2px solid var(--newsprint-fg);
         cursor: pointer;
         font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
 
         &:hover {
-          transform: translateY(-1px);
-          box-shadow: 0 4px 12px rgba(196, 30, 58, 0.3);
+          background: var(--newsprint-bg);
+          color: var(--newsprint-fg);
+          box-shadow: 4px 4px 0px 0px var(--newsprint-fg);
+          transform: translate(-2px, -2px);
         }
 
         &:active {
-          transform: translateY(0);
+          transform: translate(0, 0);
+          box-shadow: 0 0 0 0 var(--newsprint-fg);
         }
 
         .btn-content {
@@ -547,7 +550,7 @@ const closeCreateDialog = () => {
 
     .search-section {
       padding: 16px;
-      border-bottom: 1px solid #fceef2;
+      border-bottom: 1px solid var(--newsprint-border);
 
       .search-input-wrapper {
         position: relative;
@@ -557,7 +560,7 @@ const closeCreateDialog = () => {
         .search-icon {
           position: absolute;
           left: 12px;
-          color: #c41e3a;
+          color: var(--newsprint-fg);
           font-size: 14px;
           z-index: 1;
         }
@@ -565,22 +568,22 @@ const closeCreateDialog = () => {
         .search-input {
           width: 100%;
           padding: 10px 12px 10px 36px;
-          border: 1px solid #f8d0d8;
-          border-radius: 10px;
+          border: none;
+          border-bottom: 2px solid var(--newsprint-border);
           font-size: 14px;
-          background: #fceef2;
+          background: transparent;
           transition: all 0.2s ease;
-          color: #5c3d2e;
+          color: var(--newsprint-fg);
+          font-family: 'JetBrains Mono', monospace;
 
           &:focus {
             outline: none;
-            border-color: #c41e3a;
-            background: white;
-            box-shadow: 0 0 0 3px rgba(196, 30, 58, 0.1);
+            border-color: var(--newsprint-accent);
+            background: #F0F0F0;
           }
 
           &::placeholder {
-            color: #c41e3a;
+            color: var(--newsprint-neutral-400);
           }
         }
       }
@@ -595,12 +598,15 @@ const closeCreateDialog = () => {
       .title {
         font-size: 14px;
         font-weight: 600;
-        color: #5c3d2e;
+        color: var(--newsprint-fg);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
       }
 
       .count {
         font-size: 12px;
-        color: #8d6e63;
+        color: var(--newsprint-neutral-500);
+        font-family: 'JetBrains Mono', monospace;
       }
     }
 
@@ -615,7 +621,6 @@ const closeCreateDialog = () => {
         align-items: center;
         justify-content: center;
         height: 200px;
-        color: #c41e3a;
 
         .loading-icon {
           font-size: 48px;
@@ -625,7 +630,7 @@ const closeCreateDialog = () => {
 
         .loading-text {
           font-size: 14px;
-          color: #8d6e63;
+          color: var(--newsprint-neutral-500);
         }
       }
 
@@ -635,7 +640,6 @@ const closeCreateDialog = () => {
         align-items: center;
         justify-content: center;
         height: 200px;
-        color: #c41e3a;
 
         .empty-icon {
           font-size: 48px;
@@ -645,35 +649,35 @@ const closeCreateDialog = () => {
         .empty-text {
           font-size: 14px;
           margin-bottom: 8px;
-          color: #8d6e63;
+          color: var(--newsprint-neutral-500);
         }
 
         .empty-hint {
           font-size: 12px;
-          color: #c41e3a;
+          color: var(--newsprint-accent);
         }
       }
 
       .dialog-card {
-        background: white;
-        border: 1px solid #f8d0d8;
-        border-radius: 12px;
+        background: var(--newsprint-bg);
+        border: 1px solid var(--newsprint-border);
         padding: 16px;
         margin-bottom: 8px;
         cursor: pointer;
-        transition: all 0.3s ease;
+        transition: all 0.2s ease;
         min-height: 80px;
         position: relative;
 
         &:hover {
-          border-color: #c41e3a;
-          box-shadow: 0 4px 12px rgba(196, 30, 58, 0.1);
-          transform: translateY(-2px);
+          border-color: var(--newsprint-accent);
+          box-shadow: 4px 4px 0px 0px var(--newsprint-border);
+          transform: translate(-2px, -2px);
         }
 
         &.active {
-          border-color: #c41e3a;
-          background-color: #fceef2;
+          border-color: var(--newsprint-accent);
+          background-color: var(--newsprint-neutral-100);
+          border-left: 3px solid var(--newsprint-accent);
         }
 
         .avatar {
@@ -682,9 +686,8 @@ const closeCreateDialog = () => {
           left: 16px;
           width: 40px;
           height: 40px;
-          border-radius: 10px;
           overflow: hidden;
-          border: 1px solid #f8d0d8;
+          border: 1px solid var(--newsprint-border);
 
           img {
             width: 100%;
@@ -700,7 +703,7 @@ const closeCreateDialog = () => {
           right: 60px;
           font-size: 14px;
           font-weight: 600;
-          color: #5c3d2e;
+          color: var(--newsprint-fg);
           overflow: hidden;
           text-overflow: ellipsis;
           white-space: nowrap;
@@ -713,10 +716,9 @@ const closeCreateDialog = () => {
           width: 32px;
           height: 32px;
           padding: 4px;
-          background: rgba(255, 255, 255, 0.9);
-          border: 1px solid #f8d0d8;
+          background: transparent;
+          border: 1px solid var(--newsprint-border);
           cursor: pointer;
-          border-radius: 6px;
           transition: all 0.2s ease;
           font-size: 14px;
           opacity: 0;
@@ -729,9 +731,9 @@ const closeCreateDialog = () => {
           outline: none;
 
           &:hover {
-            background: #fceef2;
-            color: #c41e3a;
-            border-color: #c41e3a;
+            background: var(--newsprint-fg);
+            color: var(--newsprint-bg);
+            border-color: var(--newsprint-fg);
             opacity: 1;
           }
 
@@ -749,7 +751,8 @@ const closeCreateDialog = () => {
           bottom: 8px;
           right: 16px;
           font-size: 11px;
-          color: #c41e3a;
+          color: var(--newsprint-neutral-500);
+          font-family: 'JetBrains Mono', monospace;
         }
       }
     }
@@ -757,11 +760,8 @@ const closeCreateDialog = () => {
 
   .content {
     flex: 1;
-    background-color: #fff9f2;
-    border-radius: 0;
-    margin: 0;
-    box-shadow: none;
-    border-left: 1px solid #f8d0d8;
+    background-color: var(--newsprint-bg);
+    border-left: 1px solid var(--newsprint-border);
     overflow: hidden;
 
     .welcome-content {
@@ -771,7 +771,7 @@ const closeCreateDialog = () => {
       align-items: center;
       justify-content: center;
       text-align: center;
-      color: #8d6e63;
+      color: var(--newsprint-neutral-500);
       height: 100%;
 
       .welcome-icon {
@@ -779,21 +779,22 @@ const closeCreateDialog = () => {
 
         .icon {
           font-size: 48px;
-          color: #c41e3a;
-          filter: drop-shadow(0 4px 12px rgba(196, 30, 58, 0.3));
+          color: var(--newsprint-fg);
         }
       }
 
       h2 {
         font-size: 1.5rem;
         margin: 0 0 12px 0;
-        color: #5c3d2e;
-        font-weight: 600;
+        color: var(--newsprint-fg);
+        font-weight: 700;
+        font-family: 'Playfair Display', serif;
       }
 
       p {
         font-size: 1rem;
         margin: 0;
+        color: var(--newsprint-neutral-500);
       }
     }
 
@@ -804,12 +805,12 @@ const closeCreateDialog = () => {
 
       .chat-header {
         padding: 20px;
-        border-bottom: 1px solid #f8d0d8;
-        background: #fceef2;
+        border-bottom: 1px solid var(--newsprint-border);
+        background: var(--newsprint-neutral-100);
 
         h3 {
           margin: 0;
-          color: #5c3d2e;
+          color: var(--newsprint-fg);
           font-weight: 600;
         }
       }
@@ -817,18 +818,16 @@ const closeCreateDialog = () => {
       .chat-messages {
         flex: 1;
         padding: 20px;
-        background-color: #fff9f2;
+        background-color: var(--newsprint-bg);
 
         .message {
           padding: 12px 16px;
-          border-radius: 12px;
           margin-bottom: 12px;
-          border: 1px solid transparent;
+          border: 1px solid var(--newsprint-border);
 
           &.system {
-            background: #fceef2;
-            color: #8d6e63;
-            border-color: #f8d0d8;
+            background: var(--newsprint-neutral-100);
+            color: var(--newsprint-neutral-500);
           }
         }
       }
@@ -851,19 +850,22 @@ const closeCreateDialog = () => {
       .title {
         font-size: 16px;
         font-weight: 600;
-        color: #1f2937;
+        color: var(--newsprint-fg);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
       }
 
       .count {
         font-size: 14px;
-        color: #6b7280;
+        color: var(--newsprint-neutral-500);
+        font-family: 'JetBrains Mono', monospace;
       }
     }
 
     .empty-state {
       text-align: center;
       padding: 40px 20px;
-      color: #9ca3af;
+      color: var(--newsprint-neutral-500);
 
       .empty-icon {
         font-size: 48px;
@@ -877,7 +879,7 @@ const closeCreateDialog = () => {
 
       .empty-hint {
         font-size: 12px;
-        color: #d1d5db;
+        color: var(--newsprint-accent);
       }
     }
 
@@ -892,28 +894,28 @@ const closeCreateDialog = () => {
         align-items: center;
         gap: 12px;
         padding: 16px;
-        border: 2px solid transparent;
-        border-radius: 8px;
+        border: 1px solid var(--newsprint-border);
         cursor: pointer;
         transition: all 0.2s ease;
         position: relative;
 
         &:hover {
-          background: #f9fafb;
-          border-color: #d1d5db;
+          background: var(--newsprint-neutral-100);
+          border-color: var(--newsprint-accent);
         }
 
         &.active {
-          border-color: #c41e3a;
-          background: #fceef2;
+          border-color: var(--newsprint-accent);
+          background: var(--newsprint-neutral-100);
+          border-left: 3px solid var(--newsprint-accent);
         }
 
         .agent-avatar {
           width: 48px;
           height: 48px;
-          border-radius: 8px;
           overflow: hidden;
           flex-shrink: 0;
+          border: 1px solid var(--newsprint-border);
 
           img {
             width: 100%;
@@ -928,13 +930,13 @@ const closeCreateDialog = () => {
           .agent-name {
             font-size: 16px;
             font-weight: 600;
-            color: #1f2937;
+            color: var(--newsprint-fg);
             margin-bottom: 4px;
           }
 
           .agent-description {
             font-size: 14px;
-            color: #6b7280;
+            color: var(--newsprint-neutral-500);
             line-height: 1.4;
           }
         }
@@ -948,8 +950,8 @@ const closeCreateDialog = () => {
             display: flex;
             align-items: center;
             justify-content: center;
-            background: #eff6ff;
-            border-radius: 50%;
+            background: var(--newsprint-fg);
+            color: var(--newsprint-bg);
           }
         }
       }
@@ -962,7 +964,7 @@ const closeCreateDialog = () => {
   justify-content: flex-end;
   gap: 12px;
   padding-top: 16px;
-  border-top: 1px solid #f8d0d8;
+  border-top: 1px solid var(--newsprint-border);
 }
 
 // 响应式设计
@@ -1002,7 +1004,7 @@ const closeCreateDialog = () => {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(92, 61, 46, 0.4);
+  background: rgba(17, 17, 17, 0.4);
   backdrop-filter: blur(4px);
   display: flex;
   align-items: center;
@@ -1012,51 +1014,52 @@ const closeCreateDialog = () => {
 }
 
 .create-dialog {
-  background: white;
-  border-radius: 20px;
+  background: var(--newsprint-bg);
   width: 600px;
   max-width: 90vw;
   max-height: 85vh;
   overflow: hidden;
-  box-shadow: 0 20px 60px rgba(92, 61, 46, 0.2);
+  box-shadow: 8px 8px 0px 0px var(--newsprint-fg);
   animation: slideIn 0.3s ease;
   display: flex;
   flex-direction: column;
-  border: 1px solid #f8d0d8;
+  border: 2px solid var(--newsprint-fg);
 
   .dialog-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 24px 24px 16px;
-    border-bottom: 1px solid #f8d0d8;
-    background: #fceef2;
+    border-bottom: 1px solid var(--newsprint-border);
+    background: var(--newsprint-neutral-100);
 
     h3 {
       margin: 0;
-      color: #5c3d2e;
+      color: var(--newsprint-fg);
       font-size: 18px;
-      font-weight: 600;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
 
     .close-btn {
       background: none;
-      border: none;
+      border: 1px solid var(--newsprint-border);
       font-size: 24px;
       cursor: pointer;
-      color: #8d6e63;
+      color: var(--newsprint-neutral-500);
       padding: 0;
       width: 32px;
       height: 32px;
       display: flex;
       align-items: center;
       justify-content: center;
-      border-radius: 50%;
       transition: all 0.2s ease;
 
       &:hover {
-        background: #fceef2;
-        color: #c41e3a;
+        background: var(--newsprint-fg);
+        color: var(--newsprint-bg);
+        border-color: var(--newsprint-fg);
       }
     }
   }
@@ -1065,7 +1068,7 @@ const closeCreateDialog = () => {
     flex: 1;
     padding: 20px 24px;
     overflow-y: auto;
-    background-color: white;
+    background-color: var(--newsprint-bg);
 
     .search-section {
       margin-bottom: 20px;
@@ -1073,22 +1076,22 @@ const closeCreateDialog = () => {
       .search-input {
         width: 100%;
         padding: 12px 16px;
-        border: 2px solid #f8d0d8;
-        border-radius: 12px;
+        border: none;
+        border-bottom: 2px solid var(--newsprint-border);
         font-size: 14px;
         transition: all 0.2s ease;
-        background: #fceef2;
-        color: #5c3d2e;
+        background: transparent;
+        color: var(--newsprint-fg);
+        font-family: 'JetBrains Mono', monospace;
 
         &:focus {
           outline: none;
-          border-color: #c41e3a;
-          background: white;
-          box-shadow: 0 0 0 3px rgba(196, 30, 58, 0.1);
+          border-color: var(--newsprint-accent);
+          background: #F0F0F0;
         }
 
         &::placeholder {
-          color: #c41e3a;
+          color: var(--newsprint-neutral-400);
         }
       }
     }
@@ -1103,23 +1106,26 @@ const closeCreateDialog = () => {
         .title {
           font-size: 16px;
           font-weight: 600;
-          color: #5c3d2e;
+          color: var(--newsprint-fg);
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
         }
 
         .count {
           font-size: 14px;
-          color: #c41e3a;
-          background: #fceef2;
+          color: var(--newsprint-neutral-500);
+          background: var(--newsprint-neutral-100);
           padding: 2px 8px;
-          border-radius: 12px;
+          border: 1px solid var(--newsprint-border);
           font-weight: 600;
+          font-family: 'JetBrains Mono', monospace;
         }
       }
 
       .empty-state {
         text-align: center;
         padding: 40px 20px;
-        color: #c41e3a;
+        color: var(--newsprint-neutral-500);
 
         .empty-icon {
           font-size: 48px;
@@ -1129,12 +1135,12 @@ const closeCreateDialog = () => {
         .empty-text {
           font-size: 14px;
           margin-bottom: 8px;
-          color: #8d6e63;
+          color: var(--newsprint-neutral-500);
         }
 
         .empty-hint {
           font-size: 12px;
-          color: #c41e3a;
+          color: var(--newsprint-accent);
         }
       }
 
@@ -1149,34 +1155,30 @@ const closeCreateDialog = () => {
           align-items: center;
           gap: 12px;
           padding: 16px;
-          border: 2px solid transparent;
-          border-radius: 16px;
+          border: 1px solid var(--newsprint-border);
           cursor: pointer;
           transition: all 0.2s ease;
           position: relative;
-          background: #fceef2;
-          border: 1px solid #f8d0d8;
+          background: var(--newsprint-bg);
 
           &:hover {
-            background: #fceef2;
-            border-color: #c41e3a;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(196, 30, 58, 0.1);
+            border-color: var(--newsprint-accent);
+            box-shadow: 4px 4px 0px 0px var(--newsprint-border);
+            transform: translate(-2px, -2px);
           }
 
           &.active {
-            border-color: #c41e3a;
-            background: #fceef2;
-            box-shadow: 0 4px 16px rgba(196, 30, 58, 0.2);
+            border-color: var(--newsprint-accent);
+            background: var(--newsprint-neutral-100);
+            border-left: 3px solid var(--newsprint-accent);
           }
 
           .agent-avatar {
             width: 48px;
             height: 48px;
-            border-radius: 12px;
             overflow: hidden;
             flex-shrink: 0;
-            border: 1px solid #f8d0d8;
+            border: 1px solid var(--newsprint-border);
 
             img {
               width: 100%;
@@ -1191,13 +1193,13 @@ const closeCreateDialog = () => {
             .agent-name {
               font-size: 16px;
               font-weight: 600;
-              color: #5c3d2e;
+              color: var(--newsprint-fg);
               margin-bottom: 4px;
             }
 
             .agent-description {
               font-size: 14px;
-              color: #8d6e63;
+              color: var(--newsprint-neutral-500);
               line-height: 1.4;
             }
           }
@@ -1211,9 +1213,8 @@ const closeCreateDialog = () => {
               display: flex;
               align-items: center;
               justify-content: center;
-              background: #c41e3a;
-              color: white;
-              border-radius: 50%;
+              background: var(--newsprint-fg);
+              color: var(--newsprint-bg);
               font-size: 12px;
             }
           }
@@ -1227,45 +1228,49 @@ const closeCreateDialog = () => {
     justify-content: flex-end;
     gap: 12px;
     padding: 16px 24px;
-    border-top: 1px solid #f8d0d8;
-    background: #fceef2;
+    border-top: 1px solid var(--newsprint-border);
+    background: var(--newsprint-neutral-100);
 
     .btn-cancel {
       padding: 10px 24px;
-      border: 1px solid #f8d0d8;
-      border-radius: 10px;
-      background: white;
-      color: #8d6e63;
+      border: 1px solid var(--newsprint-border);
+      background: var(--newsprint-bg);
+      color: var(--newsprint-neutral-500);
       cursor: pointer;
       font-size: 14px;
       transition: all 0.2s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
 
       &:hover {
-        background: #fceef2;
-        color: #c41e3a;
-        border-color: #c41e3a;
+        background: var(--newsprint-neutral-100);
+        color: var(--newsprint-fg);
+        border-color: var(--newsprint-fg);
       }
     }
 
     .btn-confirm {
       padding: 10px 24px;
-      border: none;
-      border-radius: 10px;
-      background: linear-gradient(135deg, #c41e3a 0%, #9e1830 100%);
-      color: white;
+      border: 2px solid var(--newsprint-fg);
+      background: var(--newsprint-fg);
+      color: var(--newsprint-bg);
       cursor: pointer;
       font-size: 14px;
       font-weight: 600;
       transition: all 0.2s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
 
       &:hover:not(:disabled) {
-        transform: translateY(-1px);
-        box-shadow: 0 8px 20px rgba(196, 30, 58, 0.3);
+        background: var(--newsprint-bg);
+        color: var(--newsprint-fg);
+        box-shadow: 4px 4px 0px 0px var(--newsprint-fg);
+        transform: translate(-2px, -2px);
       }
 
       &:disabled {
-        background: #c41e3a;
-        opacity: 0.6;
+        background: var(--newsprint-fg);
+        opacity: 0.5;
         cursor: not-allowed;
         transform: none;
         box-shadow: none;

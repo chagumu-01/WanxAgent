@@ -29,7 +29,7 @@ onMounted(async () => {
   flex-direction: column;
   height: 100%;
   padding: 24px;
-  background: linear-gradient(135deg, #f2a5b5 0%, #c41e3a 100%);
+  background-color: var(--newsprint-bg);
   min-height: 100vh;
 
   .header-section {
@@ -43,31 +43,30 @@ onMounted(async () => {
       gap: 20px;
 
       .welcome-icon {
-        background: rgba(255, 255, 255, 0.1);
-        border-radius: 50%;
+        background: var(--newsprint-neutral-100);
+        border: 2px solid var(--newsprint-border);
         padding: 20px;
-        backdrop-filter: blur(10px);
       }
 
       .welcome-text {
         .title {
           font-size: 2.5rem;
           font-weight: 700;
-          color: white;
+          color: var(--newsprint-fg);
           margin: 0 0 12px 0;
-          text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+          font-family: 'Playfair Display', serif;
 
           .highlight {
-            color: #fbbf24;
-            text-shadow: 0 2px 4px rgba(251, 191, 36, 0.3);
+            color: var(--newsprint-accent);
           }
         }
 
         .subtitle {
           font-size: 1.1rem;
-          color: rgba(255, 255, 255, 0.9);
+          color: var(--newsprint-neutral-500);
           margin: 0;
           font-weight: 400;
+          font-family: 'Lora', serif;
         }
       }
     }
@@ -82,28 +81,35 @@ onMounted(async () => {
 
       .search-input {
         :deep(.el-input__wrapper) {
-          border-radius: 12px;
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-          background: rgba(255, 255, 255, 0.95);
-          backdrop-filter: blur(10px);
+          background-color: transparent;
+          border: none !important;
+          border-bottom: 2px solid var(--newsprint-border) !important;
+          box-shadow: none !important;
+          padding: 4px 0;
           
           &:hover {
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            border-bottom-color: var(--newsprint-accent);
           }
           
           &.is-focus {
-            box-shadow: 0 0 0 2px #c41e3a;
+            border-bottom-color: var(--newsprint-accent);
+            background: #F0F0F0;
           }
         }
 
         :deep(.el-input-group__append) {
           .el-button {
-            border-radius: 0 12px 12px 0;
-            border: none;
-            background: #c41e3a;
+            border: 2px solid var(--newsprint-fg);
+            background: var(--newsprint-fg);
+            color: var(--newsprint-bg);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
             
             &:hover {
-              background: #9e1830;
+              background: var(--newsprint-bg);
+              color: var(--newsprint-fg);
+              box-shadow: 4px 4px 0px 0px var(--newsprint-fg);
+              transform: translate(-2px, -2px);
             }
           }
         }
@@ -113,11 +119,10 @@ onMounted(async () => {
 
   .agents-section {
     flex: 1;
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 20px;
+    background: var(--newsprint-bg);
+    border: 2px solid var(--newsprint-border);
     padding: 32px;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    box-shadow: 4px 4px 0px 0px var(--newsprint-border);
 
     .section-header {
       display: flex;
@@ -133,16 +138,19 @@ onMounted(async () => {
         .section-title {
           font-size: 1.5rem;
           font-weight: 600;
-          color: #1f2937;
+          color: var(--newsprint-fg);
           margin: 0;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
         }
 
         .agent-count {
           font-size: 0.9rem;
-          color: #6b7280;
-          background: #f3f4f6;
+          color: var(--newsprint-neutral-500);
+          background: var(--newsprint-neutral-100);
           padding: 4px 8px;
-          border-radius: 12px;
+          border: 1px solid var(--newsprint-border);
+          font-family: 'JetBrains Mono', monospace;
         }
       }
     }
@@ -154,7 +162,7 @@ onMounted(async () => {
     .empty-state {
       text-align: center;
       padding: 60px 20px;
-      color: #6b7280;
+      color: var(--newsprint-neutral-500);
 
       .empty-icon {
         font-size: 4rem;
@@ -165,12 +173,14 @@ onMounted(async () => {
         font-size: 1.25rem;
         font-weight: 600;
         margin-bottom: 8px;
-        color: #374151;
+        color: var(--newsprint-fg);
+        font-family: 'Playfair Display', serif;
       }
 
       .empty-description {
         font-size: 0.9rem;
         margin-bottom: 24px;
+        color: var(--newsprint-neutral-500);
       }
     }
 
@@ -181,14 +191,13 @@ onMounted(async () => {
 
       .agent-item {
         .agent-card {
-          transition: all 0.3s ease;
-          border-radius: 16px;
+          transition: all 0.2s ease;
+          border: 1px solid var(--newsprint-border);
           overflow: hidden;
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 
           &:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+            transform: translate(-2px, -2px);
+            box-shadow: 4px 4px 0px 0px var(--newsprint-border);
           }
         }
       }

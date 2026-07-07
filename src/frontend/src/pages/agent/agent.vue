@@ -260,7 +260,7 @@ onMounted(() => {
               @click="searchAgents"
               :loading="searchLoading"
               size="large"
-              style="margin-left: 12px; border-radius: 12px;"
+              style="margin-left: 12px; border-radius: 4px;"
             >
               搜索
             </el-button>
@@ -274,14 +274,14 @@ onMounted(() => {
             title="刷新列表"
             size="large"
             circle
-            style="border-radius: 12px;"
+            style="border-radius: 4px;"
           />
           <el-button 
             type="primary" 
             :icon="Plus" 
             @click="createAgent"
             size="large"
-            style="border-radius: 12px; background: linear-gradient(135deg, #c41e3a 0%, #9e1830 100%); border: none;"
+            style="border-radius: 4px; background: var(--newsprint-fg); border: 1px solid var(--newsprint-border);"
           >
             创建智能体
           </el-button>
@@ -397,18 +397,18 @@ onMounted(() => {
 .agent-page {
   padding: 32px;
   min-height: 100vh;
-  background: #fff9f2;
+  background: var(--newsprint-bg);
   
   .page-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 24px; // 减小了margin-bottom
-    background: #ffffff;
-    padding: 20px 28px; // 减小了padding
-    border-radius: 16px; // 减小了border-radius
-    box-shadow: 0 4px 20px rgba(196, 30, 58, 0.1); // 减小了阴影
-    border: 1px solid #f8d0d8;
+    margin-bottom: 24px;
+    background: var(--newsprint-bg);
+    padding: 20px 28px;
+    border-radius: 4px;
+    box-shadow: 4px 4px 0px 0px var(--newsprint-border);
+    border: 1px solid var(--newsprint-border);
     
     .header-title {
       display: flex;
@@ -418,17 +418,17 @@ onMounted(() => {
       .title-icon {
         width: 36px;
         height: 36px;
-        filter: drop-shadow(0 0 5px rgba(196, 30, 58, 0.4));
+        filter: none;
       }
       
       h2 {
         margin: 0;
         font-size: 24px;
         font-weight: 600;
-        background: linear-gradient(90deg, #c41e3a, #9e1830); // 与robot.svg图标颜色匹配
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
+        color: var(--newsprint-fg);
+        font-family: 'Playfair Display', serif;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
       }
     }
     
@@ -441,26 +441,27 @@ onMounted(() => {
         .search-input-wrapper {
           display: flex;
           align-items: center;
-          background: #ffffff;
+          background: var(--newsprint-bg);
           padding: 8px;
-          border-radius: 16px;
-          border: 1px solid #f8d0d8;
-          box-shadow: 0 4px 12px rgba(196, 30, 58, 0.1);
+          border-radius: 4px;
+          border: 1px solid var(--newsprint-border);
+          box-shadow: 2px 2px 0px 0px var(--newsprint-border);
           
           :deep(.el-input) {
             .el-input__wrapper {
               background: transparent;
               border: none;
               box-shadow: none;
-              border-radius: 12px;
+              border-radius: 4px;
               
               .el-input__inner {
                 font-size: 15px;
                 font-weight: 500;
-                color: #5c3d2e;
+                color: var(--newsprint-fg);
+                font-family: 'Lora', serif;
                 
                 &::placeholder {
-                  color: #c41e3a;
+                  color: var(--newsprint-neutral-500);
                   font-weight: 400;
                 }
               }
@@ -475,12 +476,12 @@ onMounted(() => {
         
         :deep(.el-button) {
           font-weight: 600;
-          font-family: 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', Arial, sans-serif;
-          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          font-family: 'Lora', serif;
+          transition: all 0.2s ease;
           
           &:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(196, 30, 58, 0.3);
+            transform: translate(-2px, -2px);
+            box-shadow: 4px 4px 0px 0px var(--newsprint-fg);
           }
         }
       }
@@ -497,21 +498,21 @@ onMounted(() => {
       gap: 16px;
       
       .agent-card {
-        background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
-        border-radius: 20px;
+        background: var(--newsprint-bg);
+        border-radius: 4px;
         padding: 16px;
         height: 200px;
-        box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1);
-        border: 1px solid rgba(226, 232, 240, 0.8);
-        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 4px 4px 0px 0px var(--newsprint-border);
+        border: 1px solid var(--newsprint-border);
+        transition: all 0.2s ease;
         position: relative;
         display: flex;
         flex-direction: column;
-        cursor: pointer; /* Add cursor pointer for clickability */
+        cursor: pointer;
         
         &:hover {
-          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-          transform: translateY(-4px);
+          box-shadow: 6px 6px 0px 0px var(--newsprint-border);
+          transform: translate(-2px, -2px);
           
           .delete-icon {
             opacity: 1;
@@ -521,21 +522,21 @@ onMounted(() => {
         
         // 系统智能体样式
         &.official-agent {
-          background: linear-gradient(145deg, #fffaf0 0%, #fff8e5 100%);
-          border: 1px solid rgba(255, 152, 0, 0.3);
+          background: var(--newsprint-neutral-100);
+          border: 2px solid var(--newsprint-fg);
           
           &:hover {
-            box-shadow: 0 8px 24px rgba(255, 152, 0, 0.15);
+            box-shadow: 6px 6px 0px 0px var(--newsprint-fg);
           }
           
           .agent-name {
-            color: #d87300 !important;
+            color: var(--newsprint-fg) !important;
           }
           
           .agent-meta {
             .meta-item {
-              background: rgba(255, 243, 224, 0.5);
-              border: 1px solid rgba(255, 152, 0, 0.1);
+              background: var(--newsprint-neutral-100);
+              border: 1px solid var(--newsprint-border);
             }
           }
         }
@@ -544,9 +545,9 @@ onMounted(() => {
           position: absolute;
           top: 10px;
           right: 10px;
-          background-color: #f56c6c;
-          color: white;
-          border-radius: 50%;
+          background-color: var(--newsprint-fg);
+          color: var(--newsprint-bg);
+          border-radius: 4px;
           width: 24px;
           height: 24px;
           display: flex;
@@ -556,13 +557,14 @@ onMounted(() => {
           font-weight: bold;
           cursor: pointer;
           z-index: 1;
-          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-          transition: all 0.3s ease;
+          box-shadow: 2px 2px 0px 0px var(--newsprint-border);
+          transition: all 0.2s ease;
           opacity: 0;
           transform: scale(0.8);
 
           &:hover {
-            background-color: #ff7a7a;
+            transform: translate(-1px, -1px);
+            box-shadow: 3px 3px 0px 0px var(--newsprint-border);
           }
         }
 
@@ -570,24 +572,24 @@ onMounted(() => {
           position: absolute;
           top: 10px;
           right: 10px;
-          background-color: #ff9800;
-          color: white;
+          background-color: var(--newsprint-fg);
+          color: var(--newsprint-bg);
           padding: 4px 8px;
-          border-radius: 8px;
+          border-radius: 4px;
           font-size: 12px;
           font-weight: bold;
           z-index: 1;
-          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+          box-shadow: 2px 2px 0px 0px var(--newsprint-border);
         }
         
         
         .agent-avatar {
           width: 48px;
           height: 48px;
-          border-radius: 12px;
+          border-radius: 4px;
           overflow: hidden;
           margin-bottom: 12px;
-          border: 2px solid #f0f0f0;
+          border: 2px solid var(--newsprint-border);
           
           img {
             width: 100%;
@@ -605,7 +607,8 @@ onMounted(() => {
           .agent-name {
             font-size: 16px;
             font-weight: 600;
-            color: #2c3e50;
+            color: var(--newsprint-fg);
+            font-family: 'Playfair Display', serif;
             margin: 0 0 6px 0;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -613,10 +616,11 @@ onMounted(() => {
           }
           
           .agent-description {
-            color: #64748b;
+            color: var(--newsprint-neutral-500);
             font-size: 14px;
             line-height: 1.4;
             margin: 0 0 10px 0;
+            font-family: 'Lora', serif;
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
@@ -634,18 +638,18 @@ onMounted(() => {
             
             .meta-item {
               font-size: 11px;
-              color: #64748b;
+              color: var(--newsprint-neutral-500);
               display: flex;
               align-items: center;
               justify-content: center;
               gap: 2px;
-              background: rgba(255, 255, 255, 0.3); /* 半透明背景 */
+              background: var(--newsprint-neutral-100);
               padding: 4px 5px;
-              border-radius: 6px;
+              border-radius: 4px;
               min-width: 38px;
               text-align: center;
-              box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-              backdrop-filter: blur(2px); /* 轻微模糊效果 */
+              box-shadow: 1px 1px 0px 0px var(--newsprint-border);
+              border: 1px solid var(--newsprint-border);
               
               .meta-icon-img {
                 width: 14px;
@@ -684,10 +688,11 @@ onMounted(() => {
     .empty-state {
       text-align: center;
       padding: 80px 20px;
-      color: #64748b;
-      background: white;
-      border-radius: 16px;
-      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+      color: var(--newsprint-neutral-500);
+      background: var(--newsprint-bg);
+      border-radius: 4px;
+      box-shadow: 4px 4px 0px 0px var(--newsprint-border);
+      border: 1px solid var(--newsprint-border);
       
       p {
         margin-top: 24px;
@@ -704,17 +709,18 @@ onMounted(() => {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.4);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
 
   .confirm-dialog-content {
-    background-color: white;
-    border-radius: 12px;
+    background-color: var(--newsprint-bg);
+    border-radius: 4px;
     padding: 24px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    box-shadow: 8px 8px 0px 0px var(--newsprint-border);
+    border: 2px solid var(--newsprint-border);
     text-align: center;
     width: 350px;
     max-width: 90%;
@@ -722,13 +728,17 @@ onMounted(() => {
     .dialog-title {
       font-size: 20px;
       font-weight: 700;
-      color: #333;
+      color: var(--newsprint-fg);
+      font-family: 'Playfair Display', serif;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
       margin-bottom: 16px;
     }
 
     .dialog-body {
       font-size: 16px;
-      color: #555;
+      color: var(--newsprint-neutral-500);
+      font-family: 'Lora', serif;
       margin-bottom: 24px;
       line-height: 1.6;
     }
@@ -740,35 +750,39 @@ onMounted(() => {
 
       .btn-cancel, .btn-confirm {
         padding: 10px 20px;
-        border-radius: 8px;
+        border-radius: 4px;
         font-size: 16px;
         font-weight: 600;
+        font-family: 'Lora', serif;
         cursor: pointer;
-        transition: all 0.3s ease;
+        transition: all 0.2s ease;
       }
 
       .btn-cancel {
-        background-color: #f5f5f5;
-        color: #333;
-        border: 1px solid #ddd;
+        background-color: var(--newsprint-neutral-100);
+        color: var(--newsprint-fg);
+        border: 1px solid var(--newsprint-border);
         
         &:hover {
-          background-color: #e5e5e5;
+          background-color: var(--newsprint-neutral-400);
+          transform: translate(-1px, -1px);
+          box-shadow: 2px 2px 0px 0px var(--newsprint-border);
         }
       }
 
       .btn-confirm {
-        background-color: #f56c6c;
-        color: white;
-        border: none;
+        background-color: var(--newsprint-fg);
+        color: var(--newsprint-bg);
+        border: 1px solid var(--newsprint-border);
         
         &:hover {
-          background-color: #ff8080;
-          transform: scale(1.05);
+          transform: translate(-2px, -2px);
+          box-shadow: 4px 4px 0px 0px var(--newsprint-border);
         }
         
         &:active {
-          transform: scale(0.95);
+          transform: translate(0, 0);
+          box-shadow: none;
         }
       }
     }
@@ -869,9 +883,11 @@ onMounted(() => {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: rgba(64, 158, 255, 0.1);
-    border-radius: 50%;
+    background: var(--newsprint-neutral-100);
+    border-radius: 4px;
     margin-bottom: 20px;
+    border: 2px solid var(--newsprint-border);
+    box-shadow: 4px 4px 0px 0px var(--newsprint-border);
     
     .empty-icon-symbol {
       font-size: 60px;
@@ -880,14 +896,18 @@ onMounted(() => {
   
   h3 {
     font-size: 20px;
-    color: #303133;
+    color: var(--newsprint-fg);
+    font-family: 'Playfair Display', serif;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
     margin: 0 0 16px;
   }
   
   p {
     margin: 0 0 20px;
     font-size: 16px;
-    color: #909399;
+    color: var(--newsprint-neutral-500);
+    font-family: 'Lora', serif;
     max-width: 300px;
   }
   
