@@ -25,7 +25,7 @@ const examples = [
     description: '使用多个工具相互配合完成自动构建智能体的任务',
     action: '开始构建 →',
     icon: Bot,
-    iconColor: '#c41e3a'
+    iconColor: 'var(--newsprint-accent)'
   },
   {
     title: '深度搜索',
@@ -33,7 +33,7 @@ const examples = [
     description: '连接外部互联网资源，扩展系统能力和数据源',
     action: '开始搜索 →',
     icon: Search,
-    iconColor: '#d94560'
+    iconColor: 'var(--newsprint-accent)'
   },
   {
     title: 'AI日报',
@@ -41,7 +41,7 @@ const examples = [
     description: '对最近的AI新闻进行整理总结，可生成下载链接',
     action: '生成日报 →',
     icon: Newspaper,
-    iconColor: '#e87187'
+    iconColor: 'var(--newsprint-accent)'
   },
   {
     title: '知识库问答',
@@ -49,7 +49,7 @@ const examples = [
     description: '基于已有知识库进行精准问答和信息检索',
     action: '查询知识 →',
     icon: FileText,
-    iconColor: '#c41e3a'
+    iconColor: 'var(--newsprint-accent)'
   }
 ]
 
@@ -90,11 +90,11 @@ const handleExampleClick = async (example: any, index: number) => {
         <div class="logo-icon">
           <svg viewBox="0 0 100 100" class="logo-svg">
             <path d="M50 15 C30 15 15 30 15 50 C15 70 30 85 50 85 C70 85 85 70 85 50 C85 30 70 15 50 15 Z" 
-                  fill="none" stroke="#c41e3a" stroke-width="8"/>
+                  fill="none" stroke="var(--newsprint-accent)" stroke-width="8"/>
             <path d="M30 50 C30 50 45 30 50 35 C55 30 70 50 70 50" 
-                  fill="none" stroke="#c41e3a" stroke-width="8" stroke-linecap="round"/>
+                  fill="none" stroke="var(--newsprint-accent)" stroke-width="8" stroke-linecap="round"/>
             <path d="M30 50 C30 50 45 70 50 65 C55 70 70 50 70 50" 
-                  fill="none" stroke="#c41e3a" stroke-width="8" stroke-linecap="round"/>
+                  fill="none" stroke="var(--newsprint-accent)" stroke-width="8" stroke-linecap="round"/>
           </svg>
         </div>
         <h1 class="brand-name">WanxAgent</h1>
@@ -229,7 +229,7 @@ export default {
 <style lang="scss" scoped>
 .homepage {
   min-height: 100vh;
-  background: linear-gradient(135deg, #fceef2 0%, #f8d0d8 50%, #f2a5b5 100%);
+  background: var(--newsprint-bg);
   padding: 10px 15px;
   overflow-y: auto;
   scrollbar-width: none;
@@ -249,13 +249,12 @@ export default {
     .logo-icon {
       width: 56px;
       height: 56px;
-      background: #ffffff;
-      border-radius: 16px;
+      background: var(--newsprint-bg);
       display: flex;
       align-items: center;
       justify-content: center;
-      border: 3px solid #c41e3a;
-      box-shadow: 0 8px 24px rgba(196, 30, 58, 0.4);
+      border: 3px solid var(--newsprint-accent);
+      box-shadow: 4px 4px 0px 0px var(--newsprint-fg);
       animation: float 3s ease-in-out infinite;
       
       .logo-svg {
@@ -267,10 +266,11 @@ export default {
     .brand-name {
       font-size: 48px;
       font-weight: 800;
-      color: #c41e3a;
+      color: var(--newsprint-fg);
       margin: 0;
       position: relative;
       letter-spacing: -1px;
+      font-family: 'Playfair Display', serif;
       
       &::after {
         content: '';
@@ -279,19 +279,19 @@ export default {
         left: 0;
         right: 0;
         height: 3px;
-        background: linear-gradient(90deg, transparent, #c41e3a, #d94560, #c41e3a, transparent);
-        border-radius: 2px;
-        opacity: 0.6;
+        background: var(--newsprint-accent);
+        opacity: 0.8;
       }
     }
   }
   
   .brand-slogan {
-    font-size: 16px;
-    color: #c41e3a;
+    font-size: 14px;
+    color: var(--newsprint-fg-muted);
     margin-top: 12px;
-    font-weight: 500;
-    letter-spacing: 2px;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
   }
 }
 
@@ -305,21 +305,19 @@ export default {
   margin: 0 auto 28px;
   
   .search-container {
-    background: #ffffff;
-    border-radius: 22px;
+    background: var(--newsprint-neutral-100);
     padding: 32px;
-    box-shadow: 0 12px 40px rgba(196, 30, 58, 0.12);
-    border: 1px solid #f2a5b5;
+    box-shadow: 4px 4px 0px 0px var(--newsprint-fg);
+    border: 2px solid var(--newsprint-fg);
   }
   
   .search-box {
     margin-bottom: 18px;
     
     .search-input-wrapper {
-      background: #fceef2;
-      border-radius: 16px;
+      background: var(--newsprint-bg);
       padding: 14px;
-      border: 2px solid #f2a5b5;
+      border: 2px solid var(--newsprint-fg);
       transition: all 0.3s ease;
       min-height: 160px;
       width: 100%;
@@ -327,8 +325,7 @@ export default {
       position: relative;
       
       &:focus-within {
-        border-color: #c41e3a;
-        box-shadow: 0 0 0 4px rgba(196, 30, 58, 0.1);
+        box-shadow: 4px 4px 0px 0px var(--newsprint-accent);
       }
       
       .search-input {
@@ -338,15 +335,15 @@ export default {
         padding: 12px 18px 45px 18px;
         font-size: 19px;
         outline: none;
-        color: #4a1a25;
+        color: var(--newsprint-fg);
         line-height: 1.6;
         resize: none;
-        font-family: inherit;
+        font-family: 'Lora', serif;
         min-height: 130px;
         box-sizing: border-box;
         
         &::placeholder {
-          color: #d94560;
+          color: var(--newsprint-fg-muted);
         }
       }
     }
@@ -373,17 +370,18 @@ export default {
     gap: 8px;
     
     .shortcut-hint {
-      color: #d94560;
+      color: var(--newsprint-fg-muted);
       font-size: 12px;
       font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
     
     .send-button {
-      background: linear-gradient(135deg, #c41e3a, #d94560);
-      color: white;
-      border: none;
+      background: var(--newsprint-fg);
+      color: var(--newsprint-bg);
+      border: 2px solid var(--newsprint-fg);
       padding: 8px;
-      border-radius: 8px;
       font-size: 16px;
       cursor: pointer;
       transition: all 0.2s ease;
@@ -392,16 +390,15 @@ export default {
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 2px 6px rgba(196, 30, 58, 0.3);
       
       &:hover {
-        background: linear-gradient(135deg, #9e1830, #c41e3a);
-        box-shadow: 0 3px 8px rgba(196, 30, 58, 0.4);
-        transform: translateY(-1px);
+        background: var(--newsprint-accent);
+        border-color: var(--newsprint-accent);
+        box-shadow: 4px 4px 0px 0px var(--newsprint-fg);
       }
       
       &:active {
-        transform: translateY(0);
+        transform: translateY(2px);
       }
     }
   }
@@ -416,15 +413,19 @@ export default {
     text-align: center;
     font-size: 24px;
     font-weight: 700;
-    color: #4a1a25;
+    color: var(--newsprint-fg);
     margin-bottom: 5px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
     
     .section-subtitle {
       display: block;
       font-size: 14px;
       font-weight: 400;
-      color: #c41e3a;
+      color: var(--newsprint-fg-muted);
       margin-top: 4px;
+      text-transform: none;
+      letter-spacing: normal;
     }
   }
   
@@ -435,20 +436,17 @@ export default {
     margin-top: 12px;
     
     .example-card {
-      background: #ffffff;
-      border-radius: 16px;
+      background: var(--newsprint-neutral-100);
       padding: 15px;
       cursor: pointer;
       transition: all 0.3s ease;
-      border: 1px solid #f2a5b5;
+      border: 2px solid var(--newsprint-fg);
       position: relative;
       overflow: hidden;
-      box-shadow: 0 3px 8px rgba(196, 30, 58, 0.05);
       
       &:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 20px 40px rgba(196, 30, 58, 0.15);
-        border-color: #e87187;
+        transform: translate(-4px, -4px);
+        box-shadow: 8px 8px 0px 0px var(--newsprint-fg);
       }
       
       .example-header {
@@ -460,13 +458,12 @@ export default {
         .example-icon {
           width: 40px;
           height: 40px;
-          border-radius: 12px;
+          background: var(--newsprint-accent);
           display: flex;
           align-items: center;
           justify-content: center;
-          color: white;
+          color: var(--newsprint-bg);
           flex-shrink: 0;
-          box-shadow: 0 4px 12px rgba(196, 30, 58, 0.2);
         }
         
         .example-title-wrapper {
@@ -474,45 +471,52 @@ export default {
           
           .example-title {
             font-size: 16px;
-            font-weight: 600;
-            color: #4a1a25;
+            font-weight: 700;
+            color: var(--newsprint-fg);
             margin: 0 0 4px 0;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
           }
           
           .example-category {
-            background: #fceef2;
-            color: #c41e3a;
+            background: var(--newsprint-bg);
+            color: var(--newsprint-accent);
             padding: 3px 10px;
-            border-radius: 10px;
             font-size: 11px;
             font-weight: 500;
             white-space: nowrap;
+            border: 1px solid var(--newsprint-accent);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
           }
         }
       }
       
       .example-description {
-        color: #c41e3a;
+        color: var(--newsprint-fg-muted);
         line-height: 1.4;
         margin-bottom: 10px;
         font-size: 13px;
+        font-family: 'Lora', serif;
       }
       
       .example-action {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        color: #c41e3a;
-        font-weight: 500;
+        color: var(--newsprint-accent);
+        font-weight: 600;
         font-size: 13px;
         margin-bottom: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
       }
       
       .example-preview {
         height: 60px;
-        border-radius: 8px;
-        background: #fceef2;
+        background: var(--newsprint-bg);
         padding: 8px;
+        border: 1px solid var(--newsprint-border);
         
         .robot-preview {
           display: flex;
@@ -525,15 +529,13 @@ export default {
           .assembly-icon {
             width: 24px;
             height: 24px;
-            background: linear-gradient(135deg, #c41e3a, #d94560);
-            border-radius: 6px;
+            background: var(--newsprint-accent);
             position: relative;
             margin-bottom: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            box-shadow: 0 2px 6px rgba(196, 30, 58, 0.3);
+            color: var(--newsprint-bg);
           }
           
           .assembly-tools {
@@ -544,24 +546,19 @@ export default {
             .tool-box {
               width: 8px;
               height: 6px;
-              background: linear-gradient(135deg, #c41e3a, #9e1830);
-              border-radius: 2px;
-              box-shadow: 0 1px 2px rgba(196, 30, 58, 0.3);
+              background: var(--newsprint-fg);
             }
             
             .connector {
               width: 12px;
               height: 2px;
-              background: #c41e3a;
-              border-radius: 1px;
+              background: var(--newsprint-fg);
             }
             
             .component {
               width: 6px;
               height: 6px;
-              background: linear-gradient(135deg, #10b981, #059669);
-              border-radius: 50%;
-              box-shadow: 0 1px 2px rgba(16, 185, 129, 0.3);
+              background: var(--newsprint-accent);
             }
           }
         }
@@ -583,22 +580,19 @@ export default {
             .search-box-icon {
               width: 14px;
               height: 14px;
-              background: #c41e3a;
-              border-radius: 50%;
+              background: var(--newsprint-accent);
               display: flex;
               align-items: center;
               justify-content: center;
-              color: white;
+              color: var(--newsprint-bg);
             }
             
             .search-box {
               width: 35px;
               height: 12px;
-              background: linear-gradient(135deg, #f8d0d8, #f2a5b5);
-              border: 2px solid #c41e3a;
-              border-radius: 8px;
+              background: var(--newsprint-bg);
+              border: 2px solid var(--newsprint-fg);
               position: relative;
-              box-shadow: 0 0 0 1px rgba(196, 30, 58, 0.3);
             }
           }
           
@@ -612,8 +606,7 @@ export default {
             
             .wave {
               width: 3px;
-              background: linear-gradient(to top, #c41e3a, #d94560);
-              border-radius: 2px;
+              background: var(--newsprint-accent);
               
               &.wave1 { height: 4px; }
               &.wave2 { height: 6px; }
@@ -624,9 +617,8 @@ export default {
         
         .news-preview {
           padding: 6px;
-          background: linear-gradient(135deg, #fefefe, #fceef2);
-          border: 1px solid #f2a5b5;
-          border-radius: 4px;
+          background: var(--newsprint-neutral-100);
+          border: 1px solid var(--newsprint-fg);
           position: relative;
           
           .news-header {
@@ -638,24 +630,20 @@ export default {
             .news-title {
               width: 70%;
               height: 8px;
-              background: linear-gradient(90deg, #c41e3a, #d94560);
-              border-radius: 2px;
-              box-shadow: 0 1px 3px rgba(196, 30, 58, 0.3);
+              background: var(--newsprint-fg);
             }
             
             .news-date {
               width: 20%;
               height: 4px;
-              background: #94a3b8;
-              border-radius: 2px;
+              background: var(--newsprint-fg-muted);
             }
           }
           
           .news-content {
             .news-line {
               height: 4px;
-              background: linear-gradient(90deg, #c41e3a, #94a3b8);
-              border-radius: 2px;
+              background: var(--newsprint-fg);
               margin-bottom: 3px;
               
               &.long { width: 100%; }
@@ -668,13 +656,12 @@ export default {
             position: absolute;
             top: 4px;
             right: 4px;
-            background: linear-gradient(135deg, #c41e3a, #d94560);
-            color: white;
+            background: var(--newsprint-accent);
+            color: var(--newsprint-bg);
             font-size: 8px;
             font-weight: 700;
             padding: 2px 4px;
-            border-radius: 3px;
-            box-shadow: 0 1px 3px rgba(196, 30, 58, 0.4);
+            text-transform: uppercase;
           }
         }
         
@@ -687,14 +674,12 @@ export default {
           .pie-chart {
             width: 50px;
             height: 50px;
-            border-radius: 50%;
             position: relative;
             background: conic-gradient(
-              #c41e3a 0deg 120deg, 
-              #d94560 120deg 240deg, 
-              #e87187 240deg
+              var(--newsprint-accent) 0deg 120deg, 
+              var(--newsprint-fg) 120deg 240deg, 
+              var(--newsprint-fg-muted) 240deg
             );
-            box-shadow: 0 4px 12px rgba(196, 30, 58, 0.4);
             
             &::before {
               content: '';
@@ -704,9 +689,7 @@ export default {
               transform: translate(-50%, -50%);
               width: 20px;
               height: 20px;
-              background: white;
-              border-radius: 50%;
-              box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+              background: var(--newsprint-bg);
             }
             
             &::after {
@@ -717,8 +700,7 @@ export default {
               transform: translate(-50%, -50%);
               width: 8px;
               height: 8px;
-              background: linear-gradient(45deg, #c41e3a, #d94560);
-              border-radius: 50%;
+              background: var(--newsprint-accent);
             }
           }
         }

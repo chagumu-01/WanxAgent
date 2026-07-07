@@ -168,75 +168,18 @@ const goToRegister = () => {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #fceef2 0%, #f8d0d8 50%, #f2a5b5 100%);
+  background-color: var(--newsprint-bg);
   position: relative;
   overflow: hidden;
-  font-family: 'PingFang SC', 'Helvetica Neue', Arial, sans-serif;
-}
-
-.bg-decoration {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-
-  .blob {
-    position: absolute;
-    filter: blur(80px);
-    border-radius: 50%;
-    opacity: 0.5;
-    z-index: 1;
-  }
-
-  .blob-1 {
-    width: 400px;
-    height: 400px;
-    background: #f2a5b5;
-    top: -100px;
-    right: -100px;
-    animation: move1 20s infinite alternate;
-  }
-
-  .blob-2 {
-    width: 500px;
-    height: 500px;
-    background: #e87187;
-    bottom: -150px;
-    left: -100px;
-    animation: move2 25s infinite alternate;
-  }
-
-  .blob-3 {
-    width: 300px;
-    height: 300px;
-    background: #f8d0d8;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-}
-
-@keyframes move1 {
-  from { transform: translate(0, 0); }
-  to { transform: translate(-100px, 100px); }
-}
-
-@keyframes move2 {
-  from { transform: translate(0, 0); }
-  to { transform: translate(150px, -100px); }
 }
 
 .login-card {
   width: 100%;
   max-width: 440px;
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(242, 165, 181, 0.5);
-  border-radius: 24px;
+  background: var(--newsprint-bg);
+  border: 1px solid var(--newsprint-border);
+  box-shadow: 8px 8px 0px 0px var(--newsprint-fg);
   padding: 40px;
-  box-shadow: 0 20px 40px rgba(196, 30, 58, 0.1);
   position: relative;
   z-index: 2;
   margin: 20px;
@@ -256,33 +199,39 @@ const goToRegister = () => {
     .logo-icon {
       width: 64px;
       height: 64px;
-      background: #ffffff;
-      border-radius: 16px;
+      background: var(--newsprint-fg);
       display: flex;
       align-items: center;
       justify-content: center;
-      border: 3px solid #c41e3a;
-      box-shadow: 0 8px 16px rgba(196, 30, 58, 0.3);
+      border: 3px solid var(--newsprint-fg);
       
       .logo-svg {
         width: 44px;
         height: 44px;
+        
+        path {
+          stroke: var(--newsprint-bg) !important;
+        }
       }
     }
 
     .logo-text {
       font-size: 28px;
       font-weight: 800;
-      color: #c41e3a;
+      color: var(--newsprint-fg);
       margin: 0;
       letter-spacing: 1px;
+      font-family: 'Playfair Display', serif;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
     }
   }
 
   .subtitle {
     font-size: 15px;
-    color: #c41e3a;
+    color: var(--newsprint-neutral-500);
     margin: 0;
+    font-family: 'Lora', serif;
   }
 }
 
@@ -293,36 +242,37 @@ const goToRegister = () => {
 
   .custom-input {
     :deep(.el-input__wrapper) {
-      background-color: #fff;
-      border: 1px solid #f2a5b5;
+      background-color: var(--newsprint-bg);
+      border: 1px solid var(--newsprint-border);
       box-shadow: none !important;
-      border-radius: 12px;
       padding: 4px 12px;
-      transition: all 0.3s ease;
+      transition: all 0.2s ease;
 
       &:hover {
-        border-color: #c41e3a;
+        border-color: var(--newsprint-fg);
       }
 
       &.is-focus {
-        border-color: #c41e3a;
-        background-color: #fff;
-        box-shadow: 0 0 0 4px rgba(196, 30, 58, 0.1) !important;
+        border-color: var(--newsprint-fg);
+        background-color: var(--newsprint-bg);
+        box-shadow: 2px 2px 0px 0px var(--newsprint-fg) !important;
+        transform: translate(-1px, -1px);
       }
     }
 
     :deep(.el-input__inner) {
       height: 48px;
       font-size: 15px;
-      color: #4a1a25;
+      color: var(--newsprint-fg);
+      font-family: 'Lora', serif;
 
       &::placeholder {
-        color: #d94560;
+        color: var(--newsprint-neutral-400);
       }
     }
 
     :deep(.el-input__prefix-inner) {
-      color: #c41e3a;
+      color: var(--newsprint-fg);
       font-size: 18px;
     }
   }
@@ -334,23 +284,28 @@ const goToRegister = () => {
     margin-bottom: 30px;
 
     :deep(.el-checkbox__label) {
-      color: #c41e3a;
+      color: var(--newsprint-neutral-500);
       font-size: 14px;
+      font-family: 'Lora', serif;
     }
 
     :deep(.el-checkbox__input.is-checked .el-checkbox__inner) {
-      background-color: #c41e3a;
-      border-color: #c41e3a;
+      background-color: var(--newsprint-fg);
+      border-color: var(--newsprint-fg);
+    }
+
+    :deep(.el-checkbox__inner) {
+      border-color: var(--newsprint-border);
     }
 
     .forgot-pwd {
       font-size: 14px;
-      color: #c41e3a;
+      color: var(--newsprint-neutral-500);
       text-decoration: none;
-      transition: color 0.3s;
+      transition: color 0.2s;
 
       &:hover {
-        color: #9e1830;
+        color: var(--newsprint-fg);
       }
     }
   }
@@ -358,38 +313,40 @@ const goToRegister = () => {
   .login-btn {
     width: 100%;
     height: 52px;
-    border-radius: 12px;
-    background: linear-gradient(135deg, #c41e3a 0%, #d94560 100%);
-    border: none;
+    background: var(--newsprint-fg);
+    border: 2px solid var(--newsprint-fg);
     font-size: 16px;
     font-weight: 600;
-    color: #fff;
+    color: var(--newsprint-bg);
     margin-bottom: 20px;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
 
     &:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 20px rgba(196, 30, 58, 0.3);
-      opacity: 0.95;
+      transform: translate(-2px, -2px);
+      box-shadow: 4px 4px 0px 0px var(--newsprint-fg);
+      background: var(--newsprint-bg);
+      color: var(--newsprint-fg);
     }
 
     &:active {
-      transform: translateY(0);
+      transform: translate(0, 0);
     }
   }
 
   .register-footer {
     text-align: center;
     font-size: 14px;
-    color: #c41e3a;
+    color: var(--newsprint-neutral-500);
 
     :deep(.el-button--link) {
-      color: #c41e3a;
+      color: var(--newsprint-fg);
       font-weight: 600;
       padding: 0 4px;
       
       &:hover {
-        color: #9e1830;
+        color: var(--newsprint-accent);
       }
     }
   }
@@ -398,17 +355,19 @@ const goToRegister = () => {
 .footer {
   margin-top: 40px;
   padding-top: 20px;
-  border-top: 1px solid #f2a5b5;
+  border-top: 1px solid var(--newsprint-border);
   display: flex;
   justify-content: space-between;
   align-items: center;
 
   .version {
     font-size: 12px;
-    color: #d94560;
-    background: #fceef2;
+    color: var(--newsprint-neutral-500);
+    background: var(--newsprint-neutral-100);
     padding: 2px 8px;
-    border-radius: 6px;
+    border: 1px solid var(--newsprint-border);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
   }
 }
 </style>

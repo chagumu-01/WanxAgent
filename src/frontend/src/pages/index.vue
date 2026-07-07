@@ -294,17 +294,17 @@ watch(
 <style lang="scss" scoped>
 .ai-body {
   overflow: hidden;
-  background-color: #fceef2;
-  color: #4a1a25;
+  background-color: #F9F9F7;
+  color: #111111;
 
   .ai-nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
     height: 64px;
-    background: #ffffff;
+    background: #F9F9F7;
     padding: 0 24px;
-    box-shadow: 0 1px 4px rgba(255, 159, 67, 0.1);
+    border-bottom: 1px solid #111111;
     position: relative;
     z-index: 3000;
 
@@ -312,12 +312,12 @@ watch(
       display: flex;
       align-items: center;
       font-weight: 600;
-      color: #4a1a25;
+      color: #111111;
       cursor: pointer;
-      transition: all 0.3s ease;
+      transition: all 0.2s ease-out;
 
       &:hover {
-        opacity: 0.8;
+        opacity: 0.7;
       }
 
       .logo-section {
@@ -330,11 +330,13 @@ watch(
           width: 36px;
           height: 36px;
           object-fit: contain;
+          filter: grayscale(100%);
         }
 
         .brand-name {
           height: 36px;
           object-fit: contain;
+          filter: grayscale(100%);
         }
       }
     }
@@ -352,31 +354,26 @@ watch(
         .user-avatar-wrapper {
           cursor: pointer;
           padding: 4px;
-          border-radius: 50%;
-          background: rgba(196, 30, 58, 0.1);
-          border: 1px solid rgba(196, 30, 58, 0.2);
-          transition: all 0.3s ease;
+          background: transparent;
+          border: 1px solid #111111;
+          transition: all 0.2s ease-out;
 
           &:hover {
-            background: rgba(196, 30, 58, 0.2);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 16px rgba(196, 30, 58, 0.15);
-            border-color: #c41e3a;
+            background: #111111;
+            box-shadow: 4px 4px 0px 0px #111111;
+            transform: translate(-2px, -2px);
           }
 
           .user-avatar {
             img {
               width: 36px;
               height: 36px;
-              border-radius: 50%;
               object-fit: cover;
-              border: 2px solid #c41e3a;
-              box-shadow: 0 4px 10px rgba(196, 30, 58, 0.2);
-              transition: all 0.3s ease;
+              border: 2px solid #111111;
+              transition: all 0.2s ease-out;
 
               &:hover {
-                border-color: #9e1830;
-                transform: scale(1.05);
+                border-color: #F9F9F7;
               }
             }
           }
@@ -384,17 +381,16 @@ watch(
           .user-avatar-default {
             width: 36px;
             height: 36px;
-            border-radius: 50%;
-            border: 2px solid #c41e3a;
+            border: 2px solid #111111;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: #c41e3a;
-            box-shadow: 0 4px 10px rgba(196, 30, 58, 0.2);
+            background: #111111;
 
             .user-icon-svg {
               width: 28px;
               height: 28px;
+              filter: invert(100%);
             }
           }
         }
@@ -405,12 +401,12 @@ watch(
   .ai-main {
     display: flex;
     height: calc(100vh - 64px);
-    background-color: #fceef2;
+    background-color: #F9F9F7;
 
     .sidebar-content {
       height: 100%;
-      background-color: #ffffff;
-      border-right: 1px solid #f2a5b5;
+      background-color: #F9F9F7;
+      border-right: 1px solid #111111;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -418,62 +414,64 @@ watch(
 
       .el-menu {
         border-right: none;
-        background-color: #ffffff;
-        color: #8d6e63;
+        background-color: #F9F9F7;
+        color: #737373;
 
         .el-menu-item {
           height: 50px;
           line-height: 50px;
           font-size: 14px;
           font-weight: 500;
-          color: #8d6e63;
+          color: #737373;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
 
           &.is-active {
-            background-color: #f8d0d8 !important;
-            color: #c41e3a !important;
-            border-right: 3px solid #c41e3a;
+            background-color: transparent !important;
+            color: #CC0000 !important;
+            border-right: 2px solid #CC0000;
 
             svg {
-              color: #c41e3a !important;
+              color: #CC0000 !important;
             }
           }
 
           &:hover {
-            background-color: #fceef2;
-            color: #c41e3a;
+            background-color: #F5F5F5;
+            color: #111111;
 
             svg {
-              color: #c41e3a;
+              color: #111111;
             }
           }
 
           svg {
             margin-right: 10px;
-            color: #8d6e63;
-            transition: color 0.3s ease;
+            color: #737373;
+            transition: color 0.2s ease-out;
           }
 
           .nav-icon {
             width: 20px;
             height: 20px;
             margin-right: 10px;
-            filter: grayscale(100%) brightness(1.5);
-            transition: all 0.3s ease;
+            filter: grayscale(100%) opacity(0.6);
+            transition: all 0.2s ease-out;
           }
 
           &.is-active .nav-icon {
-            filter: none;
+            filter: grayscale(100%) opacity(1);
           }
 
           &:hover .nav-icon {
-            filter: none;
+            filter: grayscale(100%) opacity(1);
           }
         }
       }
 
       .sidebar-footer {
         padding: 16px;
-        border-top: 1px solid #f2a5b5;
+        border-top: 1px solid #111111;
 
         .help-links {
           display: flex;
@@ -484,9 +482,9 @@ watch(
             .help-icon {
               width: 24px;
               height: 24px;
-              opacity: 0.6;
-              transition: opacity 0.3s ease;
-              filter: sepia(100%) saturate(500%) hue-rotate(320deg) brightness(70%);
+              opacity: 0.4;
+              transition: opacity 0.2s ease-out;
+              filter: grayscale(100%);
 
               &:hover {
                 opacity: 1;
@@ -499,9 +497,9 @@ watch(
 
     .content {
       flex: 1;
-      padding: 20px;
+      padding: 24px;
       overflow-y: auto;
-      background-color: #fceef2;
+      background-color: #F9F9F7;
     }
   }
 }

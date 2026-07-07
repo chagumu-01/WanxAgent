@@ -199,10 +199,10 @@ const goToLogin = () => {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #fff9f2;
+  background-color: var(--newsprint-bg);
   position: relative;
   overflow: hidden;
-  font-family: 'PingFang SC', 'Helvetica Neue', Arial, sans-serif;
+  font-family: 'Inter', 'Helvetica Neue', sans-serif;
 }
 
 .bg-decoration {
@@ -212,65 +212,25 @@ const goToLogin = () => {
   width: 100%;
   height: 100%;
   z-index: 1;
-
-  .blob {
-    position: absolute;
-    filter: blur(80px);
-    border-radius: 50%;
-    opacity: 0.5;
-    z-index: 1;
-  }
-
-  .blob-1 {
-    width: 400px;
-    height: 400px;
-    background: #ffe0b2;
-    top: -100px;
-    right: -100px;
-    animation: move1 20s infinite alternate;
-  }
-
-  .blob-2 {
-    width: 500px;
-    height: 500px;
-    background: #ffccbc;
-    bottom: -150px;
-    left: -100px;
-    animation: move2 25s infinite alternate;
-  }
-
-  .blob-3 {
-    width: 300px;
-    height: 300px;
-    background: #fff3e0;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-}
-
-@keyframes move1 {
-  from { transform: translate(0, 0); }
-  to { transform: translate(-100px, 100px); }
-}
-
-@keyframes move2 {
-  from { transform: translate(0, 0); }
-  to { transform: translate(150px, -100px); }
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%23111111' fill-opacity='0.04' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");
 }
 
 .register-card {
   width: 100%;
   max-width: 440px;
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 224, 178, 0.5);
-  border-radius: 24px;
+  background: var(--newsprint-bg);
+  border: 2px solid var(--newsprint-border);
   padding: 40px;
-  box-shadow: 0 20px 40px rgba(255, 159, 67, 0.1);
   position: relative;
   z-index: 2;
   margin: 20px;
+  box-shadow: 4px 4px 0px 0px var(--newsprint-border);
+
+  &:hover {
+    box-shadow: 6px 6px 0px 0px var(--newsprint-border);
+    transform: translate(-2px, -2px);
+    transition: all 0.2s ease-out;
+  }
 }
 
 .header {
@@ -287,75 +247,73 @@ const goToLogin = () => {
     .logo-icon {
       width: 56px;
       height: 56px;
-      background: #fff;
-      border-radius: 14px;
+      background: var(--newsprint-bg);
+      border: 2px solid var(--newsprint-border);
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 8px 16px rgba(255, 159, 67, 0.15);
       
       .logo-img {
         width: 32px;
         height: 32px;
-        filter: drop-shadow(0 2px 4px rgba(255, 159, 67, 0.3));
       }
     }
 
     .logo-text {
       font-size: 26px;
-      font-weight: 800;
-      background: linear-gradient(135deg, #c41e3a 0%, #d94560 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      font-weight: 900;
+      color: var(--newsprint-fg);
       margin: 0;
-      letter-spacing: 1px;
+      letter-spacing: 2px;
+      font-family: 'Playfair Display', serif;
     }
   }
 
   .subtitle {
     font-size: 14px;
-    color: #8d6e63;
+    color: var(--newsprint-neutral-500);
     margin: 0;
+    font-family: 'Lora', serif;
   }
 }
 
 .register-form {
   .form-item {
-    margin-bottom: 16px;
+    margin-bottom: 20px;
   }
 
   .custom-input {
     :deep(.el-input__wrapper) {
-      background-color: #fff;
-      border: 1px solid #f2a5b5;
+      background-color: transparent;
+      border: none !important;
+      border-bottom: 2px solid var(--newsprint-border) !important;
       box-shadow: none !important;
-      border-radius: 12px;
-      padding: 4px 12px;
-      transition: all 0.3s ease;
+      padding: 4px 0;
+      transition: all 0.2s ease;
 
       &:hover {
-        border-color: #c41e3a;
+        border-bottom-color: var(--newsprint-accent);
       }
 
       &.is-focus {
-        border-color: #c41e3a;
-        background-color: #fff;
-        box-shadow: 0 0 0 4px rgba(196, 30, 58, 0.1) !important;
+        border-bottom-color: var(--newsprint-accent);
+        background-color: #F0F0F0;
       }
     }
 
     :deep(.el-input__inner) {
       height: 44px;
       font-size: 14px;
-      color: #4a1a25;
+      color: var(--newsprint-fg);
+      font-family: 'JetBrains Mono', monospace;
 
       &::placeholder {
-        color: #f2a5b5;
+        color: var(--newsprint-neutral-400);
       }
     }
 
     :deep(.el-input__prefix-inner) {
-      color: #c41e3a;
+      color: var(--newsprint-fg);
       font-size: 18px;
     }
   }
@@ -363,39 +321,43 @@ const goToLogin = () => {
   .register-btn {
     width: 100%;
     height: 48px;
-    border-radius: 12px;
-    background: linear-gradient(135deg, #c41e3a 0%, #d94560 100%);
-    border: none;
-    font-size: 16px;
+    background: var(--newsprint-fg);
+    border: 2px solid var(--newsprint-fg);
+    font-size: 14px;
     font-weight: 600;
-    color: #fff;
+    color: var(--newsprint-bg);
     margin-top: 10px;
     margin-bottom: 16px;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
 
     &:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 20px rgba(196, 30, 58, 0.3);
-      opacity: 0.95;
+      background: var(--newsprint-bg);
+      color: var(--newsprint-fg);
+      border-color: var(--newsprint-fg);
+      box-shadow: 4px 4px 0px 0px var(--newsprint-fg);
+      transform: translate(-2px, -2px);
     }
 
     &:active {
-      transform: translateY(0);
+      transform: translate(0, 0);
+      box-shadow: 0 0 0 0 var(--newsprint-fg);
     }
   }
 
   .login-footer {
     text-align: center;
     font-size: 14px;
-    color: #8d6e63;
+    color: var(--newsprint-neutral-500);
 
     :deep(.el-button--link) {
-      color: #c41e3a;
+      color: var(--newsprint-accent);
       font-weight: 600;
       padding: 0 4px;
       
       &:hover {
-        color: #d94560;
+        color: var(--newsprint-fg);
       }
     }
   }
@@ -404,36 +366,18 @@ const goToLogin = () => {
 .footer {
   margin-top: 30px;
   padding-top: 16px;
-  border-top: 1px solid #ffe0b2;
+  border-top: 1px solid var(--newsprint-border);
   display: flex;
   justify-content: space-between;
   align-items: center;
 
   .version {
     font-size: 11px;
-    color: #ffbd69;
-    background: #fff3e0;
+    color: var(--newsprint-neutral-500);
+    background: var(--newsprint-neutral-100);
     padding: 2px 6px;
-    border-radius: 6px;
-  }
-
-  .links {
-    display: flex;
-    gap: 12px;
-
-    a {
-      img {
-        width: 18px;
-        height: 18px;
-        opacity: 0.6;
-        transition: opacity 0.3s;
-        filter: sepia(100%) saturate(300%) hue-rotate(350deg) brightness(80%);
-
-        &:hover {
-          opacity: 1;
-        }
-      }
-    }
+    border: 1px solid var(--newsprint-border);
+    font-family: 'JetBrains Mono', monospace;
   }
 }
 </style>
