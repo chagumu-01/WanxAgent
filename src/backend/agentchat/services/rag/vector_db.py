@@ -1,5 +1,6 @@
 from agentchat.settings import app_settings
 from agentchat.services.memory.vector_stores.chroma import ChromaDB
+from agentchat.services.rag.embedding import get_embedding
 
 
 class MilvusClient:
@@ -25,13 +26,26 @@ class MilvusClient:
         return []
 
     async def insert(self, collection_name, chunks):
-        if self.mode == "chroma":
+        if self.mode == "chroma" and chunks:
             client = self._get_client(str(collection_name))
-            if chunks:
-                vectors = [chunk.get("vector") for chunk in chunks]
-                payloads = [chunk.get("metadata") for chunk in chunks]
-                ids = [chunk.get("id") for chunk in chunks]
-                client.insert(vectors=vectors, payloads=payloads, ids=ids)
+            
+            contents = []
+            payloads = []
+            ids = []
+            
+            for chunk in chunks:
+                if hasattr(chunk, 'content'):
+                    contents.append(chunk.content)
+                    payloads.append(chunk.to_dict())
+                    ids.append(chunk.chunk_id)
+                elif isinstance(chunk, dict):
+                    contents.append(chunk.get("content", ""))
+                    payloads.append(chunk.get("metadata", {}))
+                    ids.append(chunk.get("id", ""))
+            
+            vectors = await get_embedding(contents)
+            
+            client.insert(vectors=vectors, payloads=payloads, ids=ids)
         return None
 
     async def delete_by_file_id(self, file_id, knowledge_id):

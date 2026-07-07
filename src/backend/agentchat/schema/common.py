@@ -62,6 +62,7 @@ class MinioConfig(BaseModel):
 
 class LocalConfig(BaseModel):
     storage_dir: str = "./storage"
+    base_url: str = "/local_storage"
 
 
 class StorageConfig(BaseModel):
@@ -76,7 +77,6 @@ class StorageConfig(BaseModel):
             raise ValueError("mode=oss 时必须提供 aliyun_oss")
         if self.mode == "minio" and not self.minio:
             raise ValueError("mode=minio 时必须提供 minio")
-        return self
 
     @property
     def active(self):

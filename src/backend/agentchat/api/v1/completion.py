@@ -14,7 +14,7 @@ from agentchat.prompts.completion import SYSTEM_PROMPT
 from agentchat.schema.completion import CompletionReq
 from agentchat.services.memory.client import memory_client
 from agentchat.utils.contexts import set_user_id_context, set_agent_name_context
-from agentchat.utils.helpers import build_completion_system_prompt, build_completion_history_messages, build_completion_user_input
+from agentchat.utils.helpers import build_completion_system_prompt, build_completion_history_messages, build_completion_user_input, build_multimodal_content
 
 router = APIRouter(tags=["Completion"])
 
@@ -76,11 +76,14 @@ async def completion(
     # 备份用户原始输入，用于后续数据库存储和记忆检索
     original_user_input = req.user_input
 
-    # 整合用户输入内容，将文本和附件URL合并处理
-    req.user_input = build_completion_user_input(
-        file_url=req.file_url,
-        user_input=req.user_input
-    )
+    # 构建用户消息内容：有图片附件时使用多模态内容块，否则使用纯文本
+    if req.file_url:
+        user_content = await build_multimodal_content(
+            user_input=req.user_input,
+            file_url=req.file_url
+        )
+    else:
+        user_content = req.user_input
 
     # 构建系统提示词基础指令
     system_prompt = (
@@ -113,7 +116,7 @@ async def completion(
     # 构建完整消息列表（System → Human 的标准对话结构）
     messages: List[BaseMessage] = [
         SystemMessage(content=system_prompt),
-        HumanMessage(content=req.user_input),
+        HumanMessage(content=user_content),
     ]
 
     # 事件队列：收集工具调用、状态变更等非文本事件

@@ -4,9 +4,7 @@ import rsa
 import hashlib
 from base64 import b64decode
 from urllib.parse import urlparse
-from fastapi_jwt_auth import AuthJWT
-from fastapi import Request, Depends, HTTPException
-
+from fastapi import Request, HTTPException
 
 from agentchat.services.storage import storage_client
 from agentchat.services.redis import redis_client
@@ -19,15 +17,16 @@ from agentchat.database.models.user import UserTable
 from agentchat.database.dao.user import UserDao
 from agentchat.utils.constants import RSA_KEY
 from agentchat.schema.schemas import CreateUserReq
-from agentchat.utils.JWT import ACCESS_TOKEN_EXPIRE_TIME
+from agentchat.utils.JWT import ACCESS_TOKEN_EXPIRE_TIME, decode_token
 from agentchat.utils.file_utils import normalize_object_storage_value, get_object_name_from_minio_url
+
 
 class UserPayload:
 
     def __init__(self, **kwargs):
         self.user_id = kwargs.get('user_id')
         self.user_role = kwargs.get('role')
-        if self.user_role != 'admin':  # 非管理员用户，需要获取他的角色列表
+        if self.user_role != 'admin':
             roles = UserRoleDao.get_user_roles(self.user_id)
             self.user_role = [one.role_id for one in roles]
         self.user_name = kwargs.get('user_name')
@@ -41,9 +40,9 @@ class UserPayload:
                     return True
         return False
 
+
 class UserService:
 
-    # MD5算法加密
     @classmethod
     def decrypt_md5_password(cls, password: str):
         value = redis_client.get(RSA_KEY)
@@ -54,7 +53,6 @@ class UserService:
             password = md5_hash(password)
         return password
 
-    # 使用SHA-256算法进行加密
     @classmethod
     def encrypt_sha256_password(cls, password: str):
         sha256 = hashlib.sha256()
@@ -62,19 +60,14 @@ class UserService:
         encrypted_password = sha256.hexdigest()
         return encrypted_password
 
-    # 验证密码是否匹配
     @classmethod
     def verify_password(cls, password: str, encrypted_password: str):
         return cls.encrypt_sha256_password(password) == encrypted_password
 
     @classmethod
     def create_user(cls, request: Request, login_user: UserPayload, req_data: CreateUserReq):
-        """
-        创建用户
-        """
         exists_user = UserDao.get_user_by_username(req_data.user_name)
         if exists_user:
-            # 抛出异常
             raise UserNameAlreadyExistError.http_exception()
         user = UserTable(
             user_name=req_data.user_name,
@@ -120,8 +113,8 @@ class UserService:
                         if base_netloc and parsed.netloc == base_netloc:
                             object_name = get_object_name_from_minio_url(avatar)
                             result["user_avatar"] = storage_client.sign_url_for_get(object_name)
-                    elif isinstance(avatar, str):
-                        result["user_avatar"] = storage_client.sign_url_for_get(avatar)
+                        elif isinstance(avatar, str):
+                            result["user_avatar"] = storage_client.sign_url_for_get(avatar)
         except Exception:
             pass
         return result
@@ -139,30 +132,34 @@ class UserService:
         user = UserDao.get_user_by_username(user_name)
         return user.user_id
 
-async def get_login_user(request: Request, authorize: AuthJWT = Depends()) -> UserPayload:
-    """
-    获取当前登录的用户
-    """
-    if request.state.is_whitelisted:
-        # 白名单路径：直接返回Admin
+
+async def get_login_user(request: Request) -> UserPayload:
+    if hasattr(request.state, 'is_whitelisted') and request.state.is_whitelisted:
         return UserPayload(user_id="1", user_name="Admin")
 
-    # 非白名单路径：执行 JWT 验证
+    auth_header = request.headers.get("Authorization")
+    if not auth_header or not auth_header.startswith("Bearer "):
+        raise HTTPException(status_code=401, detail="Invalid authentication credentials")
+
+    token = auth_header[7:]
+    payload = decode_token(token)
+
+    if not payload or "sub" not in payload:
+        raise HTTPException(status_code=401, detail="Invalid authentication credentials")
+
     try:
-        authorize.jwt_required()
-        current_user = json.loads(authorize.get_jwt_subject())
-        return UserPayload(**current_user)
+        user_data = json.loads(payload["sub"])
+        return UserPayload(**user_data)
     except Exception as e:
         raise HTTPException(status_code=401, detail="Invalid authentication credentials")
 
+
 def get_user_role(db_user: UserTable):
-    # 查询用户的角色列表
     db_user_role = UserRoleDao.get_user_roles(db_user.user_id)
     role = ""
     role_ids = []
     for user_role in db_user_role:
         if user_role.role_id == '1':
-            # 是管理员，忽略其他的角色
             role = 'admin'
         else:
             role_ids.append(user_role.role_id)
@@ -170,16 +167,3 @@ def get_user_role(db_user: UserTable):
         role = role_ids
 
     return role
-
-def get_user_jwt(db_user: UserTable):
-    # 查询角色
-    role = get_user_role(db_user)
-    # 生成JWT令牌
-    payload = {'user_name': db_user.user_name, 'user_id': db_user.user_id, 'role': role}
-
-    access_token = AuthJWT().create_access_token(subject=json.dumps(payload), expires_time=ACCESS_TOKEN_EXPIRE_TIME)
-
-    refresh_token = AuthJWT().create_refresh_token(subject=db_user.user_name)
-
-    # Set the JWT cookies in the response
-    return access_token, refresh_token, role

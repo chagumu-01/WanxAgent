@@ -1,4 +1,4 @@
-﻿﻿<script setup lang="ts">
+﻿<script setup lang="ts">
 import { ref, onMounted, nextTick, watch, computed } from "vue"
 import { useRoute } from 'vue-router'
 import { MdPreview } from "md-editor-v3"
@@ -73,19 +73,65 @@ const checkActiveEvents = (chatItem: any) => {
   return chatItem.eventInfo.some((event: EventInfo) => event.status === 'START')
 }
 
-const handleUploadSuccess = (response: any, file: any, fileList: any) => {
+const handleUploadSuccess = (response: any, file: any) => {
   ElMessage.success(`文件 ${file.name} 上传成功!`)
-  console.log(response)
-  // 保存上传成功返回的文件URL和文件名
-  if (response && response.data) {
-    fileUrl.value = response.data
+  let imageUrl = ''
+  if (typeof response === 'string') {
+    imageUrl = response
+  } else if (response.data) {
+    imageUrl = response.data
+  } else if (response && typeof response === 'object') {
+    imageUrl = response
+  }
+  if (imageUrl) {
+    fileUrl.value = imageUrl
     fileName.value = file.name
   }
 }
 
-const handleUploadError = (error: any, file: any, fileList: any) => {
-  ElMessage.error(`文件 ${file.name} 上传失败.`)
+const handleUploadError = (error: any) => {
+  ElMessage.error('文件上传失败')
   console.error(error)
+}
+
+const handleChatUpload = async (options: any) => {
+  const file = options.file.raw || options.file
+  
+  if (!file) {
+    options.onError(new Error('文件不存在'))
+    return
+  }
+  
+  try {
+    const formData = new FormData()
+    formData.append('file', file)
+    
+    const response = await fetch('/api/v1/upload', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token') || ''}`
+      },
+      body: formData
+    })
+    
+    if (!response.ok) {
+      throw new Error('上传失败')
+    }
+    
+    const result = await response.json()
+    
+    if (result.status_code === 200 && result.data) {
+      options.onSuccess(result.data, file)
+      handleUploadSuccess(result, file)
+    } else {
+      options.onError(new Error(result.status_message || '上传失败'))
+      ElMessage.error(result.status_message || '上传失败')
+    }
+  } catch (error: any) {
+    console.error('文件上传失败:', error)
+    options.onError(error)
+    ElMessage.error('文件上传失败，请重试')
+  }
 }
 
 // 取消上传的文件
@@ -440,10 +486,7 @@ watch(
 
     <div class="input-area">
       <el-upload
-        action="/api/v1/upload"
-        :headers="uploadHeaders"
-        :on-success="handleUploadSuccess"
-        :on-error="handleUploadError"
+        :http-request="handleChatUpload"
         :show-file-list="false"
         :disabled="!!fileUrl"
       >

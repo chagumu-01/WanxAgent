@@ -97,14 +97,18 @@ class MarkdownRewrite:
         # 正则表达式匹配Markdown中的图片链接格式
         pattern = r"!\[.*?\]\((.*?)\)"
 
-        # 替换函数，在每个匹配的图片链接前加上提示文字
         def replace_image(match):
-            alt_text = match.group(0)  # 提取图片的alt文本
-            image_url = match.group(1)  # 提取图片的URL
+            alt_text = match.group(0)
+            image_url = match.group(1)
             image_oss_object_name = image_oss_dict.get(os.path.basename(image_url))
             image_desc = image_desc_dict.get(os.path.basename(image_url))
 
-            return f'![{image_desc}]({urljoin(app_settings.storage.active.base_url, image_oss_object_name)})'
+            if app_settings.storage.mode == "oss":
+                image_full_url = urljoin(app_settings.storage.active.base_url, image_oss_object_name)
+            else:
+                image_full_url = urljoin("/local_storage", image_oss_object_name)
+
+            return f'![{image_desc}]({image_full_url})'
 
         # 使用re.sub进行替换
         result = re.sub(pattern, replace_image, markdown_text)

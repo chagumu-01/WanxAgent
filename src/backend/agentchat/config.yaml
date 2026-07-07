@@ -99,6 +99,7 @@ storage:
 
   local:
     storage_dir: "${LOCAL_STORAGE_DIR:-./storage}"
+    base_url: "${LOCAL_BASE_URL:-/local_storage}"
 
 default_config:
   mcp_logo_url: "${MCP_LOGO_URL:-https://wanxagent.oss-cn-beijing.aliyuncs.com/icons/mcp/mcp.png}"

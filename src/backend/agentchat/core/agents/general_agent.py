@@ -376,15 +376,23 @@ class GeneralAgent:
                 if token == "custom":
                     yield self.wrap_event(metadata)
                 elif isinstance(metadata[0], AIMessageChunk) and metadata[0].content:
-                    response_content += metadata[0].content
-                    yield {
-                        "type": "response_chunk",
-                        "timestamp": time.time(),
-                        "data": {
-                            "chunk": metadata[0].content,
-                            "accumulated": response_content
+                    # 兼容多模态响应：content 可能是 list（含 text/image_url 块），需提取纯文本
+                    chunk_content = metadata[0].content
+                    if isinstance(chunk_content, list):
+                        chunk_content = "".join(
+                            block.get("text", "") if isinstance(block, dict) else str(block)
+                            for block in chunk_content
+                        )
+                    if chunk_content:
+                        response_content += chunk_content
+                        yield {
+                            "type": "response_chunk",
+                            "timestamp": time.time(),
+                            "data": {
+                                "chunk": chunk_content,
+                                "accumulated": response_content
+                            }
                         }
-                    }
 
         # 针对模型回复进行兜底操作，错误类型包括：敏感词，模型问题
         except Exception as err:

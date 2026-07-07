@@ -1,18 +1,16 @@
 from typing import Optional
 
-from fastapi import APIRouter, HTTPException, Depends, Body
-from fastapi_jwt_auth import AuthJWT
+from fastapi import APIRouter, HTTPException, Body
 
 from agentchat.services.redis import redis_client
 from agentchat.database.dao.user import UserDao
 from agentchat.api.errcode.user import UserValidateError
 from agentchat.schema.schemas import resp_200
-from agentchat.utils.JWT import ACCESS_TOKEN_EXPIRE_TIME
+from agentchat.utils.JWT import ACCESS_TOKEN_EXPIRE_TIME, get_user_jwt
 from agentchat.api.services.user import UserService
 from agentchat.database.models.user import AdminUser
 from agentchat.schema.schemas import UnifiedResponseModel
 from loguru import logger
-from agentchat.api.services.user import get_user_jwt
 from agentchat.utils.constants import USER_CURRENT_SESSION
 
 router = APIRouter(tags=["User"])
@@ -22,11 +20,6 @@ router = APIRouter(tags=["User"])
 async def register(user_name: str = Body(description='用户名'),
                    user_email: Optional[str] = Body(description='用户邮箱'),
                    user_password: str = Body(description='用户密码')):
-    # 验证码校验
-    # if userConfig.USE_CAPTCHA:
-    #     if not user.captcha_key or not await verify_captcha(user.captcha, user.captcha_key):
-    #         raise HTTPException(status_code=500, detail='验证码错误')
-
     exist_user = UserDao.get_user_by_username(user_name)
     if exist_user:
         raise HTTPException(status_code=500, detail='用户名重复')
@@ -50,15 +43,8 @@ async def register(user_name: str = Body(description='用户名'),
 
 @router.post('/user/login', response_model=UnifiedResponseModel)
 async def login(user_name: str = Body(description='用户名'),
-                user_password: str = Body(description='用户密码'),
-                Authorize: AuthJWT = Depends()):
-    # 验证码校验
-    # if userConfig.USE_CAPTCHA:
-    #     if not user.captcha_key or not await verify_captcha(user.captcha, user.captcha_key):
-    #         raise HTTPException(status_code=500, detail='验证码错误')
-
+                user_password: str = Body(description='用户密码')):
     db_user = UserDao.get_user_by_username(user_name)
-    # 检查密码
     if not db_user or not UserService.verify_password(user_password, db_user.user_password):
         return UserValidateError.return_resp()
 
@@ -67,11 +53,6 @@ async def login(user_name: str = Body(description='用户名'),
 
     access_token, refresh_token, role = get_user_jwt(db_user)
 
-    # Set the JWT cookies in the response
-    Authorize.set_access_cookies(access_token)
-    Authorize.set_refresh_cookies(refresh_token)
-
-    # 设置登录用户当前的cookie, 比jwt有效期多一个小时
     redis_client.set(USER_CURRENT_SESSION.format(db_user.user_id), access_token, ACCESS_TOKEN_EXPIRE_TIME + 3600)
 
     return resp_200(data={'user_id': db_user.user_id, 'access_token': access_token})

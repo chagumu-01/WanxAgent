@@ -71,8 +71,14 @@ const uploadHeaders = computed(() => ({
 }))
 
 const handleLogoUploadSuccess: UploadProps['onSuccess'] = (response: any) => {
-  // 后端通常返回 { data: 'http://xxx/xxx.png', ... } 或直接是字符串
-  const imageUrl = typeof response === 'string' ? response : response?.data
+  let imageUrl = ''
+  if (typeof response === 'string') {
+    imageUrl = response
+  } else if (response.data) {
+    imageUrl = response.data
+  } else if (response && typeof response === 'object') {
+    imageUrl = response
+  }
   if (imageUrl) {
     formData.value.logo_url = imageUrl
     ElMessage.success('Logo 上传成功')
@@ -88,20 +94,61 @@ const handleLogoUploadError: UploadProps['onError'] = (err: any) => {
   uploadingLogo.value = false
 }
 
-const beforeLogoUpload: UploadProps['beforeUpload'] = (file: File) => {
+const handleLogoUpload = async (options: any) => {
+  const file = options.file.raw || options.file
+  
+  if (!file) {
+    options.onError(new Error('文件不存在'))
+    return
+  }
+  
   const isImage = file.type.startsWith('image/')
   const isLt2M = file.size / 1024 / 1024 < 2
 
   if (!isImage) {
     ElMessage.error('只能上传图片文件作为 Logo')
-    return false
+    options.onError(new Error('文件格式错误'))
+    return
   }
   if (!isLt2M) {
     ElMessage.error('图片大小不能超过 2MB')
-    return false
+    options.onError(new Error('文件过大'))
+    return
   }
+  
   uploadingLogo.value = true
-  return true
+  
+  try {
+    const formData = new FormData()
+    formData.append('file', file)
+    
+    const response = await fetch('/api/v1/upload', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token') || ''}`
+      },
+      body: formData
+    })
+    
+    if (!response.ok) {
+      throw new Error('上传失败')
+    }
+    
+    const result = await response.json()
+    
+    if (result.status_code === 200 && result.data) {
+      options.onSuccess(result.data)
+      handleLogoUploadSuccess(result)
+    } else {
+      options.onError(new Error(result.status_message || '上传失败'))
+      ElMessage.error(result.status_message || '上传失败')
+    }
+  } catch (error: any) {
+    console.error('Logo 上传失败:', error)
+    options.onError(error)
+    ElMessage.error('Logo 上传失败，请重试')
+    uploadingLogo.value = false
+  }
 }
 
 // 用户配置相关数据
@@ -929,12 +976,8 @@ const saveUserConfig = async () => {
                       </label>
                       <el-upload
                         class="logo-upload-square"
-                        action="/api/v1/upload"
-                        :headers="uploadHeaders"
+                        :http-request="handleLogoUpload"
                         :show-file-list="false"
-                        :on-success="handleLogoUploadSuccess"
-                        :on-error="handleLogoUploadError"
-                        :before-upload="beforeLogoUpload"
                         accept="image/*"
                       >
                         <div v-if="formData.logo_url" class="logo-preview-square">
@@ -1389,8 +1432,7 @@ const saveUserConfig = async () => {
   bottom: 0;
   width: 100vw;
   height: 100vh;
-  background-color: var(--newsprint-fg);
-  opacity: 0.6;
+  background-color: rgba(17, 17, 17, 0.6);
   display: flex;
   align-items: center;
   justify-content: center;

@@ -83,6 +83,84 @@ def build_completion_user_input(user_input, file_url):
     else:
         return user_input
 
+
+async def build_multimodal_content(user_input: str, file_url: str) -> list | str:
+    """
+    构建多模态内容块（文本 + 图片）。
+    获取图片并 base64 编码，返回适用于多模态 LLM 的 content 列表。
+    支持本地存储路径（/local_storage/...）和远程 URL（http/https）。
+    如果获取失败或文件不是图片，则回退为纯文本方式。
+    """
+    import base64
+
+    image_extensions = {'png', 'jpg', 'jpeg', 'gif', 'webp', 'bmp'}
+
+    # 从 URL 中提取文件扩展名
+    url_path = file_url.split('?')[0].lower()
+    ext = url_path.rsplit('.', 1)[-1] if '.' in url_path else ''
+
+    if ext not in image_extensions:
+        # 非图片文件，回退为纯文本
+        return build_completion_user_input(user_input, file_url)
+
+    image_data = None
+
+    # 本地存储模式：直接从文件系统读取
+    if file_url.startswith('/local_storage/'):
+        try:
+            from agentchat.services.storage import storage_client
+            local_dir = getattr(storage_client, 'storage_dir', os.path.abspath('./storage'))
+
+            # 去掉 /local_storage/ 前缀，得到相对路径
+            relative_path = file_url[len('/local_storage/'):]
+            file_path = os.path.join(local_dir, relative_path)
+
+            if os.path.exists(file_path):
+                with open(file_path, 'rb') as f:
+                    image_data = f.read()
+            else:
+                logger.warning(f"Local file not found: {file_path}")
+                return build_completion_user_input(user_input, file_url)
+        except Exception as e:
+            logger.warning(f"Failed to read local file from {file_url}: {e}")
+            return build_completion_user_input(user_input, file_url)
+    else:
+        # 远程 URL 模式：通过 HTTP 下载
+        try:
+            import aiohttp
+            async with aiohttp.ClientSession() as session:
+                async with session.get(file_url) as resp:
+                    if resp.status != 200:
+                        logger.warning(f"Failed to download image from {file_url}, status={resp.status}")
+                        return build_completion_user_input(user_input, file_url)
+                    image_data = await resp.read()
+                    # 优先从 Content-Type 推断格式
+                    content_type = resp.headers.get('Content-Type', '')
+                    if 'png' in content_type:
+                        ext = 'png'
+                    elif 'jpeg' in content_type or 'jpg' in content_type:
+                        ext = 'jpeg'
+                    elif 'webp' in content_type:
+                        ext = 'webp'
+                    elif 'gif' in content_type:
+                        ext = 'gif'
+                    elif 'bmp' in content_type:
+                        ext = 'bmp'
+        except Exception as e:
+            logger.warning(f"Failed to download image from {file_url}: {e}")
+            return build_completion_user_input(user_input, file_url)
+
+    if not image_data:
+        return build_completion_user_input(user_input, file_url)
+
+    base64_image = base64.b64encode(image_data).decode("utf-8")
+    content = [
+        {"type": "text", "text": user_input},
+        {"type": "image_url", "image_url": {"url": f"data:image/{ext};base64,{base64_image}"}},
+    ]
+    return content
+
+
 def init_dir(path):
     try:
         if not os.path.exists(path):

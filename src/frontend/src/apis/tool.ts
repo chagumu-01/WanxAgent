@@ -88,7 +88,6 @@ export function getDefaultToolLogoAPI() {
   })
 }
 
-// 上传文件
 export function uploadFileAPI(file: File) {
   const formData = new FormData()
   formData.append('file', file)
@@ -97,8 +96,6 @@ export function uploadFileAPI(file: File) {
     url: '/api/v1/upload',
     method: 'POST',
     data: formData,
-    headers: {
-      'Content-Type': 'multipart/form-data'
-    }
+    headers: {}
   })
 }

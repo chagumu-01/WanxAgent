@@ -19,9 +19,9 @@ async def upload_file(
     login_user: UserPayload = Depends(get_login_user)
 ):
     try:
-        # 获取本地临时文件路径
-        file_name = file_url.split("/")[-1]
-        local_file_path = get_save_tempfile(file_name)
+        original_file_name = file_url.split("/")[-1]
+        local_file_path = get_save_tempfile(original_file_name)
+        
         if file_url.startswith("http://") or file_url.startswith("https://"):
             normalized = normalize_object_storage_value(file_url)
             if normalized != file_url:
@@ -30,17 +30,20 @@ async def upload_file(
                 parsed = urlparse(file_url)
                 object_key = parsed.path.lstrip('/')
         else:
-            object_key = file_url
+            object_key = file_url.lstrip('/')
+            if object_key.startswith('local_storage/'):
+                object_key = object_key[len('local_storage/'):]
+        
         storage_client.download_file(object_key, local_file_path)
-        # 获得文件的字节数
+        
         file_size_bytes = os.path.getsize(local_file_path)
 
-        name_part, ext_part = file_name.rsplit('.', 1) if '.' in file_name else (file_name, '')
+        name_part, ext_part = original_file_name.rsplit('.', 1) if '.' in original_file_name else (original_file_name, '')
         parts = name_part.split("_")
-        file_name = "_".join(parts[:-1]) + f".{ext_part}"
+        display_file_name = "_".join(parts[:-1]) + f".{ext_part}" if len(parts) > 1 else original_file_name
 
         await KnowledgeFileService.create_knowledge_file(
-            file_name=file_name,
+            file_name=display_file_name,
             file_path=local_file_path,
             knowledge_id=knowledge_id,
             user_id=login_user.user_id,

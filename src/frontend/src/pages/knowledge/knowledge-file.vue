@@ -215,16 +215,21 @@ const cancelDelete = () => {
   fileToDelete.value = null
 }
 
-// 文件上传前处理
-const beforeUpload: UploadProps['beforeUpload'] = (rawFile) => {
-  // 文件大小限制：100MB
-  const maxSize = 100 * 1024 * 1024
-  if (rawFile.size > maxSize) {
-    ElMessage.error('文件大小不能超过100MB')
-    return false
+const handleKnowledgeFileUpload = async (options: any) => {
+  const file = options.file.raw || options.file
+  
+  if (!file) {
+    options.onError(new Error('文件不存在'))
+    return
   }
   
-  // 支持的文件类型
+  const maxSize = 100 * 1024 * 1024
+  if (file.size > maxSize) {
+    ElMessage.error('文件大小不能超过100MB')
+    options.onError(new Error('文件过大'))
+    return
+  }
+  
   const supportedTypes = [
     'application/pdf',
     'application/msword',
@@ -240,34 +245,64 @@ const beforeUpload: UploadProps['beforeUpload'] = (rawFile) => {
     'image/gif'
   ]
   
-  if (!supportedTypes.includes(rawFile.type)) {
+  if (!supportedTypes.includes(file.type)) {
     ElMessage.error('不支持的文件类型，请上传PDF、Word、Excel、文本或图片文件')
-    return false
+    options.onError(new Error('文件类型不支持'))
+    return
   }
   
-  // 立即添加文件到列表，显示为处理中状态
   const tempFile: KnowledgeFileResponse = {
     id: `temp_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
-    file_name: rawFile.name,
+    file_name: file.name,
     knowledge_id: knowledgeId.value,
     status: KnowledgeFileStatus.PROCESS,
     user_id: '',
     oss_url: '',
-    file_size: rawFile.size,
+    file_size: file.size,
     create_time: new Date().toISOString(),
     update_time: new Date().toISOString()
   }
   
-  files.value.unshift(tempFile) // 添加到列表顶部
+  files.value.unshift(tempFile)
   
-  // 开始轮询（如果还没有开始）
   if (!isPolling.value) {
     startPolling()
   }
   
-  // 设置上传状态
   uploading.value = true
-  return true
+  
+  try {
+    const formData = new FormData()
+    formData.append('file', file)
+    
+    const response = await fetch('/api/v1/upload', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${getToken()}`
+      },
+      body: formData
+    })
+    
+    if (!response.ok) {
+      throw new Error('上传失败')
+    }
+    
+    const result = await response.json()
+    
+    if (result.status_code === 200 && result.data) {
+      options.onSuccess(result, file)
+      handleUploadSuccess(result, file)
+    } else {
+      options.onError(new Error(result.status_message || '上传失败'))
+      ElMessage.error(result.status_message || '上传失败')
+      uploading.value = false
+    }
+  } catch (error: any) {
+    console.error('文件上传失败:', error)
+    options.onError(error)
+    ElMessage.error('文件上传失败，请重试')
+    uploading.value = false
+  }
 }
 
 // 文件上传成功处理
@@ -571,14 +606,12 @@ onUnmounted(() => {
           <!-- 上传按钮 -->
           <el-upload
             v-model:file-list="fileList"
-            :action="`/api/v1/upload`"
-            :before-upload="beforeUpload"
+            :http-request="handleKnowledgeFileUpload"
             :on-success="handleUploadSuccess"
             :on-error="handleUploadError"
             :multiple="true"
             :show-file-list="false"
             :disabled="uploading"
-            :headers="{ Authorization: `Bearer ${getToken()}` }"
           >
             <div class="upload-button-wrapper">
               <button class="upload-btn-custom" :class="{ 'uploading': uploading }">
@@ -730,14 +763,12 @@ onUnmounted(() => {
         </div>
         <el-upload
           v-model:file-list="fileList"
-          :action="`/api/v1/upload`"
-          :before-upload="beforeUpload"
+          :http-request="handleKnowledgeFileUpload"
           :on-success="handleUploadSuccess"
           :on-error="handleUploadError"
           :multiple="true"
           :show-file-list="false"
           :disabled="uploading"
-          :headers="{ Authorization: `Bearer ${getToken()}` }"
         >
           <el-button type="primary" size="large" class="empty-upload-btn">
             <span class="btn-icon">🚀</span>

@@ -61,7 +61,7 @@ class ToolDao:
                 ToolTable.user_id == user_id
             )
             result = await session.exec(statement)
-            return result
+            return result.all()
 
     @classmethod
     async def get_tool_by_id(cls, tool_id: str):
@@ -121,7 +121,7 @@ class ToolDao:
                 ToolTable.user_id == user_id
             )
             result = await session.exec(statement)
-            return result
+            return result.all()
 
     @classmethod
     async def update_user_defined_tool(cls, tool_id, update_values):

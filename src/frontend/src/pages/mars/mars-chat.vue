@@ -127,6 +127,9 @@ const typingTimer = ref<NodeJS.Timeout | null>(null)
 const showLeaveModal = ref(false)
 let pendingNavigation: (() => void) | null = null
 
+// beforeunload 事件处理器引用（用于在 onBeforeUnmount 中移除）
+let beforeUnloadHandler: ((event: BeforeUnloadEvent) => any) | null = null
+
 const aiContent = computed(() => chatSegments.value.map(s => s.content).join(''))
 
 // 检查是否有聊天内容
@@ -250,98 +253,28 @@ const sendMessage = async (userMessage: string) => {
         if (typingTimer.value) clearTimeout(typingTimer.value)
         showTypingIndicator.value = false
         try {
-          console.log('=== Mars消息处理开始 ===')
-          console.log('原始消息数据长度:', msg.data.length)
-          console.log('原始消息数据:', msg.data.substring(0, 200) + (msg.data.length > 200 ? '...' : ''))
-          
-          // 处理SSE格式的数据，去掉 "data: " 前缀
-          let rawData = msg.data.trim()
-          
+          const rawData = msg.data.trim()
           if (!rawData) return
           
-          // 去掉 "data: " 前缀（如果存在）
-          if (rawData.startsWith('data: ')) {
-            rawData = rawData.substring(6).trim()
-          }
-          
-          console.log('去掉前缀后的数据:', rawData)
-          
-          let parsedData
-          let parseSuccess = false
-          
-          // 方法1: 尝试直接替换单引号为双引号并解析JSON
-          try {
-            const jsonString = rawData.replace(/'/g, '"')
-            parsedData = JSON.parse(jsonString)
-            console.log(`方法1成功 - 类型: ${parsedData.type}, 内容: "${parsedData.data || ''}"`)
-            parseSuccess = true
-          } catch (parseError1) {
-            console.error('方法1 JSON解析失败:', parseError1)
-            
-            // 方法2: 尝试使用eval解析
-            try {
-              // @ts-ignore
-              const evalData = eval('(' + rawData + ')')
-              parsedData = evalData
-              if (!parsedData.data) {
-                throw new Error('Eval解析后无法获取data字段')
-              }
-              console.log(`方法2成功 - 使用eval解析:`, parsedData.data)
-              parseSuccess = true
-            } catch (evalError) {
-              console.error('方法2 Eval解析失败:', evalError)
-              
-              // 方法3: 尝试修复JSON格式后再解析
-              try {
-                // 尝试处理嵌套引号问题
-                const fixedJson = rawData
-                  .replace(/'/g, '"')                   // 替换所有单引号为双引号
-                  .replace(/"\s*([^"]*?)\s*":/g, '"$1":') // 修复键名格式
-                  .replace(/:\s*"([^"]*?)"/g, ':"$1"')    // 修复值格式
-                
-                parsedData = JSON.parse(fixedJson)
-                if (!parsedData.data) {
-                  throw new Error('修复JSON后无法获取data字段')
-                }
-                console.log(`方法3成功 - 修复后JSON解析:`, parsedData.data)
-                parseSuccess = true
-              } catch (parseError3) {
-                console.error('方法3 修复JSON解析失败:', parseError3)
-              }
-            }
-          }
+          const parsedData = JSON.parse(rawData)
+          const type = parsedData.type || 'answer'
+          const chunkData = parsedData.data || ''
 
-          if (parseSuccess && parsedData) {
-            const type = parsedData.type || 'answer'
-            const chunkData = parsedData.data || ''
-
-            if (chunkData !== undefined && chunkData !== null) {
-              if (chatSegments.value.length > 0 && chatSegments.value[chatSegments.value.length - 1].type === type) {
-                chatSegments.value[chatSegments.value.length - 1].content += chunkData
-              } else {
-                const newSegment: { type: string, content: string, isCollapsed?: boolean } = { type: type, content: chunkData }
-                if (type === 'reasoning_chunk') {
-                  newSegment.isCollapsed = false;
-                }
-                chatSegments.value.push(newSegment)
-              }
-              console.log('添加内容:', `"${chunkData}"`, '当前总长度:', aiContent.value.length)
-                scrollToBottom()
-              
-              // 重新启动计时器，以便在下一次数据延迟时显示...
-              if (isLoading.value) {
-                startTypingTimer()
-              }
-            }
-          } else {
-            // 所有方法都失败，直接添加原始数据
-            console.log('所有解析方法都失败，直接添加原始数据')
-            if (chatSegments.value.length > 0 && chatSegments.value[chatSegments.value.length - 1].type === 'raw') {
-              chatSegments.value[chatSegments.value.length - 1].content += rawData
+          if (chunkData !== undefined && chunkData !== null) {
+            if (chatSegments.value.length > 0 && chatSegments.value[chatSegments.value.length - 1].type === type) {
+              chatSegments.value[chatSegments.value.length - 1].content += chunkData
             } else {
-              chatSegments.value.push({ type: 'raw', content: rawData })
+              const newSegment: { type: string, content: string, isCollapsed?: boolean } = { type: type, content: chunkData }
+              if (type === 'reasoning_chunk') {
+                newSegment.isCollapsed = false
+              }
+              chatSegments.value.push(newSegment)
             }
             scrollToBottom()
+            
+            if (isLoading.value) {
+              startTypingTimer()
+            }
           }
         } catch (error) {
           console.error('处理Mars消息时出错:', error)
@@ -448,98 +381,28 @@ const sendExampleRequest = async (exampleId: number) => {
         if (typingTimer.value) clearTimeout(typingTimer.value)
         showTypingIndicator.value = false
         try {
-          console.log('=== Mars示例消息处理开始 ===')
-          console.log('原始消息数据长度:', msg.data.length)
-          console.log('原始消息数据:', msg.data.substring(0, 200) + (msg.data.length > 200 ? '...' : ''))
-          
-          // 处理SSE格式的数据，去掉 "data: " 前缀
-          let rawData = msg.data.trim()
-          
+          const rawData = msg.data.trim()
           if (!rawData) return
           
-          // 去掉 "data: " 前缀（如果存在）
-          if (rawData.startsWith('data: ')) {
-            rawData = rawData.substring(6).trim()
-          }
-          
-          console.log('去掉前缀后的数据:', rawData)
-          
-          let parsedData
-          let parseSuccess = false
+          const parsedData = JSON.parse(rawData)
+          const type = parsedData.type || 'answer'
+          const chunkData = parsedData.data || ''
 
-          // 方法1: 尝试直接替换单引号为双引号并解析JSON
-          try {
-            const jsonString = rawData.replace(/'/g, '"')
-            parsedData = JSON.parse(jsonString)
-            console.log(`方法1成功 - 类型: ${parsedData.type}, 内容: "${parsedData.data || ''}"`)
-            parseSuccess = true
-          } catch (parseError1) {
-            console.error('方法1 JSON解析失败:', parseError1)
-            
-            // 方法2: 尝试使用eval解析
-            try {
-              // @ts-ignore
-              const evalData = eval('(' + rawData + ')')
-              parsedData = evalData
-              if (!parsedData.data) {
-                throw new Error('Eval解析后无法获取data字段')
-              }
-              console.log(`方法2成功 - 使用eval解析:`, parsedData.data)
-              parseSuccess = true
-            } catch (evalError) {
-              console.error('方法2 Eval解析失败:', evalError)
-              
-              // 方法3: 尝试修复JSON格式后再解析
-              try {
-                // 尝试处理嵌套引号问题
-                const fixedJson = rawData
-                  .replace(/'/g, '"')                   // 替换所有单引号为双引号
-                  .replace(/"\s*([^"]*?)\s*":/g, '"$1":') // 修复键名格式
-                  .replace(/:\s*"([^"]*?)"/g, ':"$1"')    // 修复值格式
-                
-                parsedData = JSON.parse(fixedJson)
-                if (!parsedData.data) {
-                  throw new Error('修复JSON后无法获取data字段')
-                }
-                console.log(`方法3成功 - 修复后JSON解析:`, parsedData.data)
-                parseSuccess = true
-              } catch (parseError3) {
-                console.error('方法3 修复JSON解析失败:', parseError3)
-              }
-            }
-          }
-
-          if (parseSuccess && parsedData) {
-            const type = parsedData.type || 'answer'
-            const chunkData = parsedData.data || ''
-
-            if (chunkData !== undefined && chunkData !== null) {
-              if (chatSegments.value.length > 0 && chatSegments.value[chatSegments.value.length - 1].type === type) {
-                chatSegments.value[chatSegments.value.length - 1].content += chunkData
-              } else {
-                const newSegment: { type: string, content: string, isCollapsed?: boolean } = { type: type, content: chunkData }
-                if (type === 'reasoning_chunk') {
-                  newSegment.isCollapsed = false;
-                }
-                chatSegments.value.push(newSegment)
-              }
-              console.log('添加内容:', `"${chunkData}"`, '当前总长度:', aiContent.value.length)
-                scrollToBottom()
-              
-              // 重新启动计时器，以便在下一次数据延迟时显示...
-              if (isLoading.value) {
-                startTypingTimer()
-              }
-            }
-          } else {
-            // 所有方法都失败，直接添加原始数据
-            console.log('所有解析方法都失败，直接添加原始数据')
-            if (chatSegments.value.length > 0 && chatSegments.value[chatSegments.value.length - 1].type === 'raw') {
-              chatSegments.value[chatSegments.value.length - 1].content += rawData
+          if (chunkData !== undefined && chunkData !== null) {
+            if (chatSegments.value.length > 0 && chatSegments.value[chatSegments.value.length - 1].type === type) {
+              chatSegments.value[chatSegments.value.length - 1].content += chunkData
             } else {
-              chatSegments.value.push({ type: 'raw', content: rawData })
+              const newSegment: { type: string, content: string, isCollapsed?: boolean } = { type: type, content: chunkData }
+              if (type === 'reasoning_chunk') {
+                newSegment.isCollapsed = false
+              }
+              chatSegments.value.push(newSegment)
             }
             scrollToBottom()
+            
+            if (isLoading.value) {
+              startTypingTimer()
+            }
           }
         } catch (error) {
           console.error('处理Mars示例消息时出错:', error)
@@ -610,6 +473,7 @@ onMounted(() => {
   }
   
   window.addEventListener('beforeunload', handleBeforeUnload)
+  beforeUnloadHandler = handleBeforeUnload
   
   // 检查URL参数
   const messageFromHome = route.query.message
@@ -635,11 +499,14 @@ onMounted(() => {
       sendMessage(messageFromHome)
     }
   })
-  
-  // 清理函数
-  onBeforeUnmount(() => {
-    window.removeEventListener('beforeunload', handleBeforeUnload)
-  })
+})
+
+// 组件卸载时清理浏览器事件监听
+onBeforeUnmount(() => {
+  if (beforeUnloadHandler) {
+    window.removeEventListener('beforeunload', beforeUnloadHandler)
+    beforeUnloadHandler = null
+  }
 })
 </script>
 

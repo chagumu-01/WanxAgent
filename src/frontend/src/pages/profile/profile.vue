@@ -151,17 +151,22 @@ const confirmAvatarSelection = async () => {
 
 // 上传自定义头像
 const handleUploadSuccess = async (response: any) => {
-  // 后端直接返回图片链接字符串，格式为: data = "http........."
-  const imageUrl = typeof response === 'string' ? response : response.data
+  let imageUrl = ''
+  if (typeof response === 'string') {
+    imageUrl = response
+  } else if (response.data) {
+    imageUrl = response.data
+  } else if (response && typeof response === 'object') {
+    imageUrl = response
+  }
   
   if (imageUrl) {
-    // 只更新选中的头像，不立即保存到服务器
-    selectedAvatar.value = imageUrl;
-    uploading.value = false;
-    ElMessage.success('头像上传成功，请点击"确定选择"保存');
+    selectedAvatar.value = imageUrl
+    uploading.value = false
+    ElMessage.success('头像上传成功，请点击"确定选择"保存')
   } else {
-    ElMessage.error('上传失败，未获取到图片链接');
-    uploading.value = false;
+    ElMessage.error('上传失败，未获取到图片链接')
+    uploading.value = false
   }
 }
 
@@ -245,54 +250,108 @@ const handleImageError = (event: Event) => {
 
 // 处理自定义上传
 const handleCustomUpload = async (event: Event) => {
-  const input = event.target as HTMLInputElement;
-  if (!input.files || input.files.length === 0) return;
+  const input = event.target as HTMLInputElement
+  if (!input.files || input.files.length === 0) return
   
-  const file = input.files[0];
+  const file = input.files[0]
   
-  // 验证文件类型
-  const isJPGOrPNG = file.type === 'image/jpeg' || file.type === 'image/png';
-  const isLt2M = file.size / 1024 / 1024 < 2;
+  const isJPGOrPNG = file.type === 'image/jpeg' || file.type === 'image/png'
+  const isLt2M = file.size / 1024 / 1024 < 2
 
   if (!isJPGOrPNG) {
-    ElMessage.error('只能上传 JPG/PNG 格式的图片!');
-    return;
+    ElMessage.error('只能上传 JPG/PNG 格式的图片!')
+    return
   }
   if (!isLt2M) {
-    ElMessage.error('图片大小不能超过 2MB!');
-    return;
+    ElMessage.error('图片大小不能超过 2MB!')
+    return
   }
   
-  uploading.value = true;
+  uploading.value = true
   
   try {
-    // 创建表单数据
-    const formData = new FormData();
-    formData.append('file', file);
+    const formData = new FormData()
+    formData.append('file', file)
     
-    // 发送请求
     const response = await fetch('/api/v1/upload', {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('token') || ''}`
       },
       body: formData
-    });
+    })
     
     if (!response.ok) {
-      throw new Error('上传失败');
+      throw new Error('上传失败')
     }
     
-    const result = await response.json();
+    const result = await response.json()
     
-    // 处理响应
-    handleUploadSuccess(result);
+    handleUploadSuccess(result)
   } catch (error) {
-    console.error('上传失败:', error);
-    ElMessage.error('头像上传失败，请重试');
-    uploading.value = false;
+    console.error('上传失败:', error)
+    ElMessage.error('头像上传失败，请重试')
+    uploading.value = false
   }
-};
+}
+
+// 处理 el-upload 的自定义上传请求
+const handleAvatarUpload = async (options: any) => {
+  const file = options.file.raw || options.file
+  
+  if (!file) {
+    options.onError(new Error('文件不存在'))
+    return
+  }
+  
+  const isJPGOrPNG = file.type === 'image/jpeg' || file.type === 'image/png'
+  const isLt2M = file.size / 1024 / 1024 < 2
+
+  if (!isJPGOrPNG) {
+    ElMessage.error('只能上传 JPG/PNG 格式的图片!')
+    options.onError(new Error('文件格式错误'))
+    return
+  }
+  if (!isLt2M) {
+    ElMessage.error('图片大小不能超过 2MB!')
+    options.onError(new Error('文件过大'))
+    return
+  }
+  
+  uploading.value = true
+  
+  try {
+    const formData = new FormData()
+    formData.append('file', file)
+    
+    const response = await fetch('/api/v1/upload', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token') || ''}`
+      },
+      body: formData
+    })
+    
+    if (!response.ok) {
+      throw new Error('上传失败')
+    }
+    
+    const result = await response.json()
+    
+    if (result.status_code === 200 && result.data) {
+      options.onSuccess(result.data)
+      handleUploadSuccess(result)
+    } else {
+      options.onError(new Error(result.status_message || '上传失败'))
+      ElMessage.error(result.status_message || '上传失败')
+    }
+  } catch (error: any) {
+    console.error('上传失败:', error)
+    options.onError(error)
+    ElMessage.error('头像上传失败，请重试')
+    uploading.value = false
+  }
+}
 </script>
 
 <template>
@@ -420,12 +479,8 @@ const handleCustomUpload = async (event: Event) => {
             <div class="upload-area-custom">
               <el-upload
                 ref="uploadRef"
-                action="/api/v1/upload"
-                :headers="uploadHeaders"
+                :http-request="handleAvatarUpload"
                 :show-file-list="false"
-                :on-success="handleUploadSuccess"
-                :before-upload="beforeUpload"
-                :on-error="handleUploadError"
                 accept="image/*"
                 :disabled="uploading"
               >

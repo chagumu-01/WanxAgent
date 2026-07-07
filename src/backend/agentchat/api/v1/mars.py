@@ -1,3 +1,4 @@
+import json
 from typing import List
 
 from fastapi import FastAPI, APIRouter, Body, Depends
@@ -32,8 +33,13 @@ async def chat_mars(user_input: str = Body(..., description="用户输入", embe
 
     await mars_agent.init_mars_agent()
 
-    memory_messages = await memory_client.search(query=user_input, user_id=login_user.user_id)
-    memory_content = str([f"- {msg.get('memory', '')} \n" for msg in memory_messages.get('results', [])])
+    try:
+        memory_messages = await memory_client.search(query=user_input, user_id=login_user.user_id)
+        memory_content = str([f"- {msg.get('memory', '')} \n" for msg in memory_messages.get('results', [])])
+    except Exception as e:
+        import logging
+        logging.getLogger(__name__).warning(f"Memory search failed, using empty memory: {e}")
+        memory_content = ""
 
     messages: List[BaseMessage] = [
         SystemMessage(content=Mars_System_Prompt.format(memory_content=memory_content)),
@@ -43,14 +49,18 @@ async def chat_mars(user_input: str = Body(..., description="用户输入", embe
     async def general_generate():
         final_response = ""
         async for chunk in mars_agent.ainvoke_stream(messages):
-            yield f"data: {chunk}\n\n"
+            yield f"data: {json.dumps(chunk, ensure_ascii=False)}\n\n"
             if chunk.get("type") == "response_chunk":
                 final_response += chunk.get("data", "")
 
-        await memory_client.add(
-            user_id=login_user.user_id,
-            messages=[{"role": "user", "content": user_input}, {"role": "assistant", "content": final_response}]
-        )
+        try:
+            await memory_client.add(
+                user_id=login_user.user_id,
+                messages=[{"role": "user", "content": user_input}, {"role": "assistant", "content": final_response}]
+            )
+        except Exception as e:
+            import logging
+            logging.getLogger(__name__).warning(f"Memory save failed: {e}")
 
     return StreamingResponse(general_generate(), media_type="text/event-stream")
 
@@ -85,6 +95,6 @@ async def chat_mars_example(
 
     async def general_generate():
         async for chunk in mars_agent.ainvoke_stream(messages):
-            yield f"data: {chunk}\n\n"
+            yield f"data: {json.dumps(chunk, ensure_ascii=False)}\n\n"
 
     return StreamingResponse(general_generate(), media_type="text/event-stream")

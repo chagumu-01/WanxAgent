@@ -43,12 +43,15 @@ def _text_to_image(user_prompt):
                 # 可选：添加存储前缀，方便管理OSS文件
                 oss_object_name = f"text_to_image/{file_name}"  # 例如存到images目录下
 
-                # 直接获取图片内容并上传到OSS
                 response = requests.get(result.url)
                 if response.status_code == 200:
                     storage_client.upload_file(oss_object_name, response.content)
-                    logger.info(f"图片 {file_name} 已成功上传到OSS")
-                    return f"您的图片已经生成完毕，图片链接为：![图片]({app_settings.storage.active.base_url}/{oss_object_name})"
+                    logger.info(f"图片 {file_name} 已成功上传")
+                    if app_settings.storage.mode == "oss":
+                        image_url = f"{app_settings.storage.active.base_url}/{oss_object_name}"
+                    else:
+                        image_url = storage_client.sign_url_for_get(oss_object_name)
+                    return f"您的图片已经生成完毕，图片链接为：![图片]({image_url})"
                 else:
                     logger.error(f"获取图片 {result.url} 失败，状态码: {response.status_code}")
                     raise ValueError(f"获取图片 {result.url} 失败，状态码: {response.status_code}")

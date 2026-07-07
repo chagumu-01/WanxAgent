@@ -26,10 +26,11 @@ async def upload_file(
         # 返回可访问的URL：
         # - minio 使用预签名URL
         # - oss 使用公共 base_url 拼接的直链
-        if app_settings.storage.mode == "minio":
-            url = storage_client.sign_url_for_get(oss_object_name)
-        else:
+        # - local 使用 sign_url_for_get 返回 /local_storage/... 路径
+        if app_settings.storage.mode == "oss":
             url = urljoin(app_settings.storage.active.base_url, oss_object_name)
+        else:
+            url = storage_client.sign_url_for_get(oss_object_name)
 
         return resp_200(url)
     except Exception as err:

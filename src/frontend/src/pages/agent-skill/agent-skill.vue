@@ -1,4 +1,4 @@
-﻿<script setup lang="ts">
+<script setup lang="ts">
 import { ref, onMounted, computed, nextTick, reactive } from 'vue'
 import { ElMessage } from 'element-plus'
 import { Plus, Delete, Refresh, FolderOpened, Document, Edit, View, CloseBold, Files, Clock } from '@element-plus/icons-vue'
@@ -941,8 +941,7 @@ body {
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background: var(--newsprint-fg);
-  opacity: 0.6;
+  background: rgba(17, 17, 17, 0.6);
   backdrop-filter: blur(8px);
   display: flex;
   align-items: center;
