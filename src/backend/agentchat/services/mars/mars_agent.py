@@ -134,6 +134,7 @@ class MarsAgent:
                 logger.error(f"Mars Agent执行错误: {e}")
             finally:
                 self.agent_finished = True
+                self.reasoning_interrupt.set()
                 logger.info("Mars agent finished")
                 await self.mars_output_queue.put(None)
 
@@ -145,6 +146,7 @@ class MarsAgent:
                 response = await self.reasoning_model.astream(messages)
                 async for chunk in response:
                     if self.reasoning_interrupt.is_set():
+                        logger.info("推理模型已中断")
                         break
 
                     delta = chunk.choices[0].delta
@@ -172,38 +174,57 @@ class MarsAgent:
             在mock模式下直接执行工具功能。
             """
             user_input = ""
+            from langchain_core.messages import HumanMessage
             for msg in messages:
-                if hasattr(msg, "content"):
+                if isinstance(msg, HumanMessage):
                     user_input = msg.content
                     break
+            logger.info(f"User input for mock agent: {user_input}")
 
-            mock_results = {
-                "auto_build_agent": "智能体创建成功！\n\n智能体名称：天气绘图助手\n描述：每天为您预报天气并生成天气图片\n模型：glm-4.5-air\n工具：天气查询、图片生成\n\n智能体已成功创建到您的智能体列表中。",
-                "crawl_ai_news": "AI日报生成成功！\n\n今日AI新闻要点：\n1. 新一代大语言模型发布，性能提升30%\n2. AI绘画工具新增多种风格\n3. AI助手在医疗领域应用取得突破\n\n完整报告已生成，包含图表展示。",
-                "query_knowledge": "知识库查询结果：\n\n您共有2个知识库：\n1. 测试知识库 - 包含3个文件，共500条知识\n2. 产品文档 - 包含10个文件，共2000条知识\n\n知识库内容涵盖技术文档、产品说明等领域。",
-                "deep_search": "深度搜索完成！\n\n泰山游玩攻略：\n\n📍 景点推荐：\n- 玉皇顶 - 泰山最高峰\n- 十八盘 - 著名登山路线\n- 南天门 - 标志性建筑\n\n🏔️ 登山路线：\n- 红门线：经典路线，全程约4-6小时\n- 天外村线：可乘车上山\n\n📝 注意事项：\n- 建议提前预订门票\n- 山上气温较低，注意保暖\n- 准备好登山装备",
-            }
+            mock_results = [
+                {
+                    "keywords": ["智能体", "创建", "构建", "agent"],
+                    "result": "智能体创建成功！\n\n智能体名称：天气绘图助手\n描述：每天为您预报天气并生成天气图片\n模型：glm-4.5-air\n工具：天气查询、图片生成\n\n智能体已成功创建到您的智能体列表中。"
+                },
+                {
+                    "keywords": ["日报", "新闻", "AI日报"],
+                    "result": "AI日报生成成功！\n\n今日AI新闻要点：\n1. 新一代大语言模型发布，性能提升30%\n2. AI绘画工具新增多种风格\n3. AI助手在医疗领域应用取得突破\n\n完整报告已生成，包含图表展示。"
+                },
+                {
+                    "keywords": ["知识库", "知识", "查询知识"],
+                    "result": "知识库查询结果：\n\n您共有2个知识库：\n1. 测试知识库 - 包含3个文件，共500条知识\n2. 产品文档 - 包含10个文件，共2000条知识\n\n知识库内容涵盖技术文档、产品说明等领域。"
+                },
+                {
+                    "keywords": ["搜索", "深度搜索", "攻略"],
+                    "result": "深度搜索完成！\n\n泰山游玩攻略：\n\n📍 景点推荐：\n- 玉皇顶 - 泰山最高峰\n- 十八盘 - 著名登山路线\n- 南天门 - 标志性建筑\n\n🏔️ 登山路线：\n- 红门线：经典路线，全程约4-6小时\n- 天外村线：可乘车上山\n\n📝 注意事项：\n- 建议提前预订门票\n- 山上气温较低，注意保暖\n- 准备好登山装备"
+                },
+            ]
 
-            for tool_name, result in mock_results.items():
-                if tool_name in user_input or \
-                   (tool_name == "auto_build_agent" and ("智能体" in user_input or "agent" in user_input.lower())) or \
-                   (tool_name == "crawl_ai_news" and ("日报" in user_input or "新闻" in user_input)) or \
-                   (tool_name == "query_knowledge" and ("知识库" in user_input or "知识" in user_input)) or \
-                   (tool_name == "deep_search" and ("搜索" in user_input or "攻略" in user_input)):
-                    self.is_call_tool = True
-                    await self.mars_output_queue.put({
-                        "type": "response_chunk",
-                        "time": time.time(),
-                        "data": f"\n\n## 🎯 执行结果\n\n{result}\n"
-                    })
-                    return
+            matched_result = None
+            for item in mock_results:
+                for keyword in item["keywords"]:
+                    if keyword.lower() in user_input.lower():
+                        matched_result = item["result"]
+                        break
+                if matched_result:
+                    break
 
-            self.is_call_tool = True
-            await self.mars_output_queue.put({
-                "type": "response_chunk",
-                "time": time.time(),
-                "data": "\n\n## 🎯 执行结果\n\n由于当前未配置有效的模型API Key，我正在使用本地模拟模式为您服务。\n\n这是WanxAgent智能助手的响应：\n- 您的消息：'" + user_input + "'\n- 服务状态：正常运行\n\n您可以在系统设置中配置真实的大语言模型API，以获得完整的AI对话能力。\n"
-            })
+            if matched_result:
+                await asyncio.sleep(2)
+                self.is_call_tool = True
+                await self.mars_output_queue.put({
+                    "type": "response_chunk",
+                    "time": time.time(),
+                    "data": f"\n\n## 🎯 执行结果\n\n{matched_result}\n"
+                })
+            else:
+                await asyncio.sleep(2)
+                self.is_call_tool = True
+                await self.mars_output_queue.put({
+                    "type": "response_chunk",
+                    "time": time.time(),
+                    "data": "\n\n## 🎯 执行结果\n\n由于当前未配置有效的模型API Key，我正在使用本地模拟模式为您服务。\n\n这是WanxAgent智能助手的响应：\n- 您的消息：'" + user_input + "'\n- 服务状态：正常运行\n\n您可以在系统设置中配置真实的大语言模型API，以获得完整的AI对话能力。\n"
+                })
 
         yield {
             "type": "response_chunk",
@@ -215,9 +236,6 @@ class MarsAgent:
 
         async for reasoning_chunk in run_reasoning_model():
             yield reasoning_chunk
-
-        if not self.is_call_tool and not self.agent_finished:
-            await asyncio.sleep(3)
 
         while True:
             try:

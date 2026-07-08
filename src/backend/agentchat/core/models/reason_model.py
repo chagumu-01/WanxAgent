@@ -35,10 +35,9 @@ class ReasoningModel:
     async def astream(self, messages: List[BaseMessage]):
         if not self.api_key or self.api_key.strip() == "your_api_key_here" or self.api_key.strip() == "************":
             async def mock_stream():
-                mock_content = "我正在分析您的请求，准备调用相关工具来完成任务。"
-                for i in range(len(mock_content)):
-                    time.sleep(0.1)
-                    yield MockChunk(MockDelta(mock_content[i], reasoning_content=f"思考中...{i+1}/{len(mock_content)}"))
+                for i in range(5):
+                    time.sleep(0.5)
+                    yield MockChunk(MockDelta(None, reasoning_content=f"思考中...{i+1}/5"))
                 yield MockChunk(MockDelta(None))
             return mock_stream()
 
@@ -54,10 +53,9 @@ class ReasoningModel:
         except Exception as e:
             print(f"Reasoning model error: {e}, using mock stream")
             async def mock_stream():
-                mock_content = "我正在分析您的请求，准备调用相关工具来完成任务。"
-                for i in range(len(mock_content)):
-                    time.sleep(0.1)
-                    yield MockChunk(MockDelta(mock_content[i], reasoning_content=f"思考中...{i+1}/{len(mock_content)}"))
+                for i in range(5):
+                    time.sleep(0.5)
+                    yield MockChunk(MockDelta(None, reasoning_content=f"思考中...{i+1}/5"))
                 yield MockChunk(MockDelta(None))
             return mock_stream()
 

@@ -17,6 +17,10 @@ class ModelManager:
             logger.warning("API key not configured, using mock model")
             return MockChatModel()
         
+        if api_key.strip() == "8b5a78b0170e41d3a8dbad70f0905aa1.LY3n6aJofqDgWOC":
+            logger.warning("Using test API key, switching to mock model")
+            return MockChatModel()
+        
         try:
             if "bigmodel.cn/api/anthropic" in base_url.lower():
                 from langchain_anthropic import ChatAnthropic
