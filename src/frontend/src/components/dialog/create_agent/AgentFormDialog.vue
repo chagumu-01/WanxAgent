@@ -309,7 +309,7 @@ defineExpose({ open, close })
           <div class="dialog-header">
             <div class="header-left">
               <svg class="header-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M3 17.25V21H6.75L17.81 9.94L14.06 6.19L3 17.25Z" fill="#c41e3a"/>
+                <path d="M3 17.25V21H6.75L17.81 9.94L14.06 6.19L3 17.25Z" fill="#111111"/>
               </svg>
               <span class="header-title">{{ isEditing ? "编辑助手" : "助手配置" }}</span>
             </div>
@@ -330,7 +330,7 @@ defineExpose({ open, close })
                   <div class="assistant-avatar">
                     <img v-if="formData.logo_url" :src="formData.logo_url" alt="头像" />
                     <svg v-else width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M12 2L13.09 8.26L19 7L18.74 13.74L24 12L17.74 16.74L19 19L13.74 18.26L12 22L10.26 16.74L5 17L5.26 10.26L2 12L8.26 7.26L7 5L12.26 5.74L12 2Z" fill="#c41e3a"/>
+                      <path d="M12 2L13.09 8.26L19 7L18.74 13.74L24 12L17.74 16.74L19 19L13.74 18.26L12 22L10.26 16.74L5 17L5.26 10.26L2 12L8.26 7.26L7 5L12.26 5.74L12 2Z" fill="#111111"/>
                     </svg>
                   </div>
                   <div class="assistant-info">
@@ -446,7 +446,7 @@ defineExpose({ open, close })
                     </svg>
                     <span>知识库</span>
                     <svg class="add-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M12 2L13.09 8.26L19 7L18.74 13.74L24 12L17.74 16.74L19 19L13.74 18.26L12 22L10.26 16.74L5 17L5.26 10.26L2 12L8.26 7.26L7 5L12.26 5.74L12 2Z" fill="#c41e3a"/>
+                      <path d="M12 2L13.09 8.26L19 7L18.74 13.74L24 12L17.74 16.74L19 19L13.74 18.26L12 22L10.26 16.74L5 17L5.26 10.26L2 12L8.26 7.26L7 5L12.26 5.74L12 2Z" fill="#111111"/>
                     </svg>
                   </div>
                   <div v-show="collapseItems.knowledgeBase" class="section-content">
@@ -476,7 +476,7 @@ defineExpose({ open, close })
                     </svg>
                     <span>工具</span>
                     <svg class="add-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M12 2L13.09 8.26L19 7L18.74 13.74L24 12L17.74 16.74L19 19L13.74 18.26L12 22L10.26 16.74L5 17L5.26 10.26L2 12L8.26 7.26L7 5L12.26 5.74L12 2Z" fill="#c41e3a"/>
+                      <path d="M12 2L13.09 8.26L19 7L18.74 13.74L24 12L17.74 16.74L19 19L13.74 18.26L12 22L10.26 16.74L5 17L5.26 10.26L2 12L8.26 7.26L7 5L12.26 5.74L12 2Z" fill="#111111"/>
                     </svg>
                   </div>
                   <div v-show="collapseItems.tools" class="section-content">
@@ -506,7 +506,7 @@ defineExpose({ open, close })
                     </svg>
                     <span>技能</span>
                     <svg class="add-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M12 2L13.09 8.26L19 7L18.74 13.74L24 12L17.74 16.74L19 19L13.74 18.26L12 22L10.26 16.74L5 17L5.26 10.26L2 12L8.26 7.26L7 5L12.26 5.74L12 2Z" fill="#c41e3a"/>
+                      <path d="M12 2L13.09 8.26L19 7L18.74 13.74L24 12L17.74 16.74L19 19L13.74 18.26L12 22L10.26 16.74L5 17L5.26 10.26L2 12L8.26 7.26L7 5L12.26 5.74L12 2Z" fill="#111111"/>
                     </svg>
                   </div>
                   <div v-show="collapseItems.skills" class="section-content">
@@ -612,20 +612,20 @@ defineExpose({ open, close })
       gap: 8px;
 
       .header-icon {
-        color: #c41e3a;
+        color: #111111;
       }
 
       .header-title {
         font-size: 18px;
         font-weight: 600;
-        color: #4a1a25;
+        color: #111111;
       }
     }
     
     .close-btn {
       color: #8d6e63;
       &:hover {
-        color: #c41e3a;
+        color: #111111;
       }
     }
   }
@@ -637,8 +637,8 @@ defineExpose({ open, close })
     .left-panel {
       width: 50%;
       padding: 24px;
-      background-color: #fceef2;
-      border-right: 1px solid #f2a5b5;
+      background-color: #F9F9F7;
+      border-right: 1px solid #A3A3A3;
       overflow-y: auto;
 
       .assistant-preview {
@@ -652,7 +652,7 @@ defineExpose({ open, close })
             width: 60px;
             height: 60px;
             border-radius: 12px;
-            border: 2px dashed #f2a5b5;
+            border: 2px dashed #A3A3A3;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -735,16 +735,16 @@ defineExpose({ open, close })
             span {
               flex: 1;
               font-weight: 500;
-              color: #4a1a25;
+              color: #111111;
             }
 
             .add-icon {
               margin-left: auto;
-              color: #c41e3a;
+              color: #111111;
               cursor: pointer;
 
               &:hover {
-                color: #d94560;
+                color: #404040;
               }
             }
           }
@@ -763,25 +763,25 @@ defineExpose({ open, close })
         .avatar-preview {
           width: 80px;
           height: 80px;
-          border: 2px dashed #f2a5b5;
+          border: 2px dashed #A3A3A3;
           border-radius: 12px;
           display: flex;
           align-items: center;
           justify-content: center;
           cursor: pointer;
           transition: all 0.3s ease;
-          background: #fceef2;
+          background: #F9F9F7;
           position: relative;
           
           &:hover:not(.uploading) {
-            border-color: #c41e3a;
-            background: #f8d0d8;
+            border-color: #111111;
+            background: #E5E5E0;
           }
           
           &.uploading {
             cursor: not-allowed;
-            border-color: #c41e3a;
-            background: #f8d0d8;
+            border-color: #111111;
+            background: #E5E5E0;
           }
           
           img {
@@ -800,15 +800,15 @@ defineExpose({ open, close })
             .loading-spinner {
               width: 20px;
               height: 20px;
-              border: 2px solid #f8d0d8;
-              border-top: 2px solid #c41e3a;
+              border: 2px solid #E5E5E0;
+              border-top: 2px solid #111111;
               border-radius: 50%;
               animation: spin 1s linear infinite;
             }
             
             span {
               font-size: 12px;
-              color: #c41e3a;
+              color: #111111;
             }
           }
           
@@ -820,7 +820,7 @@ defineExpose({ open, close })
             
             span {
               font-size: 12px;
-              color: #f2a5b5;
+              color: #A3A3A3;
             }
           }
         }
@@ -855,9 +855,9 @@ defineExpose({ open, close })
             border: 1px solid transparent;
 
             &:hover {
-              background-color: #fceef2;
-              color: #c41e3a;
-              border-color: #f2a5b5;
+              background-color: #F9F9F7;
+              color: #111111;
+              border-color: #A3A3A3;
             }
           }
         }
@@ -868,7 +868,7 @@ defineExpose({ open, close })
         justify-content: flex-end;
         gap: 12px;
         padding-top: 24px;
-        border-top: 1px solid #f2a5b5;
+        border-top: 1px solid #A3A3A3;
         margin-top: 24px;
         
         .btn {
@@ -881,17 +881,17 @@ defineExpose({ open, close })
         
         .btn-cancel {
           background-color: #fff;
-          border: 1px solid #f2a5b5;
+          border: 1px solid #A3A3A3;
           color: #8d6e63;
           &:hover {
-            background-color: #fceef2;
-            color: #c41e3a;
-            border-color: #c41e3a;
+            background-color: #F9F9F7;
+            color: #111111;
+            border-color: #111111;
           }
         }
         
         .btn-primary {
-          background: linear-gradient(135deg, #c41e3a 0%, #d94560 100%);
+          background: linear-gradient(135deg, #111111 0%, #404040 100%);
           border: none;
           color: white;
           &:hover {
@@ -910,6 +910,6 @@ defineExpose({ open, close })
 }
 
 .orange-checkbox {
-  accent-color: #c41e3a;
+  accent-color: #111111;
 }
 </style> 

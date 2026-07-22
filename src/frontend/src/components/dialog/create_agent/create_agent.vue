@@ -535,8 +535,8 @@ defineExpose({ open, close })
               cursor: pointer;
               transition: all 0.3s;
               &:hover {
-                background-color: #fceef2;
-                color: #c41e3a;
+                background-color: #F9F9F7;
+                color: #111111;
               }
             }
           }

@@ -118,7 +118,7 @@ const editAgent = () => {
     left: 0;
     right: 0;
     height: 4px;
-    background: linear-gradient(90deg, #c41e3a 0%, #d94560 50%, #e87187 100%);
+    background: linear-gradient(90deg, #111111 0%, #404040 50%, #737373 100%);
     border-radius: 20px 20px 0 0;
   }
 
@@ -146,7 +146,7 @@ const editAgent = () => {
         span {
           font-size: 15px;
           font-weight: 600;
-          color: #4a1a25;
+          color: #111111;
           font-family: 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', Arial, sans-serif;
           line-height: 1.3;
           overflow: hidden;
@@ -207,7 +207,7 @@ const editAgent = () => {
           .stat-value {
             font-size: 10px;
             font-weight: 600;
-            color: #c41e3a;
+            color: #111111;
             background: rgba(196, 30, 58, 0.1);
             padding: 1px 4px;
             border-radius: 4px;
@@ -281,7 +281,7 @@ const editAgent = () => {
   }
   
   &:hover {
-    background: linear-gradient(145deg, #ffffff 0%, #fceef2 100%);
+    background: linear-gradient(145deg, #ffffff 0%, #F9F9F7 100%);
     border-color: rgba(196, 30, 58, 0.3);
     box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
     transform: translateY(-8px) scale(1.02);
@@ -294,7 +294,7 @@ const editAgent = () => {
         }
         
         span {
-          color: #c41e3a;
+          color: #111111;
         }
       }
       

@@ -1321,8 +1321,8 @@ watch(
           font-size: 18px;
 
           &:hover {
-            border-color: #c41e3a;
-            background: #f8d0d8;
+            border-color: #111111;
+            background: #E5E5E0;
             transform: translateY(-1px);
           }
 

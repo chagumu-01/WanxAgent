@@ -18,7 +18,7 @@ router = APIRouter(tags=["User"])
 
 @router.post('/user/register', response_model=UnifiedResponseModel)
 async def register(user_name: str = Body(description='用户名'),
-                   user_email: Optional[str] = Body(description='用户邮箱'),
+                   user_email: Optional[str] = Body(default=None, description='用户邮箱'),
                    user_password: str = Body(description='用户密码')):
     exist_user = UserDao.get_user_by_username(user_name)
     if exist_user:
@@ -28,6 +28,7 @@ async def register(user_name: str = Body(description='用户名'),
     try:
         user_password = UserService.encrypt_sha256_password(user_password)
         user_avatar = UserService.get_random_user_avatar()
+        user_email = user_email or ''
         admin = UserDao.get_user(AdminUser)
 
         if admin:

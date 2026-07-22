@@ -259,7 +259,7 @@ const clearSearch = () => {
       <div class="content">
         <div v-if="!selectedDialog" class="welcome-content">
           <div class="welcome-icon">
-            <el-icon size="48" color="#c41e3a">
+            <el-icon size="48" color="#111111">
               <Star />
             </el-icon>
           </div>

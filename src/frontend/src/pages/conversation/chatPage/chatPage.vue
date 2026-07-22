@@ -464,7 +464,7 @@ watch(
                   <el-icon class="is-loading" :size="20"><Loading /></el-icon>
               </div>
               <template v-else>
-                <div v-if="item.aiMessage.type === 'knowledge'" style="color: #c41e3a;">
+                <div v-if="item.aiMessage.type === 'knowledge'" style="color: #111111;">
                   <MdPreview :editorId="'ai-knowledge-' + index" :modelValue="item.aiMessage.content" />
                 </div>
                 <div v-else-if="item.aiMessage.type === 'event'" style="color: #67c23a;">
@@ -500,7 +500,7 @@ watch(
           <span class="file-avatar" aria-hidden="true">
             <img v-if="isImageFile(fileName)" :src="fileUrl" alt="" />
             <svg v-else width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M21.44 11.05l-7.07 7.07a5 5 0 01-7.07-7.07l7.07-7.07a3 3 0 114.24 4.24l-7.07 7.07a1 1 0 01-1.41-1.41l6.36-6.36" stroke="#c41e3a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M21.44 11.05l-7.07 7.07a5 5 0 01-7.07-7.07l7.07-7.07a3 3 0 114.24 4.24l-7.07 7.07a1 1 0 01-1.41-1.41l6.36-6.36" stroke="#111111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </span>
           <a class="file-name" :href="fileUrl" target="_blank" rel="noopener" :title="fileName">{{ fileName }}</a>

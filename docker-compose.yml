@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  backend:
+    build: .
+    container_name: wanxagent-backend
+    ports:
+      - "7860:7860"
+    volumes:
+      - ./src/backend/agentchat:/app/src/backend/agentchat
+      - ./data:/app/src/backend/data
+      - ./storage:/app/src/backend/storage
+    environment:
+      - PYTHONUNBUFFERED=1
+    restart: unless-stopped
+
+  frontend:
+    image: node:18-alpine
+    container_name: wanxagent-frontend
+    working_dir: /app
+    ports:
+      - "8091:8091"
+    volumes:
+      - ./src/frontend:/app
+    command: sh -c "npm install && npm run dev -- --host 0.0.0.0 --port 8091"
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    container_name: wanxagent-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./redis_data:/data
+    restart: unless-stopped

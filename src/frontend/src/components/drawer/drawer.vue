@@ -184,7 +184,7 @@ defineExpose({
           }
           
           &.is-focus {
-            box-shadow: 0 0 0 1px #c41e3a;
+            box-shadow: 0 0 0 1px #111111;
           }
         }
       }
@@ -258,8 +258,8 @@ defineExpose({
           }
 
           &.active {
-            border-color: #c41e3a;
-            background-color: #fceef2;
+            border-color: #111111;
+            background-color: #F9F9F7;
           }
         }
       }

@@ -809,7 +809,7 @@ onMounted(() => {
       
       &:focus {
         outline: none;
-        border-color: #c41e3a;
+        border-color: #111111;
       }
       
       &::placeholder {
@@ -850,13 +850,13 @@ onMounted(() => {
   }
   
   .primary-btn {
-    background: #c41e3a;
+    background: #111111;
     color: white;
-    border-color: #c41e3a;
+    border-color: #111111;
     
     &:hover:not(:disabled) {
-      background: #d94560;
-      border-color: #d94560;
+      background: #404040;
+      border-color: #404040;
     }
   }
 }

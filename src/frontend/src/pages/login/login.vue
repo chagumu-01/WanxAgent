@@ -13,11 +13,11 @@
             <div class="logo-icon">
               <svg viewBox="0 0 100 100" class="logo-svg">
                 <path d="M50 15 C30 15 15 30 15 50 C15 70 30 85 50 85 C70 85 85 70 85 50 C85 30 70 15 50 15 Z" 
-                      fill="none" stroke="#c41e3a" stroke-width="8"/>
+                      fill="none" stroke="#111111" stroke-width="8"/>
                 <path d="M30 50 C30 50 45 30 50 35 C55 30 70 50 70 50" 
-                      fill="none" stroke="#c41e3a" stroke-width="8" stroke-linecap="round"/>
+                      fill="none" stroke="#111111" stroke-width="8" stroke-linecap="round"/>
                 <path d="M30 50 C30 50 45 70 50 65 C55 70 70 50 70 50" 
-                      fill="none" stroke="#c41e3a" stroke-width="8" stroke-linecap="round"/>
+                      fill="none" stroke="#111111" stroke-width="8" stroke-linecap="round"/>
               </svg>
             </div>
             <h1 class="logo-text">WanxAgent</h1>

@@ -755,14 +755,14 @@ const handleAvatarUpload = async (options: any) => {
   .current-selection {
     text-align: center;
     padding: 16px;
-    background: #fceef2;
+    background: #F9F9F7;
     border-radius: 12px;
-    border: 1px solid #f2a5b5;
+    border: 1px solid #A3A3A3;
 
     h4 {
       margin-bottom: 12px;
       font-size: 16px;
-      color: #4a1a25;
+      color: #111111;
     }
 
     .selected-avatar {
@@ -771,7 +771,7 @@ const handleAvatarUpload = async (options: any) => {
         height: 80px;
         border-radius: 50%;
         object-fit: cover;
-        border: 3px solid #c41e3a;
+        border: 3px solid #111111;
         box-shadow: 0 4px 12px rgba(196, 30, 58, 0.2);
       }
     }
@@ -787,7 +787,7 @@ const handleAvatarUpload = async (options: any) => {
       h4 {
         margin-bottom: 16px;
         font-size: 16px;
-        color: #4a1a25;
+        color: #111111;
       }
 
       .avatar-grid {
@@ -802,7 +802,7 @@ const handleAvatarUpload = async (options: any) => {
           width: 6px;
         }
         &::-webkit-scrollbar-thumb {
-          background: #f2a5b5;
+          background: #A3A3A3;
           border-radius: 3px;
         }
 
@@ -816,12 +816,12 @@ const handleAvatarUpload = async (options: any) => {
           transition: all 0.2s ease;
 
           &:hover:not(.active) {
-            border-color: #c41e3a;
+            border-color: #111111;
             transform: scale(1.05);
           }
 
           &.active {
-            border-color: #c41e3a;
+            border-color: #111111;
             box-shadow: 0 0 0 2px rgba(196, 30, 58, 0.3);
           }
 
